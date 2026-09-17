@@ -1,9 +1,1711 @@
-<!doctype html><html lang='pt-BR'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1,viewport-fit=cover'><meta name='theme-color' content='#071d20'><link rel='manifest' href='manifest.json'><title>Minha Saída</title><style>
-:root{--bg:#061b1e;--card:#0d2a2d;--green:#5df29a;--text:#f4fbf8;--muted:#a9bfba;--red:#ff6464;--line:#214246}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px system-ui,-apple-system,Segoe UI,sans-serif}.app{max-width:520px;margin:auto;min-height:100vh;padding:24px 16px 92px}h1{font-size:28px;margin:8px 0 2px}h2{font-size:20px}.muted{color:var(--muted)}.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px;margin:12px 0}.hero{background:linear-gradient(135deg,#138c55,#075b44)}.big{font-size:34px;font-weight:800}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.stat{background:#fff;color:#102325;border-radius:14px;padding:13px}.stat b{display:block;font-size:20px;margin-top:4px}.green{color:#159457}.red{color:#e34242}button,.btn{border:0;border-radius:12px;padding:13px 15px;font-weight:750;background:var(--green);color:#082117;width:100%;cursor:pointer}input,select{width:100%;padding:13px;border-radius:10px;border:1px solid #b9c8c5;margin:6px 0 12px;font:inherit}.row{display:flex;justify-content:space-between;gap:10px;align-items:center}.debt{padding:12px 0;border-bottom:1px solid var(--line)}.debt:last-child{border:0}.progress{height:10px;background:#dce7e4;border-radius:9px;overflow:hidden}.progress i{display:block;height:100%;background:var(--green)}nav{position:fixed;bottom:0;left:0;right:0;background:#092326;border-top:1px solid var(--line);display:flex;justify-content:center;padding:8px}.navin{width:min(520px,100%);display:grid;grid-template-columns:repeat(5,1fr);gap:4px}.navin button{background:transparent;color:var(--muted);font-size:11px;padding:8px 2px}.navin button.active{color:var(--green)}section{display:none}section.active{display:block}.fab{font-size:22px}.empty{text-align:center;color:var(--muted);padding:22px}.pill{padding:6px 9px;border-radius:999px;background:#16383b;color:var(--green);font-size:12px}.danger{background:#421f22;border-color:#713238}.danger button{background:#ff7474}.small{font-size:12px}.money{font-variant-numeric:tabular-nums}</style></head><body><main class='app'>
-<section id='home' class='active'><div class='muted'>Minha Saída</div><h1>Olá, Bruno! 👋</h1><div class='muted'>Disciplina hoje, liberdade amanhã.</div><div class='card hero'><div>Saldo em conta</div><div id='balance' class='big money'>R$ 0,00</div><div class='row'><div>Comprometido<br><b id='committed'>R$ 0,00</b></div><div>Saldo real<br><b id='real'>R$ 0,00</b></div></div></div><div class='grid'><div class='stat'>Receitas do mês<b id='income' class='green'>R$ 0,00</b></div><div class='stat'>Despesas do mês<b id='expense' class='red'>R$ 0,00</b></div></div><div class='card'><b>🎯 Sua prioridade agora</b><p id='priority' class='muted'>Cadastre suas dívidas e seus lançamentos para eu mostrar seu cenário.</p></div><div class='card'><div class='row'><b>Meu progresso</b><span id='pct'>0%</span></div><p>Dívidas atuais: <b id='totalDebt' class='red money'>R$ 0,00</b></p><div class='progress'><i id='bar' style='width:0%'></i></div></div></section>
-<section id='debts'><div class='row'><h1>Minhas Dívidas</h1><span class='pill' id='debtCount'>0 dívidas</span></div><div class='card'><div class='muted'>Dívidas totais</div><div id='debtTotal2' class='big money'>R$ 0,00</div><div id='debtList'></div></div><button onclick="showForm('debtForm')">+ Adicionar dívida</button><div id='debtForm' class='card' style='display:none'><h2>Nova dívida</h2><input id='dname' placeholder='Nome (ex.: Cartão Nubank)'><input id='dtotal' type='number' step='0.01' placeholder='Saldo devedor'><input id='dinstallment' type='number' step='0.01' placeholder='Parcela mensal'><input id='drate' type='number' step='0.01' placeholder='Juros ao mês (%)'><input id='ddue' type='number' min='1' max='31' placeholder='Dia do vencimento'><button onclick='addDebt()'>Salvar dívida</button></div></section>
-<section id='add'><h1>Novo Lançamento</h1><div class='card'><select id='ttype'><option value='expense'>Despesa</option><option value='income'>Receita</option></select><input id='tvalue' type='number' step='0.01' placeholder='Valor'><input id='tdesc' placeholder='Descrição'><select id='tcat'><option>Moradia</option><option>Alimentação</option><option>Transporte</option><option>Cartões</option><option>Lazer</option><option>Saúde</option><option>Salário</option><option>Outros</option></select><input id='tdate' type='date'><button onclick='addTransaction()'>Salvar lançamento</button></div><div id='txList' class='card'></div></section>
-<section id='calendar'><h1>Calendário Financeiro</h1><div class='card'><p class='muted'>Próximos compromissos cadastrados</p><div id='calendarList'></div></div><div class='card danger'><b>⚠️ Atenção</b><p id='warning'>Cadastre suas contas para acompanhar os vencimentos.</p></div></section>
-<section id='more'><h1>Minha Saída</h1><div class='card hero'><div>Você já eliminou</div><div id='eliminated' class='big'>R$ 0,00</div><div id='progressText'>Comece cadastrando suas dívidas.</div></div><div class='card'><h2>Simulador de quitação</h2><p class='muted'>Informe um valor extra e veja o impacto aproximado sobre a dívida com maior taxa de juros.</p><input id='extra' type='number' step='0.01' placeholder='Valor extra'><button onclick='simulate()'>Simular</button><div id='simResult'></div></div><div class='card'><h2>Backup</h2><p class='muted small'>Nesta versão gratuita, os dados ficam salvos neste navegador/aparelho.</p><button onclick='exportData()'>Exportar meus dados</button></div></section>
-</main><nav><div class='navin'><button class='active' onclick="go('home',this)">⌂<br>Início</button><button onclick="go('debts',this)">▤<br>Dívidas</button><button class='fab' onclick="go('add',this)">＋<br>Lançar</button><button onclick="go('calendar',this)">▦<br>Calendário</button><button onclick="go('more',this)">☰<br>Mais</button></div></nav><script>
-const BRL=new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL'});let data=JSON.parse(localStorage.getItem('minhaSaida')||'{"debts":[],"tx":[],"initialDebt":0}');const save=()=>{localStorage.setItem('minhaSaida',JSON.stringify(data));render()};function go(id,b){document.querySelectorAll('section').forEach(x=>x.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('nav button').forEach(x=>x.classList.remove('active'));b.classList.add('active');scrollTo(0,0)}function showForm(id){let x=document.getElementById(id);x.style.display=x.style.display==='none'?'block':'none'}function addDebt(){let d={id:Date.now(),name:dname.value||'Dívida',total:+dtotal.value||0,installment:+dinstallment.value||0,rate:+drate.value||0,due:+ddue.value||1};data.debts.push(d);data.initialDebt=Math.max(data.initialDebt,data.debts.reduce((s,x)=>s+x.total,0));['dname','dtotal','dinstallment','drate','ddue'].forEach(i=>document.getElementById(i).value='');save()}function delDebt(id){data.debts=data.debts.filter(x=>x.id!==id);save()}function addTransaction(){data.tx.push({id:Date.now(),type:ttype.value,value:+tvalue.value||0,desc:tdesc.value||'Lançamento',cat:tcat.value,date:tdate.value||new Date().toISOString().slice(0,10)});tvalue.value='';tdesc.value='';save()}function delTx(id){data.tx=data.tx.filter(x=>x.id!==id);save()}function simulate(){let e=+extra.value||0,d=[...data.debts].sort((a,b)=>b.rate-a.rate)[0];simResult.innerHTML=!d?'<p>Cadastre uma dívida primeiro.</p>':`<div class='card'><b>${d.name}</b><p>Saldo atual: ${BRL.format(d.total)}<br>Após pagamento extra: <b>${BRL.format(Math.max(0,d.total-e))}</b><br>Taxa cadastrada: ${d.rate.toFixed(2)}% a.m.</p><p class='muted small'>Estimativa simples; o contrato real pode usar regras diferentes.</p></div>`}function exportData(){let a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'}));a.download='minha-saida-backup.json';a.click()}function render(){let now=new Date(),m=now.getMonth(),y=now.getFullYear(),txm=data.tx.filter(t=>{let d=new Date(t.date+'T12:00');return d.getMonth()==m&&d.getFullYear()==y}),inc=txm.filter(t=>t.type==='income').reduce((s,t)=>s+t.value,0),exp=txm.filter(t=>t.type==='expense').reduce((s,t)=>s+t.value,0),bal=inc-exp,debt=data.debts.reduce((s,d)=>s+d.total,0),comm=data.debts.reduce((s,d)=>s+d.installment,0),real=bal-comm,elim=Math.max(0,data.initialDebt-debt),pct=data.initialDebt?Math.min(100,elim/data.initialDebt*100):0;balance.textContent=BRL.format(bal);committed.textContent=BRL.format(comm);real.textContent=BRL.format(real);income.textContent=BRL.format(inc);expense.textContent=BRL.format(exp);totalDebt.textContent=debtTotal2.textContent=BRL.format(debt);debtCount.textContent=`${data.debts.length} dívida${data.debts.length==1?'':'s'}`;pct.textContent=pct.toFixed(1)+'%';bar.style.width=pct+'%';eliminated.textContent=BRL.format(elim);progressText.textContent=data.initialDebt?`${pct.toFixed(1)}% da dívida inicial eliminada.`:'Comece cadastrando suas dívidas.';priority.textContent=real<0?`Seu fluxo mensal está pressionado em ${BRL.format(Math.abs(real))}. Revise despesas e vencimentos.`:debt>0?`Você tem ${BRL.format(Math.max(0,real))} de margem após as parcelas cadastradas.`:'Cadastre suas dívidas e lançamentos para acompanhar seu cenário.';debtList.innerHTML=data.debts.length?data.debts.map(d=>`<div class='debt'><div class='row'><b>${d.name}</b><button style='width:auto;background:transparent;color:#ff7777' onclick='delDebt(${d.id})'>×</button></div><div>${BRL.format(d.total)}</div><div class='muted small'>Parcela ${BRL.format(d.installment)} · ${d.rate.toFixed(2)}% a.m. · vence dia ${d.due}</div></div>`).join(''):`<div class='empty'>Nenhuma dívida cadastrada.</div>`;txList.innerHTML='<h2>Últimos lançamentos</h2>'+(data.tx.length?data.tx.slice().reverse().slice(0,10).map(t=>`<div class='debt row'><div><b>${t.desc}</b><div class='muted small'>${t.cat} · ${new Date(t.date+'T12:00').toLocaleDateString('pt-BR')}</div></div><div style='text-align:right'><b class='${t.type==='income'?'green':'red'}'>${t.type==='income'?'+':'-'} ${BRL.format(t.value)}</b><div onclick='delTx(${t.id})' class='muted small'>excluir</div></div></div>`).join(''):'<div class=empty>Nenhum lançamento.</div>');calendarList.innerHTML=data.debts.length?data.debts.slice().sort((a,b)=>a.due-b.due).map(d=>`<div class='debt row'><b>Dia ${String(d.due).padStart(2,'0')} · ${d.name}</b><span class='red'>-${BRL.format(d.installment)}</span></div>`).join(''):'<div class=empty>Nenhum compromisso.</div>';warning.textContent=comm>inc&&inc>0?`As parcelas cadastradas somam ${BRL.format(comm)}, acima das receitas deste mês.`:'Acompanhe seus vencimentos para evitar juros e atrasos.'}tdate.value=new Date().toISOString().slice(0,10);render();if('serviceWorker'in navigator)navigator.serviceWorker.register('sw.js');</script></body></html>
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#071d20">
+<title>Minha Saída</title>
+
+<style>
+:root{
+  --bg:#061b1e;
+  --card:#0d2a2d;
+  --green:#5df29a;
+  --text:#f4fbf8;
+  --muted:#a9bfba;
+  --red:#ff6464;
+  --line:#214246;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font:15px system-ui,-apple-system,Segoe UI,sans-serif
+}
+.app{
+  max-width:520px;
+  margin:auto;
+  min-height:100vh;
+  padding:24px 16px 96px
+}
+h1{font-size:28px;margin:8px 0 2px}
+h2{font-size:20px}
+.muted{color:var(--muted)}
+.small{font-size:12px}
+.card{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:16px;
+  margin:12px 0
+}
+.hero{background:linear-gradient(135deg,#138c55,#075b44)}
+.big{font-size:34px;font-weight:800}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.stat{
+  background:#fff;
+  color:#102325;
+  border-radius:14px;
+  padding:13px
+}
+.stat b{display:block;font-size:20px;margin-top:4px}
+.green{color:#159457}
+.red{color:#e34242}
+button{
+  border:0;
+  border-radius:12px;
+  padding:13px 15px;
+  font-weight:750;
+  background:var(--green);
+  color:#082117;
+  width:100%;
+  cursor:pointer
+}
+input,select{
+  width:100%;
+  padding:13px;
+  border-radius:10px;
+  border:1px solid #b9c8c5;
+  margin:6px 0 12px;
+  font:inherit
+}
+.row{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  align-items:center
+}
+.debt{
+  padding:12px 0;
+  border-bottom:1px solid var(--line)
+}
+.debt:last-child{border:0}
+nav{
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  background:#092326;
+  border-top:1px solid var(--line);
+  display:flex;
+  justify-content:center;
+  padding:8px
+}
+.navin{
+  width:min(520px,100%);
+  display:grid;
+  grid-template-columns:repeat(6,1fr);
+  gap:2px
+}
+.navin button{
+  background:transparent;
+  color:var(--muted);
+  font-size:10px;
+  padding:8px 1px
+}
+.navin button.active{color:var(--green)}
+section{display:none}
+section.active{display:block}
+.empty{text-align:center;color:var(--muted);padding:22px}
+.pill,.tag{
+  padding:5px 8px;
+  border-radius:999px;
+  background:#16383b;
+  color:var(--green);
+  font-size:11px
+}
+.ghost{
+  width:auto;
+  background:transparent;
+  color:#ff8585;
+  padding:5px 8px
+}
+.inline{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px
+}
+.check{
+  display:flex;
+  gap:9px;
+  align-items:center;
+  margin:4px 0 14px
+}
+.check input{width:auto;margin:0}
+</style>
+</head>
+
+<body>
+
+<main class="app">
+
+<section id="home" class="active">
+
+<div class="muted">Minha Saída</div>
+
+<h1>Olá, Bruno! 👋</h1>
+
+<div class="muted">
+Disciplina hoje, liberdade amanhã.
+</div>
+
+<div class="card hero">
+
+<div>Saldo em conta</div>
+
+<div id="balance" class="big">
+R$ 0,00
+</div>
+
+<div class="row">
+
+<div>
+Comprometido<br>
+<b id="committed"></b>
+</div>
+
+<div>
+Saldo real<br>
+<b id="real"></b>
+</div>
+
+</div>
+</div>
+
+<div class="grid">
+
+<div class="stat">
+Receitas do mês
+<b id="income" class="green"></b>
+</div>
+
+<div class="stat">
+Despesas do mês
+<b id="expense" class="red"></b>
+</div>
+
+</div>
+
+<div class="card">
+
+<b>🎯 Sua prioridade agora</b>
+
+<p id="priority" class="muted"></p>
+
+</div>
+
+</section>
+
+
+<!-- DÍVIDAS -->
+
+<section id="debts">
+
+<div class="row">
+
+<h1>Minhas Dívidas</h1>
+
+<span class="pill" id="debtCount"></span>
+
+</div>
+
+<div class="card">
+
+<div class="muted">
+Dívidas totais
+</div>
+
+<div id="debtTotal" class="big"></div>
+
+<div id="debtList"></div>
+
+</div>
+
+<button onclick="showForm('debtForm')">
++ Adicionar dívida
+</button>
+
+<div id="debtForm"
+class="card"
+style="display:none">
+
+<h2>Nova dívida</h2>
+
+<input id="dname"
+placeholder="Nome / credor">
+
+<input id="dtotal"
+type="number"
+step=".01"
+placeholder="Saldo devedor">
+
+<input id="dinstallment"
+type="number"
+step=".01"
+placeholder="Parcela / valor do vencimento">
+
+<input id="drate"
+type="number"
+step=".01"
+placeholder="Juros ao mês (%)">
+
+<label class="muted small">
+Próximo vencimento
+</label>
+
+<input id="ddate"
+type="date">
+
+<label class="check">
+
+<input id="dmonthly"
+type="checkbox">
+
+Repetir esta cobrança todo mês
+
+</label>
+
+<p class="muted small">
+Se for uma cobrança única, deixe desmarcado.
+</p>
+
+<button onclick="addDebt()">
+Salvar dívida
+</button>
+
+</div>
+
+</section>
+
+
+<!-- CARTÕES -->
+
+<section id="cards">
+
+<div class="row">
+
+<h1>Cartões de Crédito</h1>
+
+<span class="pill"
+id="cardCount"></span>
+
+</div>
+
+<div id="cardList"></div>
+
+<button onclick="showForm('cardForm')">
++ Cadastrar cartão
+</button>
+
+<div id="cardForm"
+class="card"
+style="display:none">
+
+<h2>Novo cartão</h2>
+
+<input id="cname"
+placeholder="Nome do cartão (ex.: Nubank)">
+
+<input id="climit"
+type="number"
+step=".01"
+placeholder="Limite">
+
+<div class="inline">
+
+<div>
+
+<label class="small muted">
+Fecha dia
+</label>
+
+<input id="cclose"
+type="number"
+min="1"
+max="31">
+
+</div>
+
+<div>
+
+<label class="small muted">
+Vence dia
+</label>
+
+<input id="cdue"
+type="number"
+min="1"
+max="31">
+
+</div>
+
+</div>
+
+<button onclick="addCard()">
+Salvar cartão
+</button>
+
+</div>
+
+<button
+style="margin-top:10px"
+onclick="openPurchase()">
+
++ Lançar compra no cartão
+
+</button>
+
+<div id="purchaseForm"
+class="card"
+style="display:none">
+
+<h2>Nova compra</h2>
+
+<select id="pcard"></select>
+
+<input id="pdesc"
+placeholder="Descrição da compra">
+
+<input id="pvalue"
+type="number"
+step=".01"
+placeholder="Valor">
+
+<input id="pdate"
+type="date">
+
+<button onclick="addPurchase()">
+Adicionar à fatura
+</button>
+
+</div>
+
+<div class="card">
+
+<h2>Compras</h2>
+
+<div id="purchaseList"></div>
+
+</div>
+
+</section>
+
+
+<!-- LANÇAMENTOS -->
+
+<section id="add">
+
+<h1>Novo Lançamento</h1>
+
+<div class="card">
+
+<select id="ttype">
+
+<option value="expense">
+Despesa
+</option>
+
+<option value="income">
+Receita
+</option>
+
+</select>
+
+<input id="tvalue"
+type="number"
+step=".01"
+placeholder="Valor">
+
+<input id="tdesc"
+placeholder="Descrição">
+
+<select id="tcat">
+
+<option>Moradia</option>
+<option>Alimentação</option>
+<option>Transporte</option>
+<option>Cartões</option>
+<option>Lazer</option>
+<option>Saúde</option>
+<option>Salário</option>
+<option>Outros</option>
+
+</select>
+
+<input id="tdate"
+type="date">
+
+<button onclick="addTx()">
+Salvar lançamento
+</button>
+
+</div>
+
+<div id="txList"
+class="card"></div>
+
+</section>
+
+
+<!-- CALENDÁRIO -->
+
+<section id="calendar">
+
+<h1>Calendário Financeiro</h1>
+
+<div class="card">
+
+<p class="muted">
+Vencimentos cadastrados
+</p>
+
+<div id="calendarList"></div>
+
+</div>
+
+</section>
+
+
+<!-- MINHA SAÍDA -->
+
+<section id="more">
+
+<h1>Minha Saída</h1>
+
+<div class="card hero">
+
+<div>
+Você já eliminou
+</div>
+
+<div id="eliminated"
+class="big"></div>
+
+<div id="progressText"></div>
+
+</div>
+
+<div class="card">
+
+<h2>
+Simulador de quitação
+</h2>
+
+<input id="extra"
+type="number"
+step=".01"
+placeholder="Valor extra">
+
+<button onclick="simulate()">
+Simular
+</button>
+
+<div id="simResult"></div>
+
+</div>
+
+<div class="card">
+
+<h2>Backup</h2>
+
+<p class="muted small">
+Os dados ficam salvos neste navegador/aparelho.
+</p>
+
+<button onclick="exportData()">
+Exportar meus dados
+</button>
+
+</div>
+
+</section>
+
+</main>
+
+
+<!-- MENU -->
+
+<nav>
+
+<div class="navin">
+
+<button class="active"
+onclick="go('home',this)">
+⌂<br>Início
+</button>
+
+<button onclick="go('debts',this)">
+▤<br>Dívidas
+</button>
+
+<button onclick="go('cards',this)">
+▣<br>Cartões
+</button>
+
+<button onclick="go('add',this)">
+＋<br>Lançar
+</button>
+
+<button onclick="go('calendar',this)">
+▦<br>Agenda
+</button>
+
+<button onclick="go('more',this)">
+☰<br>Mais
+</button>
+
+</div>
+
+</nav>
+
+
+<script>
+
+const BRL =
+new Intl.NumberFormat(
+'pt-BR',
+{
+style:'currency',
+currency:'BRL'
+}
+);
+
+let data =
+JSON.parse(
+localStorage.getItem('minhaSaida')
+|| '{}'
+);
+
+data.debts ??= [];
+data.tx ??= [];
+data.cards ??= [];
+data.purchases ??= [];
+data.initialDebt ??= 0;
+
+
+function save(){
+
+localStorage.setItem(
+'minhaSaida',
+JSON.stringify(data)
+);
+
+render();
+
+}
+
+
+function go(id,b){
+
+document
+.querySelectorAll('section')
+.forEach(
+x=>x.classList.remove('active')
+);
+
+document
+.getElementById(id)
+.classList.add('active');
+
+document
+.querySelectorAll('nav button')
+.forEach(
+x=>x.classList.remove('active')
+);
+
+b.classList.add('active');
+
+scrollTo(0,0);
+
+}
+
+
+function showForm(id){
+
+let x =
+document.getElementById(id);
+
+x.style.display =
+x.style.display === 'none'
+? 'block'
+: 'none';
+
+}
+
+
+/* DÍVIDAS */
+
+function addDebt(){
+
+let total =
++dtotal.value || 0;
+
+if(!dname.value || !total){
+
+return alert(
+'Informe o nome e o saldo da dívida.'
+);
+
+}
+
+data.debts.push({
+
+id:Date.now(),
+
+name:dname.value,
+
+total:total,
+
+installment:
++dinstallment.value || 0,
+
+rate:
++drate.value || 0,
+
+date:
+ddate.value || '',
+
+monthly:
+dmonthly.checked
+
+});
+
+data.initialDebt =
+Math.max(
+data.initialDebt,
+data.debts.reduce(
+(s,x)=>s+x.total,0
+)
+);
+
+[
+'dname',
+'dtotal',
+'dinstallment',
+'drate',
+'ddate'
+]
+.forEach(
+i=>
+document.getElementById(i).value=''
+);
+
+dmonthly.checked=false;
+
+save();
+
+}
+
+
+function delDebt(id){
+
+data.debts =
+data.debts.filter(
+x=>x.id!==id
+);
+
+save();
+
+}
+
+
+/* CARTÕES */
+
+function addCard(){
+
+if(!cname.value){
+
+return alert(
+'Informe o nome do cartão.'
+);
+
+}
+
+data.cards.push({
+
+id:Date.now(),
+
+name:cname.value,
+
+limit:
++climit.value || 0,
+
+close:
++cclose.value || 0,
+
+due:
++cdue.value || 0
+
+});
+
+[
+'cname',
+'climit',
+'cclose',
+'cdue'
+]
+.forEach(
+i=>
+document.getElementById(i).value=''
+);
+
+save();
+
+}
+
+
+function delCard(id){
+
+if(
+confirm(
+'Excluir este cartão e as compras dele?'
+)
+){
+
+data.cards =
+data.cards.filter(
+x=>x.id!==id
+);
+
+data.purchases =
+data.purchases.filter(
+x=>x.cardId!==id
+);
+
+save();
+
+}
+
+}
+
+
+function fillCards(){
+
+pcard.innerHTML =
+data.cards
+.map(
+c=>
+`<option value="${c.id}">
+${c.name}
+</option>`
+)
+.join('');
+
+}
+
+
+function openPurchase(){
+
+if(!data.cards.length){
+
+return alert(
+'Cadastre um cartão primeiro.'
+);
+
+}
+
+fillCards();
+
+purchaseForm.style.display =
+'block';
+
+pdate.value =
+new Date()
+.toISOString()
+.slice(0,10);
+
+}
+
+
+function addPurchase(){
+
+let value =
++pvalue.value || 0;
+
+if(!pcard.value || !value){
+
+return alert(
+'Escolha o cartão e informe o valor.'
+);
+
+}
+
+data.purchases.push({
+
+id:Date.now(),
+
+cardId:
++pcard.value,
+
+desc:
+pdesc.value || 'Compra',
+
+value:value,
+
+date:
+pdate.value ||
+new Date()
+.toISOString()
+.slice(0,10)
+
+});
+
+pdesc.value='';
+pvalue.value='';
+
+save();
+
+}
+
+
+function delPurchase(id){
+
+data.purchases =
+data.purchases.filter(
+x=>x.id!==id
+);
+
+save();
+
+}
+
+
+/* LANÇAMENTOS */
+
+function addTx(){
+
+data.tx.push({
+
+id:Date.now(),
+
+type:ttype.value,
+
+value:
++tvalue.value || 0,
+
+desc:
+tdesc.value || 'Lançamento',
+
+cat:
+tcat.value,
+
+date:
+tdate.value ||
+new Date()
+.toISOString()
+.slice(0,10)
+
+});
+
+tvalue.value='';
+tdesc.value='';
+
+save();
+
+}
+
+
+function delTx(id){
+
+data.tx =
+data.tx.filter(
+x=>x.id!==id
+);
+
+save();
+
+}
+
+
+/* SIMULADOR */
+
+function simulate(){
+
+let e =
++extra.value || 0;
+
+let d =
+[...data.debts]
+.sort(
+(a,b)=>b.rate-a.rate
+)[0];
+
+simResult.innerHTML =
+!d
+
+? '<p>Cadastre uma dívida primeiro.</p>'
+
+:
+`<p>
+<b>${d.name}</b><br>
+Saldo atual:
+${BRL.format(d.total)}
+<br>
+Após valor extra:
+<b>
+${BRL.format(
+Math.max(0,d.total-e)
+)}
+</b>
+</p>`;
+
+}
+
+
+/* BACKUP */
+
+function exportData(){
+
+let a =
+document.createElement('a');
+
+a.href =
+URL.createObjectURL(
+
+new Blob(
+
+[
+JSON.stringify(
+data,
+null,
+2
+)
+],
+
+{
+type:'application/json'
+}
+
+)
+
+);
+
+a.download =
+'minha-saida-backup.json';
+
+a.click();
+
+}
+
+
+/* ATUALIZA TELA */
+
+function render(){
+
+let now =
+new Date();
+
+let month =
+now.getMonth();
+
+let year =
+now.getFullYear();
+
+
+let monthTx =
+data.tx.filter(
+t=>{
+
+let d =
+new Date(
+t.date+'T12:00'
+);
+
+return (
+d.getMonth()==month
+&&
+d.getFullYear()==year
+);
+
+}
+);
+
+
+let incomeValue =
+monthTx
+.filter(
+t=>t.type==='income'
+)
+.reduce(
+(s,t)=>s+t.value,
+0
+);
+
+
+let expenseValue =
+monthTx
+.filter(
+t=>t.type==='expense'
+)
+.reduce(
+(s,t)=>s+t.value,
+0
+);
+
+
+let debtValue =
+data.debts
+.reduce(
+(s,d)=>s+d.total,
+0
+);
+
+
+let committedValue =
+data.debts
+.reduce(
+(s,d)=>s+d.installment,
+0
+);
+
+
+let balanceValue =
+incomeValue -
+expenseValue;
+
+
+let realValue =
+balanceValue -
+committedValue;
+
+
+let eliminatedValue =
+Math.max(
+0,
+data.initialDebt -
+debtValue
+);
+
+
+let percentage =
+data.initialDebt
+
+?
+Math.min(
+100,
+eliminatedValue /
+data.initialDebt *
+100
+)
+
+:
+0;
+
+
+balance.textContent =
+BRL.format(balanceValue);
+
+committed.textContent =
+BRL.format(committedValue);
+
+real.textContent =
+BRL.format(realValue);
+
+income.textContent =
+BRL.format(incomeValue);
+
+expense.textContent =
+BRL.format(expenseValue);
+
+debtTotal.textContent =
+BRL.format(debtValue);
+
+
+debtCount.textContent =
+`${data.debts.length}
+dívida${data.debts.length==1?'':'s'}`;
+
+
+priority.textContent =
+
+realValue < 0
+
+?
+`Seu fluxo mensal está pressionado em
+${BRL.format(
+Math.abs(realValue)
+)}.`
+
+:
+
+debtValue > 0
+
+?
+`Margem estimada após parcelas:
+${BRL.format(
+Math.max(0,realValue)
+)}.`
+
+:
+
+'Cadastre suas dívidas e lançamentos.';
+
+
+eliminated.textContent =
+BRL.format(
+eliminatedValue
+);
+
+
+progressText.textContent =
+
+data.initialDebt
+
+?
+`${percentage.toFixed(1)}%
+da dívida inicial eliminada.`
+
+:
+'Comece cadastrando suas dívidas.';
+
+
+/* LISTA DE DÍVIDAS */
+
+debtList.innerHTML =
+
+data.debts.length
+
+?
+
+data.debts
+.map(
+
+d=>
+
+`<div class="debt">
+
+<div class="row">
+
+<b>${d.name}</b>
+
+<button
+class="ghost"
+onclick="delDebt(${d.id})">
+
+×
+
+</button>
+
+</div>
+
+<div>
+${BRL.format(d.total)}
+</div>
+
+<div class="muted small">
+
+Parcela
+${BRL.format(d.installment)}
+
+·
+
+${d.rate.toFixed(2)}% a.m.
+
+${
+
+d.date
+
+?
+
+' · vence ' +
+new Date(
+d.date+'T12:00'
+)
+.toLocaleDateString('pt-BR')
+
+:
+
+''
+
+}
+
+·
+
+${
+
+d.monthly
+
+?
+'🔁 mensal'
+
+:
+'cobrança única'
+
+}
+
+</div>
+
+</div>`
+
+)
+.join('')
+
+:
+
+`<div class="empty">
+Nenhuma dívida cadastrada.
+</div>`;
+
+
+/* CARTÕES */
+
+cardCount.textContent =
+
+`${data.cards.length}
+cartão${data.cards.length==1?'':'ões'}`;
+
+
+cardList.innerHTML =
+
+data.cards.length
+
+?
+
+data.cards.map(
+
+c=>{
+
+let totalCard =
+
+data.purchases
+.filter(
+p=>p.cardId===c.id
+)
+.reduce(
+(s,p)=>s+p.value,
+0
+);
+
+
+return `
+
+<div class="card">
+
+<div class="row">
+
+<div>
+
+<span class="tag">
+CARTÃO
+</span>
+
+<h2>
+${c.name}
+</h2>
+
+</div>
+
+<button
+class="ghost"
+onclick="delCard(${c.id})">
+
+×
+
+</button>
+
+</div>
+
+
+<div class="muted">
+Total lançado
+</div>
+
+
+<div class="big">
+
+${BRL.format(
+totalCard
+)}
+
+</div>
+
+
+<div class="row small">
+
+<span>
+
+Limite
+
+${BRL.format(
+c.limit
+)}
+
+</span>
+
+
+<span>
+
+Disponível
+
+${BRL.format(
+
+Math.max(
+0,
+c.limit-totalCard
+)
+
+)}
+
+</span>
+
+</div>
+
+
+<p class="muted small">
+
+Fecha dia
+${c.close || '—'}
+
+·
+
+Vence dia
+${c.due || '—'}
+
+</p>
+
+</div>`;
+
+}
+
+).join('')
+
+:
+
+`<div class="card empty">
+
+Cadastre seu primeiro cartão.
+
+</div>`;
+
+
+/* COMPRAS */
+
+purchaseList.innerHTML =
+
+data.purchases.length
+
+?
+
+data.purchases
+.slice()
+.reverse()
+.map(
+
+p=>{
+
+let card =
+data.cards.find(
+c=>c.id===p.cardId
+);
+
+
+return `
+
+<div class="debt row">
+
+<div>
+
+<b>
+${p.desc}
+</b>
+
+<div class="muted small">
+
+${card?.name || 'Cartão'}
+
+·
+
+${
+
+new Date(
+p.date+'T12:00'
+)
+.toLocaleDateString(
+'pt-BR'
+)
+
+}
+
+</div>
+
+</div>
+
+
+<div>
+
+<b>
+${BRL.format(p.value)}
+</b>
+
+<button
+class="ghost"
+onclick="delPurchase(${p.id})">
+
+×
+
+</button>
+
+</div>
+
+</div>`;
+
+}
+
+).join('')
+
+:
+
+`<div class="empty">
+
+Nenhuma compra lançada.
+
+</div>`;
+
+
+/* LANÇAMENTOS */
+
+txList.innerHTML =
+
+'<h2>Últimos lançamentos</h2>'
+
++
+
+(
+
+data.tx.length
+
+?
+
+data.tx
+.slice()
+.reverse()
+.slice(0,10)
+.map(
+
+t=>
+
+`<div class="debt row">
+
+<div>
+
+<b>
+${t.desc}
+</b>
+
+<div class="muted small">
+${t.cat}
+</div>
+
+</div>
+
+<div>
+
+${BRL.format(t.value)}
+
+<span
+onclick="delTx(${t.id})">
+
+×
+
+</span>
+
+</div>
+
+</div>`
+
+)
+.join('')
+
+:
+
+`<div class="empty">
+
+Nenhum lançamento.
+
+</div>`
+
+);
+
+
+/* CALENDÁRIO */
+
+let calendar = [];
+
+
+data.debts.forEach(
+
+d=>{
+
+if(d.date){
+
+calendar.push({
+
+date:d.date,
+
+label:d.name,
+
+value:
+d.installment ||
+d.total,
+
+monthly:
+d.monthly
+
+});
+
+}
+
+}
+
+);
+
+
+data.cards.forEach(
+
+c=>{
+
+if(c.due){
+
+let date =
+new Date(
+year,
+month,
+c.due,
+12
+);
+
+
+let invoice =
+
+data.purchases
+.filter(
+p=>p.cardId===c.id
+)
+.reduce(
+(s,p)=>s+p.value,
+0
+);
+
+
+calendar.push({
+
+date:
+date
+.toISOString()
+.slice(0,10),
+
+label:
+'Fatura '+c.name,
+
+value:
+invoice,
+
+monthly:true
+
+});
+
+}
+
+}
+
+);
+
+
+calendarList.innerHTML =
+
+calendar.length
+
+?
+
+calendar
+.sort(
+(a,b)=>
+a.date.localeCompare(b.date)
+)
+.map(
+
+x=>
+
+`<div class="debt row">
+
+<div>
+
+<b>
+
+${
+
+new Date(
+x.date+'T12:00'
+)
+.toLocaleDateString(
+'pt-BR'
+)
+
+}
+
+·
+
+${x.label}
+
+</b>
+
+
+<div class="muted small">
+
+${
+
+x.monthly
+
+?
+'🔁 recorrente mensal'
+
+:
+'cobrança única'
+
+}
+
+</div>
+
+</div>
+
+
+<span class="red">
+
+-${BRL.format(x.value)}
+
+</span>
+
+</div>`
+
+)
+.join('')
+
+:
+
+`<div class="empty">
+
+Nenhum vencimento cadastrado.
+
+</div>`;
+
+
+fillCards();
+
+}
+
+
+tdate.value =
+new Date()
+.toISOString()
+.slice(0,10);
+
+pdate.value =
+tdate.value;
+
+render();
+
+</script>
+
+</body>
+</html>
