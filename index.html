@@ -2,92 +2,51 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#061b1e">
-
 <title>Minha Saída</title>
 
 <style>
 :root{
   --bg:#061b1e;
   --card:#0d2a2d;
-  --green:#5df29a;
-  --green2:#159457;
+  --green:#55ed96;
+  --greenDark:#159457;
   --text:#f4fbf8;
   --muted:#a9bfba;
   --red:#ff6464;
   --orange:#ffb84d;
   --line:#214246;
-  --white:#ffffff;
 }
 
-*{
-  box-sizing:border-box;
-}
+*{box-sizing:border-box}
 
-html{
-  background:var(--bg);
-}
-
-body{
+html,body{
   margin:0;
   background:var(--bg);
   color:var(--text);
   font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+}
+
+body{
   font-size:15px;
-}
-
-button,
-input,
-select{
-  font:inherit;
-}
-
-button{
-  -webkit-tap-highlight-color:transparent;
-  touch-action:manipulation;
 }
 
 .app{
   max-width:520px;
-  margin:0 auto;
+  margin:auto;
   min-height:100vh;
   padding:24px 16px 110px;
 }
 
 h1{
   font-size:28px;
-  margin:8px 0 2px;
+  margin:8px 0 4px;
 }
 
 h2{
   font-size:20px;
   margin:8px 0 14px;
-}
-
-.muted{
-  color:var(--muted);
-}
-
-.small{
-  font-size:12px;
-}
-
-.big{
-  font-size:34px;
-  font-weight:800;
-}
-
-.green{
-  color:var(--green2);
-}
-
-.red{
-  color:var(--red);
-}
-
-.orange{
-  color:var(--orange);
 }
 
 .card{
@@ -99,8 +58,18 @@ h2{
 }
 
 .hero{
-  background:linear-gradient(135deg,#138c55,#075b44);
+  background:linear-gradient(135deg,#14945b,#087052);
 }
+
+.big{
+  font-size:34px;
+  font-weight:800;
+}
+
+.muted{color:var(--muted)}
+.small{font-size:12px}
+.green{color:var(--greenDark)}
+.red{color:var(--red)}
 
 .grid{
   display:grid;
@@ -109,7 +78,7 @@ h2{
 }
 
 .stat{
-  background:var(--white);
+  background:#fff;
   color:#102325;
   border-radius:14px;
   padding:13px;
@@ -128,20 +97,42 @@ h2{
   gap:10px;
 }
 
-button.primary,
-.form-button{
+button{
+  font:inherit;
+  cursor:pointer;
+  touch-action:manipulation;
+  -webkit-tap-highlight-color:transparent;
+}
+
+.primary{
+  width:100%;
   border:0;
   border-radius:12px;
   padding:13px 15px;
-  font-weight:800;
   background:var(--green);
   color:#082117;
-  width:100%;
-  cursor:pointer;
+  font-weight:800;
 }
 
-input,
-select{
+.pay{
+  border:0;
+  border-radius:10px;
+  padding:9px 12px;
+  margin-top:7px;
+  background:var(--green);
+  color:#082117;
+  font-weight:800;
+}
+
+.delete{
+  border:0;
+  background:transparent;
+  color:#ff8585;
+  font-size:18px;
+  padding:8px;
+}
+
+input,select{
   width:100%;
   padding:13px;
   border-radius:10px;
@@ -149,69 +140,42 @@ select{
   margin:6px 0 12px;
   background:#fff;
   color:#102325;
-}
-
-.debt-row{
-  padding:12px 0;
-  border-bottom:1px solid var(--line);
-}
-
-.debt-row:last-child{
-  border-bottom:0;
-}
-
-.empty{
-  text-align:center;
-  color:var(--muted);
-  padding:22px 5px;
-}
-
-.pill,
-.tag{
-  padding:5px 8px;
-  border-radius:999px;
-  background:#16383b;
-  color:var(--green);
-  font-size:11px;
-}
-
-.ghost{
-  border:0;
-  background:transparent;
-  color:#ff8585;
-  padding:8px;
-  width:auto;
-  font-size:18px;
-  cursor:pointer;
-}
-
-.pay-button{
-  border:0;
-  background:var(--green);
-  color:#082117;
-  border-radius:10px;
-  padding:9px 12px;
-  font-weight:800;
-  margin-top:7px;
-  cursor:pointer;
-}
-
-.inline{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:8px;
+  font:inherit;
 }
 
 .check{
   display:flex;
-  gap:9px;
   align-items:center;
+  gap:8px;
   margin:4px 0 14px;
 }
 
 .check input{
   width:auto;
   margin:0;
+}
+
+.item{
+  padding:12px 0;
+  border-bottom:1px solid var(--line);
+}
+
+.item:last-child{
+  border-bottom:0;
+}
+
+.empty{
+  text-align:center;
+  padding:20px;
+  color:var(--muted);
+}
+
+.pill{
+  background:#16383b;
+  color:var(--green);
+  padding:5px 8px;
+  border-radius:999px;
+  font-size:11px;
 }
 
 section{
@@ -222,56 +186,7 @@ section.active{
   display:block;
 }
 
-.progress{
-  height:10px;
-  background:#dce7e4;
-  border-radius:10px;
-  overflow:hidden;
-  margin-top:12px;
-}
-
-.progress-bar{
-  height:100%;
-  background:var(--green);
-  width:0%;
-}
-
-nav{
-  position:fixed;
-  z-index:9999;
-  bottom:0;
-  left:0;
-  right:0;
-  background:#092326;
-  border-top:1px solid var(--line);
-  padding:8px 6px calc(8px + env(safe-area-inset-bottom));
-}
-
-.nav-inner{
-  width:min(520px,100%);
-  margin:auto;
-  display:grid;
-  grid-template-columns:repeat(6,1fr);
-  gap:2px;
-}
-
-.nav-button{
-  appearance:none;
-  -webkit-appearance:none;
-  border:0;
-  background:transparent;
-  color:var(--muted);
-  font-size:10px;
-  padding:8px 1px;
-  cursor:pointer;
-  min-height:48px;
-}
-
-.nav-button.active{
-  color:var(--green);
-}
-
-.pie-wrap{
+.pie-area{
   display:flex;
   align-items:center;
   justify-content:center;
@@ -285,26 +200,27 @@ nav{
   border-radius:50%;
   background:#214246;
   position:relative;
-  flex-shrink:0;
 }
 
-.pie-center{
+.pie:after{
+  content:"Próximo\A mês";
+  white-space:pre;
   position:absolute;
   width:82px;
   height:82px;
-  background:#0d2a2d;
-  border-radius:50%;
   top:34px;
   left:34px;
+  border-radius:50%;
+  background:var(--card);
   display:flex;
   align-items:center;
   justify-content:center;
   text-align:center;
-  font-size:11px;
   color:var(--muted);
+  font-size:12px;
 }
 
-.legend-dot{
+.dot{
   display:inline-block;
   width:13px;
   height:13px;
@@ -312,34 +228,56 @@ nav{
   margin-right:5px;
 }
 
-.legend-green{
+.dot-green{background:var(--green)}
+.dot-orange{background:var(--orange)}
+
+.progress{
+  height:10px;
+  border-radius:10px;
+  background:#dce7e4;
+  overflow:hidden;
+  margin-top:12px;
+}
+
+.progress div{
+  height:100%;
+  width:0%;
   background:var(--green);
 }
 
-.legend-orange{
-  background:var(--orange);
+nav{
+  position:fixed;
+  z-index:9999;
+  bottom:0;
+  left:0;
+  right:0;
+  background:#092326;
+  border-top:1px solid var(--line);
+  padding:8px 5px calc(8px + env(safe-area-inset-bottom));
 }
 
-@media(max-width:380px){
-  .big{
-    font-size:29px;
-  }
+.nav{
+  max-width:520px;
+  margin:auto;
+  display:grid;
+  grid-template-columns:repeat(6,1fr);
+}
 
-  .pie{
-    width:125px;
-    height:125px;
-  }
+.nav button{
+  border:0;
+  background:transparent;
+  color:var(--muted);
+  font-size:10px;
+  padding:8px 1px;
+  min-height:48px;
+}
 
-  .pie-center{
-    width:67px;
-    height:67px;
-    top:29px;
-    left:29px;
-  }
+.nav button.active{
+  color:var(--green);
+}
 
-  .pie-wrap{
-    gap:12px;
-  }
+[hidden]{
+  display:none!important;
 }
 </style>
 </head>
@@ -348,803 +286,713 @@ nav{
 
 <main class="app">
 
-<!-- =========================
-INÍCIO
-========================= -->
+<!-- INÍCIO -->
 
-<section id="home" class="active">
+<section id="page-home" class="active">
 
-  <div class="muted">Minha Saída</div>
+<div class="muted">Minha Saída</div>
 
-  <h1>Olá, Bruno! 👋</h1>
+<h1>Olá, Bruno! 👋</h1>
 
-  <div class="muted">
-    Disciplina hoje, liberdade amanhã.
-  </div>
+<div class="muted">
+Disciplina hoje, liberdade amanhã.
+</div>
 
-  <div class="card hero">
+<div class="card hero">
 
-    <div>Saldo em conta</div>
+<div>Saldo em conta</div>
 
-    <div id="balance" class="big">
-      R$ 0,00
-    </div>
+<div id="homeBalance" class="big">
+R$ 0,00
+</div>
 
-    <div class="row">
+<div class="row">
 
-      <div>
-        Comprometido
-        <br>
-        <b id="committed">R$ 0,00</b>
-      </div>
+<div>
+Comprometido
+<br>
+<b id="homeCommitted">R$ 0,00</b>
+</div>
 
-      <div style="text-align:right">
-        Saldo real
-        <br>
-        <b id="real">R$ 0,00</b>
-      </div>
+<div style="text-align:right">
+Saldo real
+<br>
+<b id="homeReal">R$ 0,00</b>
+</div>
 
-    </div>
+</div>
 
-  </div>
+</div>
 
-  <div class="grid">
+<div class="grid">
 
-    <div class="stat">
-      Receitas do mês
-      <b id="income" class="green">
-        R$ 0,00
-      </b>
-    </div>
+<div class="stat">
+Receitas do mês
+<b id="homeIncome" class="green">
+R$ 0,00
+</b>
+</div>
 
-    <div class="stat">
-      Despesas do mês
-      <b id="expense" class="red">
-        R$ 0,00
-      </b>
-    </div>
+<div class="stat">
+Despesas do mês
+<b id="homeExpense" class="red">
+R$ 0,00
+</b>
+</div>
 
-  </div>
+</div>
 
-  <div class="card">
+<div class="card">
 
-    <b>🎯 Sua prioridade agora</b>
+<b>🎯 Sua prioridade agora</b>
 
-    <p id="priority" class="muted">
-      Cadastre suas dívidas e lançamentos.
-    </p>
+<p id="priority" class="muted">
+Cadastre seus dados para começar.
+</p>
 
-  </div>
+</div>
 
-  <!-- PRÓXIMO MÊS -->
+<div class="card">
 
-  <div class="card">
+<h2>🔮 Próximo mês</h2>
 
-    <h2>🔮 Próximo mês</h2>
+<div class="muted">
+Total já comprometido
+</div>
 
-    <div class="muted">
-      Total já comprometido
-    </div>
+<div id="nextTotal" class="big">
+R$ 0,00
+</div>
 
-    <div id="nextMonthTotal" class="big">
-      R$ 0,00
-    </div>
+<div class="grid" style="margin-top:12px">
 
-    <div class="grid" style="margin-top:12px">
+<div class="stat">
+Este mês
+<b id="thisMonthCommit">
+R$ 0,00
+</b>
+</div>
 
-      <div class="stat">
-        Este mês
-        <b id="currentMonthCommit">
-          R$ 0,00
-        </b>
-      </div>
+<div class="stat">
+Próximo mês
+<b id="nextMonthCommit" class="red">
+R$ 0,00
+</b>
+</div>
 
-      <div class="stat">
-        Próximo mês
-        <b id="nextMonthCommit" class="red">
-          R$ 0,00
-        </b>
-      </div>
+</div>
 
-    </div>
+<div class="pie-area">
 
-    <div class="pie-wrap">
+<div id="pie" class="pie"></div>
 
-      <div id="debtPie" class="pie">
+<div>
 
-        <div class="pie-center">
-          Próximo
-          <br>
-          mês
-        </div>
+<div style="margin-bottom:12px">
 
-      </div>
+<span class="dot dot-green"></span>
+Dívidas
 
-      <div>
+<br>
 
-        <div style="margin-bottom:12px">
+<b id="nextDebtValue">
+R$ 0,00
+</b>
 
-          <span class="legend-dot legend-green"></span>
-          Dívidas
+</div>
 
-          <br>
+<div>
 
-          <b id="nextDebts">
-            R$ 0,00
-          </b>
+<span class="dot dot-orange"></span>
+Cartões
 
-        </div>
+<br>
 
-        <div>
+<b id="nextCardValue">
+R$ 0,00
+</b>
 
-          <span class="legend-dot legend-orange"></span>
-          Cartões
+</div>
 
-          <br>
+</div>
 
-          <b id="nextCards">
-            R$ 0,00
-          </b>
+</div>
 
-        </div>
+<p id="nextMessage" class="muted"></p>
 
-      </div>
-
-    </div>
-
-    <div
-      id="nextMonthMessage"
-      class="muted"
-      style="margin-top:18px"
-    >
-      Cadastre suas receitas para comparar com o próximo mês.
-    </div>
-
-  </div>
+</div>
 
 </section>
 
 
-<!-- =========================
-DÍVIDAS
-========================= -->
+<!-- DÍVIDAS -->
 
-<section id="debts">
+<section id="page-debts">
 
-  <div class="row">
+<div class="row">
 
-    <h1>Minhas Dívidas</h1>
+<h1>Dívidas</h1>
 
-    <span
-      class="pill"
-      id="debtCount"
-    >
-      0 dívidas
-    </span>
+<span id="debtCount" class="pill">
+0 dívidas
+</span>
 
-  </div>
+</div>
 
-  <div class="card">
+<div class="card">
 
-    <div class="muted">
-      Dívidas totais
-    </div>
+<div class="muted">
+Saldo devedor total
+</div>
 
-    <div
-      id="debtTotal"
-      class="big"
-    >
-      R$ 0,00
-    </div>
+<div id="debtTotal" class="big">
+R$ 0,00
+</div>
 
-    <div id="debtList"></div>
+<div id="debtList"></div>
 
-  </div>
+</div>
 
-  <button
-    type="button"
-    class="primary"
-    id="openDebtForm"
-  >
-    + Adicionar dívida
-  </button>
+<button id="btnOpenDebt" class="primary">
++ Adicionar dívida
+</button>
 
-  <div
-    id="debtForm"
-    class="card"
-    hidden
-  >
+<div id="debtForm" class="card" hidden>
 
-    <h2>Nova dívida</h2>
+<h2>Nova dívida</h2>
 
-    <input
-      id="dname"
-      type="text"
-      placeholder="Nome / credor"
-    >
+<input id="debtName" placeholder="Nome / credor">
 
-    <input
-      id="dtotal"
-      type="number"
-      inputmode="decimal"
-      step="0.01"
-      placeholder="Saldo devedor"
-    >
+<input
+id="debtTotalInput"
+type="number"
+step="0.01"
+inputmode="decimal"
+placeholder="Saldo devedor">
 
-    <input
-      id="dinstallment"
-      type="number"
-      inputmode="decimal"
-      step="0.01"
-      placeholder="Parcela / valor do vencimento"
-    >
+<input
+id="debtInstallment"
+type="number"
+step="0.01"
+inputmode="decimal"
+placeholder="Valor da parcela">
 
-    <input
-      id="drate"
-      type="number"
-      inputmode="decimal"
-      step="0.01"
-      placeholder="Juros ao mês (%)"
-    >
+<input
+id="debtRate"
+type="number"
+step="0.01"
+inputmode="decimal"
+placeholder="Juros ao mês (%)">
 
-    <label class="muted small">
-      Próximo vencimento
-    </label>
+<label class="muted small">
+Próximo vencimento
+</label>
 
-    <input
-      id="ddate"
-      type="date"
-    >
+<input id="debtDate" type="date">
 
-    <label class="check">
+<label class="check">
 
-      <input
-        id="dmonthly"
-        type="checkbox"
-      >
+<input id="debtMonthly" type="checkbox">
 
-      Repetir esta cobrança todo mês
+Repetir mensalmente
 
-    </label>
+</label>
 
-    <p class="muted small">
-      Se não for mensal, deixe a opção desmarcada.
-    </p>
+<button id="btnSaveDebt" class="primary">
+Salvar dívida
+</button>
 
-    <button
-      type="button"
-      class="form-button"
-      id="saveDebt"
-    >
-      Salvar dívida
-    </button>
-
-  </div>
+</div>
 
 </section>
 
 
-<!-- =========================
-CARTÕES
-========================= -->
+<!-- CARTÕES -->
 
-<section id="cards">
+<section id="page-cards">
 
-  <div class="row">
+<div class="row">
 
-    <h1>Cartões</h1>
+<h1>Cartões</h1>
 
-    <span
-      class="pill"
-      id="cardCount"
-    >
-      0 cartões
-    </span>
+<span id="cardCount" class="pill">
+0 cartões
+</span>
 
-  </div>
+</div>
 
-  <div id="cardList"></div>
+<div id="cardList"></div>
 
-  <button
-    type="button"
-    class="primary"
-    id="openCardForm"
-  >
-    + Cadastrar cartão
-  </button>
+<button id="btnOpenCard" class="primary">
++ Cadastrar cartão
+</button>
 
-  <div
-    id="cardForm"
-    class="card"
-    hidden
-  >
+<div id="cardForm" class="card" hidden>
 
-    <h2>Novo cartão</h2>
+<h2>Novo cartão</h2>
 
-    <input
-      id="cname"
-      type="text"
-      placeholder="Nome do cartão"
-    >
+<input
+id="cardName"
+placeholder="Nome do cartão">
 
-    <input
-      id="climit"
-      type="number"
-      inputmode="decimal"
-      step="0.01"
-      placeholder="Limite"
-    >
+<input
+id="cardLimit"
+type="number"
+step="0.01"
+inputmode="decimal"
+placeholder="Limite">
 
-    <div class="inline">
+<input
+id="cardClose"
+type="number"
+inputmode="numeric"
+placeholder="Dia de fechamento">
 
-      <div>
+<input
+id="cardDue"
+type="number"
+inputmode="numeric"
+placeholder="Dia de vencimento">
 
-        <label class="small muted">
-          Fecha dia
-        </label>
+<button id="btnSaveCard" class="primary">
+Salvar cartão
+</button>
 
-        <input
-          id="cclose"
-          type="number"
-          inputmode="numeric"
-          min="1"
-          max="31"
-          placeholder="Ex.: 5"
-        >
+</div>
 
-      </div>
+<button
+id="btnOpenPurchase"
+class="primary"
+style="margin-top:10px"
+>
++ Lançar compra
+</button>
 
-      <div>
+<div id="purchaseForm" class="card" hidden>
 
-        <label class="small muted">
-          Vence dia
-        </label>
+<h2>Nova compra</h2>
 
-        <input
-          id="cdue"
-          type="number"
-          inputmode="numeric"
-          min="1"
-          max="31"
-          placeholder="Ex.: 12"
-        >
+<select id="purchaseCard"></select>
 
-      </div>
+<input
+id="purchaseDescription"
+placeholder="Descrição">
 
-    </div>
+<input
+id="purchaseValue"
+type="number"
+step="0.01"
+inputmode="decimal"
+placeholder="Valor">
 
-    <button
-      type="button"
-      class="form-button"
-      id="saveCard"
-    >
-      Salvar cartão
-    </button>
+<input
+id="purchaseDate"
+type="date">
 
-  </div>
+<button
+id="btnSavePurchase"
+class="primary"
+>
+Adicionar à fatura
+</button>
 
-  <button
-    type="button"
-    class="primary"
-    id="openPurchaseForm"
-    style="margin-top:10px"
-  >
-    + Lançar compra no cartão
-  </button>
+</div>
 
-  <div
-    id="purchaseForm"
-    class="card"
-    hidden
-  >
+<div class="card">
 
-    <h2>Nova compra</h2>
+<h2>Compras</h2>
 
-    <select id="pcard"></select>
+<div id="purchaseList"></div>
 
-    <input
-      id="pdesc"
-      type="text"
-      placeholder="Descrição da compra"
-    >
-
-    <input
-      id="pvalue"
-      type="number"
-      inputmode="decimal"
-      step="0.01"
-      placeholder="Valor"
-    >
-
-    <input
-      id="pdate"
-      type="date"
-    >
-
-    <button
-      type="button"
-      class="form-button"
-      id="savePurchase"
-    >
-      Adicionar à fatura
-    </button>
-
-  </div>
-
-  <div class="card">
-
-    <h2>Compras</h2>
-
-    <div id="purchaseList"></div>
-
-  </div>
+</div>
 
 </section>
 
 
-<!-- =========================
-LANÇAMENTOS
-========================= -->
+<!-- LANÇAMENTOS -->
 
-<section id="transactions">
+<section id="page-transactions">
 
-  <h1>Novo Lançamento</h1>
+<h1>Novo Lançamento</h1>
 
-  <div class="card">
+<div class="card">
 
-    <select id="ttype">
+<select id="transactionType">
 
-      <option value="expense">
-        Despesa
-      </option>
+<option value="expense">
+Despesa
+</option>
 
-      <option value="income">
-        Receita
-      </option>
+<option value="income">
+Receita
+</option>
 
-    </select>
+</select>
 
-    <input
-      id="tvalue"
-      type="number"
-      inputmode="decimal"
-      step="0.01"
-      placeholder="Valor"
-    >
+<input
+id="transactionValue"
+type="number"
+step="0.01"
+inputmode="decimal"
+placeholder="Valor">
 
-    <input
-      id="tdesc"
-      type="text"
-      placeholder="Descrição"
-    >
+<input
+id="transactionDescription"
+placeholder="Descrição">
 
-    <select id="tcat">
+<select id="transactionCategory">
 
-      <option>Moradia</option>
-      <option>Alimentação</option>
-      <option>Transporte</option>
-      <option>Cartões</option>
-      <option>Dívidas</option>
-      <option>Lazer</option>
-      <option>Saúde</option>
-      <option>Salário</option>
-      <option>Outros</option>
+<option>Moradia</option>
+<option>Alimentação</option>
+<option>Transporte</option>
+<option>Cartões</option>
+<option>Dívidas</option>
+<option>Lazer</option>
+<option>Saúde</option>
+<option>Salário</option>
+<option>Outros</option>
 
-    </select>
+</select>
 
-    <input
-      id="tdate"
-      type="date"
-    >
+<input
+id="transactionDate"
+type="date">
 
-    <button
-      type="button"
-      class="form-button"
-      id="saveTransaction"
-    >
-      Salvar lançamento
-    </button>
+<button
+id="btnSaveTransaction"
+class="primary"
+>
+Salvar lançamento
+</button>
 
-  </div>
+</div>
 
-  <div
-    id="txList"
-    class="card"
-  ></div>
+<div class="card">
+
+<h2>Últimos lançamentos</h2>
+
+<div id="transactionList"></div>
+
+</div>
 
 </section>
 
 
-<!-- =========================
-AGENDA
-========================= -->
+<!-- AGENDA -->
 
-<section id="calendar">
+<section id="page-calendar">
 
-  <h1>Agenda Financeira</h1>
+<h1>Agenda Financeira</h1>
 
-  <div class="card">
+<div class="card">
 
-    <p class="muted">
-      Seus próximos vencimentos
-    </p>
+<p class="muted">
+Vencimentos cadastrados
+</p>
 
-    <div id="calendarList"></div>
+<div id="calendarList"></div>
 
-  </div>
+</div>
 
 </section>
 
 
-<!-- =========================
-MAIS
-========================= -->
+<!-- MAIS -->
 
-<section id="more">
+<section id="page-more">
 
-  <h1>Minha Saída</h1>
+<h1>Minha Saída</h1>
 
-  <div class="card hero">
+<div class="card hero">
 
-    <div>
-      Você já eliminou
-    </div>
+<div>
+Você já eliminou
+</div>
 
-    <div
-      id="eliminated"
-      class="big"
-    >
-      R$ 0,00
-    </div>
+<div id="eliminated" class="big">
+R$ 0,00
+</div>
 
-    <div id="progressText">
-      Comece cadastrando suas dívidas.
-    </div>
+<div id="progressText">
+Comece cadastrando suas dívidas.
+</div>
 
-    <div class="progress">
+<div class="progress">
 
-      <div
-        id="progressBar"
-        class="progress-bar"
-      ></div>
+<div id="progressBar"></div>
 
-    </div>
+</div>
 
-  </div>
+</div>
 
-  <div class="card">
+<div class="card">
 
-    <h2>Simulador de quitação</h2>
+<h2>Simulador</h2>
 
-    <p class="muted small">
-      Simula o efeito de colocar um valor extra na dívida com maior taxa de juros.
-    </p>
+<input
+id="simulationExtra"
+type="number"
+step="0.01"
+inputmode="decimal"
+placeholder="Valor extra para pagar">
 
-    <input
-      id="extra"
-      type="number"
-      inputmode="decimal"
-      step="0.01"
-      placeholder="Valor extra"
-    >
+<button
+id="btnSimulate"
+class="primary"
+>
+Simular
+</button>
 
-    <button
-      type="button"
-      class="form-button"
-      id="simulateButton"
-    >
-      Simular
-    </button>
+<div id="simulationResult"></div>
 
-    <div id="simResult"></div>
+</div>
 
-  </div>
+<div class="card">
 
-  <div class="card">
+<h2>Backup</h2>
 
-    <h2>Backup</h2>
+<p class="muted small">
+Seus dados ficam salvos neste navegador.
+</p>
 
-    <p class="muted small">
-      Os dados ficam armazenados neste navegador/aparelho.
-    </p>
+<button
+id="btnBackup"
+class="primary"
+>
+Exportar dados
+</button>
 
-    <button
-      type="button"
-      class="form-button"
-      id="exportButton"
-    >
-      Exportar meus dados
-    </button>
-
-  </div>
+</div>
 
 </section>
 
 </main>
 
 
-<!-- =========================
-MENU
-========================= -->
+<!-- MENU -->
 
 <nav>
 
-  <div class="nav-inner">
+<div class="nav">
 
-    <button
-      type="button"
-      class="nav-button active"
-      data-page="home"
-    >
-      ⌂
-      <br>
-      Início
-    </button>
+<button
+class="navButton active"
+data-page="home"
+>
+⌂
+<br>
+Início
+</button>
 
-    <button
-      type="button"
-      class="nav-button"
-      data-page="debts"
-    >
-      ▤
-      <br>
-      Dívidas
-    </button>
+<button
+class="navButton"
+data-page="debts"
+>
+▤
+<br>
+Dívidas
+</button>
 
-    <button
-      type="button"
-      class="nav-button"
-      data-page="cards"
-    >
-      ▣
-      <br>
-      Cartões
-    </button>
+<button
+class="navButton"
+data-page="cards"
+>
+▣
+<br>
+Cartões
+</button>
 
-    <button
-      type="button"
-      class="nav-button"
-      data-page="transactions"
-    >
-      ＋
-      <br>
-      Lançar
-    </button>
+<button
+class="navButton"
+data-page="transactions"
+>
+＋
+<br>
+Lançar
+</button>
 
-    <button
-      type="button"
-      class="nav-button"
-      data-page="calendar"
-    >
-      ▦
-      <br>
-      Agenda
-    </button>
+<button
+class="navButton"
+data-page="calendar"
+>
+▦
+<br>
+Agenda
+</button>
 
-    <button
-      type="button"
-      class="nav-button"
-      data-page="more"
-    >
-      ☰
-      <br>
-      Mais
-    </button>
+<button
+class="navButton"
+data-page="more"
+>
+☰
+<br>
+Mais
+</button>
 
-  </div>
+</div>
 
 </nav>
 
 
 <script>
-(function(){
-
 "use strict";
 
-
 /* =========================
-ATALHO SEGURO PARA ELEMENTOS
+FUNÇÕES BÁSICAS
 ========================= */
 
-function el(id){
+const $ = function(id){
   return document.getElementById(id);
+};
+
+const BRL =
+new Intl.NumberFormat(
+"pt-BR",
+{
+  style:"currency",
+  currency:"BRL"
 }
-
-
-/* =========================
-FORMATAÇÃO
-========================= */
-
-const BRL = new Intl.NumberFormat(
-  "pt-BR",
-  {
-    style:"currency",
-    currency:"BRL"
-  }
 );
 
-
 function money(value){
-  return BRL.format(Number(value) || 0);
+  return BRL.format(
+    Number(value) || 0
+  );
 }
 
+function today(){
 
-function todayISO(){
+  const d = new Date();
 
-  const now = new Date();
+  return [
+    d.getFullYear(),
+    String(d.getMonth()+1).padStart(2,"0"),
+    String(d.getDate()).padStart(2,"0")
+  ].join("-");
 
-  const year = now.getFullYear();
-
-  const month =
-    String(now.getMonth()+1)
-    .padStart(2,"0");
-
-  const day =
-    String(now.getDate())
-    .padStart(2,"0");
-
-  return `${year}-${month}-${day}`;
 }
 
+function dateBR(value){
 
-function formatDate(dateString){
-
-  if(!dateString){
+  if(!value){
     return "";
   }
 
-  const parts =
-    dateString.split("-");
+  const p =
+  String(value)
+  .slice(0,10)
+  .split("-");
 
-  if(parts.length !== 3){
-    return dateString;
+  if(p.length !== 3){
+    return value;
   }
 
-  return `${parts[2]}/${parts[1]}/${parts[0]}`;
+  return p[2]+"/"+p[1]+"/"+p[0];
+
+}
+
+function safeText(value){
+
+  return String(value ?? "")
+  .replaceAll("&","&amp;")
+  .replaceAll("<","&lt;")
+  .replaceAll(">","&gt;")
+  .replaceAll('"',"&quot;")
+  .replaceAll("'","&#039;");
+
 }
 
 
 /* =========================
-DADOS
+CARREGAR DADOS
 ========================= */
 
-let data;
+let data = {};
 
 try{
 
-  data =
-    JSON.parse(
-      localStorage.getItem("minhaSaida") || "{}"
-    );
+  const saved =
+  localStorage.getItem(
+    "minhaSaida"
+  );
+
+  if(saved){
+    data = JSON.parse(saved);
+  }
 
 }catch(error){
 
+  console.error(error);
   data = {};
 
 }
 
-
 if(!Array.isArray(data.debts)){
-  data.debts = [];
-}
-
-if(!Array.isArray(data.tx)){
-  data.tx = [];
+  data.debts=[];
 }
 
 if(!Array.isArray(data.cards)){
-  data.cards = [];
+  data.cards=[];
 }
 
 if(!Array.isArray(data.purchases)){
-  data.purchases = [];
+  data.purchases=[];
+}
+
+if(!Array.isArray(data.tx)){
+  data.tx=[];
 }
 
 if(
   typeof data.initialDebt !== "number"
 ){
-  data.initialDebt = 0;
+  data.initialDebt=0;
 }
+
+
+/* =========================
+COMPATIBILIDADE COM DADOS ANTIGOS
+========================= */
+
+data.tx =
+data.tx.map(function(t){
+
+  let type =
+  String(
+    t.type || ""
+  )
+  .trim()
+  .toLowerCase();
+
+  if(
+    type === "receita"
+    ||
+    type === "entrada"
+  ){
+    type="income";
+  }
+
+  if(
+    type === "despesa"
+    ||
+    type === "saída"
+    ||
+    type === "saida"
+  ){
+    type="expense";
+  }
+
+  return {
+    id:t.id || Date.now()+Math.random(),
+    type:type,
+    value:Number(t.value)||0,
+    desc:t.desc || "Lançamento",
+    cat:t.cat || "Outros",
+    date:String(t.date || "").slice(0,10),
+    debtId:t.debtId
+  };
+
+});
 
 
 function save(){
@@ -1160,171 +1008,145 @@ function save(){
 
 
 /* =========================
-NAVEGAÇÃO
+MENU
 ========================= */
 
-function openPage(pageId,button){
-
-  document
-    .querySelectorAll("main section")
-    .forEach(function(section){
-
-      section.classList.remove("active");
-
-    });
-
-
-  const target =
-    el(pageId);
-
-  if(target){
-
-    target.classList.add("active");
-
-  }
-
-
-  document
-    .querySelectorAll(".nav-button")
-    .forEach(function(navButton){
-
-      navButton.classList.remove("active");
-
-    });
-
-
-  if(button){
-
-    button.classList.add("active");
-
-  }
-
-
-  window.scrollTo({
-    top:0,
-    behavior:"auto"
-  });
-
-}
-
-
 document
-  .querySelectorAll(".nav-button")
-  .forEach(function(button){
+.querySelectorAll(".navButton")
+.forEach(function(button){
 
-    button.addEventListener(
-      "click",
-      function(){
+  button.addEventListener(
+    "click",
+    function(){
 
-        openPage(
-          button.dataset.page,
-          button
+      const page =
+      button.dataset.page;
+
+      document
+      .querySelectorAll("main section")
+      .forEach(function(section){
+
+        section.classList.remove(
+          "active"
         );
 
-      }
-    );
+      });
 
-  });
+      const target =
+      $("page-"+page);
+
+      if(target){
+        target.classList.add(
+          "active"
+        );
+      }
+
+      document
+      .querySelectorAll(".navButton")
+      .forEach(function(b){
+
+        b.classList.remove(
+          "active"
+        );
+
+      });
+
+      button.classList.add(
+        "active"
+      );
+
+      window.scrollTo(0,0);
+
+    }
+  );
+
+});
 
 
 /* =========================
-ABRIR FORMULÁRIOS
+FORMULÁRIOS
 ========================= */
 
-function toggleForm(id){
+$("btnOpenDebt")
+.addEventListener(
+"click",
+function(){
 
-  const form =
-    el(id);
+  $("debtForm").hidden =
+  !$("debtForm").hidden;
 
-  if(!form){
+});
+
+
+$("btnOpenCard")
+.addEventListener(
+"click",
+function(){
+
+  $("cardForm").hidden =
+  !$("cardForm").hidden;
+
+});
+
+
+$("btnOpenPurchase")
+.addEventListener(
+"click",
+function(){
+
+  if(data.cards.length===0){
+
+    alert(
+      "Cadastre um cartão primeiro."
+    );
+
     return;
   }
 
-  form.hidden =
-    !form.hidden;
+  fillCardSelect();
 
-}
+  $("purchaseForm").hidden=false;
 
+  $("purchaseDate").value=
+  today();
 
-el("openDebtForm")
-.addEventListener(
-  "click",
-  function(){
-
-    toggleForm("debtForm");
-
-  }
-);
-
-
-el("openCardForm")
-.addEventListener(
-  "click",
-  function(){
-
-    toggleForm("cardForm");
-
-  }
-);
-
-
-el("openPurchaseForm")
-.addEventListener(
-  "click",
-  function(){
-
-    if(data.cards.length === 0){
-
-      alert(
-        "Cadastre um cartão primeiro."
-      );
-
-      return;
-
-    }
-
-    fillCardSelect();
-
-    el("purchaseForm").hidden = false;
-
-    el("pdate").value =
-      todayISO();
-
-  }
-);
+});
 
 
 /* =========================
 DÍVIDAS
 ========================= */
 
-function addDebt(){
+$("btnSaveDebt")
+.addEventListener(
+"click",
+function(){
 
   const name =
-    el("dname")
-    .value
-    .trim();
+  $("debtName")
+  .value
+  .trim();
 
   const total =
-    Number(
-      el("dtotal").value
-    ) || 0;
+  Number(
+    $("debtTotalInput").value
+  ) || 0;
 
   const installment =
-    Number(
-      el("dinstallment").value
-    ) || 0;
+  Number(
+    $("debtInstallment").value
+  ) || 0;
 
   const rate =
-    Number(
-      el("drate").value
-    ) || 0;
+  Number(
+    $("debtRate").value
+  ) || 0;
 
   const date =
-    el("ddate").value || "";
+  $("debtDate").value;
 
   const monthly =
-    el("dmonthly").checked;
+  $("debtMonthly").checked;
 
 
   if(!name){
@@ -1334,22 +1156,19 @@ function addDebt(){
     );
 
     return;
-
   }
 
-
-  if(total <= 0){
+  if(total<=0){
 
     alert(
-      "Informe o saldo da dívida."
+      "Informe o saldo devedor."
     );
 
     return;
-
   }
 
 
-  const debt = {
+  data.debts.push({
 
     id:Date.now(),
 
@@ -1358,9 +1177,9 @@ function addDebt(){
     total:total,
 
     installment:
-      installment > 0
-      ? installment
-      : total,
+    installment>0
+    ? installment
+    : total,
 
     rate:rate,
 
@@ -1368,94 +1187,64 @@ function addDebt(){
 
     monthly:monthly
 
-  };
+  });
 
 
-  data.debts.push(debt);
+  const currentTotal =
+  data.debts.reduce(
+    function(sum,d){
 
+      return sum+
+      Number(d.total||0);
 
-  const currentDebt =
-    data.debts.reduce(
-      function(sum,item){
-
-        return sum +
-          Number(item.total || 0);
-
-      },
-      0
-    );
+    },
+    0
+  );
 
 
   if(
-    data.initialDebt === 0
+    data.initialDebt===0
     ||
-    currentDebt > data.initialDebt
+    currentTotal>
+    data.initialDebt
   ){
 
-    data.initialDebt =
-      currentDebt;
+    data.initialDebt=
+    currentTotal;
 
   }
 
 
-  el("dname").value = "";
-  el("dtotal").value = "";
-  el("dinstallment").value = "";
-  el("drate").value = "";
-  el("ddate").value = "";
-  el("dmonthly").checked = false;
+  $("debtName").value="";
+  $("debtTotalInput").value="";
+  $("debtInstallment").value="";
+  $("debtRate").value="";
+  $("debtDate").value="";
+  $("debtMonthly").checked=false;
 
-  el("debtForm").hidden = true;
+  $("debtForm").hidden=true;
 
   save();
 
-}
-
-
-el("saveDebt")
-.addEventListener(
-  "click",
-  addDebt
-);
+});
 
 
 function deleteDebt(id){
 
-  const debt =
-    data.debts.find(
-      function(item){
-
-        return item.id === id;
-
-      }
-    );
-
-
-  if(!debt){
+  if(
+    !confirm(
+      "Excluir esta dívida?"
+    )
+  ){
     return;
   }
-
-
-  const ok =
-    confirm(
-      `Excluir a dívida "${debt.name}"?`
-    );
-
-
-  if(!ok){
-    return;
-  }
-
 
   data.debts =
-    data.debts.filter(
-      function(item){
-
-        return item.id !== id;
-
-      }
-    );
-
+  data.debts.filter(
+    function(d){
+      return d.id!==id;
+    }
+  );
 
   save();
 
@@ -1463,92 +1252,125 @@ function deleteDebt(id){
 
 
 /* =========================
-PAGAR DÍVIDA PELA AGENDA
+PAGAMENTO PELA AGENDA
 ========================= */
+
+function nextMonthDate(value){
+
+  const p =
+  String(value)
+  .split("-");
+
+  if(p.length!==3){
+    return value;
+  }
+
+  let year=Number(p[0]);
+  let month=Number(p[1])-1;
+  let day=Number(p[2]);
+
+  month++;
+
+  if(month>11){
+    month=0;
+    year++;
+  }
+
+  const last =
+  new Date(
+    year,
+    month+1,
+    0
+  )
+  .getDate();
+
+  day=
+  Math.min(
+    day,
+    last
+  );
+
+  return (
+    year+
+    "-"+
+    String(month+1)
+    .padStart(2,"0")+
+    "-"+
+    String(day)
+    .padStart(2,"0")
+  );
+
+}
+
 
 function payDebt(id){
 
   const debt =
-    data.debts.find(
-      function(item){
-
-        return item.id === id;
-
-      }
-    );
-
+  data.debts.find(
+    function(d){
+      return d.id===id;
+    }
+  );
 
   if(!debt){
-
-    alert(
-      "Dívida não encontrada."
-    );
-
     return;
-
   }
 
-
-  const suggested =
-    Math.min(
-      Number(debt.total || 0),
-      Number(
-        debt.installment ||
-        debt.total ||
-        0
-      )
-    );
+  const expected =
+  Math.min(
+    Number(debt.total),
+    Number(
+      debt.installment ||
+      debt.total
+    )
+  );
 
 
   const answer =
-    prompt(
-
-      `Pagamento de ${debt.name}\n\n` +
-
-      `Saldo atual: ${money(debt.total)}\n` +
-
-      `Valor previsto: ${money(suggested)}\n\n` +
-
-      `Digite o valor pago:`,
-
-      suggested
-        .toFixed(2)
-        .replace(".",",")
-
-    );
+  prompt(
+    "Pagamento de "+
+    debt.name+
+    "\n\nSaldo: "+
+    money(debt.total)+
+    "\nValor previsto: "+
+    money(expected)+
+    "\n\nDigite o valor pago:",
+    expected
+    .toFixed(2)
+    .replace(".",",")
+  );
 
 
-  if(answer === null){
+  if(answer===null){
     return;
   }
 
 
-  let clean =
-    String(answer)
-      .trim()
-      .replace(/\s/g,"");
+  let valueText =
+  String(answer)
+  .trim();
 
 
   if(
-    clean.includes(",")
+    valueText.includes(",")
   ){
 
-    clean =
-      clean
-      .replace(/\./g,"")
-      .replace(",", ".");
+    valueText =
+    valueText
+    .replace(/\./g,"")
+    .replace(",", ".");
 
   }
 
 
   const paid =
-    Number(clean);
+  Number(valueText);
 
 
   if(
     !Number.isFinite(paid)
     ||
-    paid <= 0
+    paid<=0
   ){
 
     alert(
@@ -1556,85 +1378,68 @@ function payDebt(id){
     );
 
     return;
-
   }
 
 
   const applied =
-    Math.min(
-      paid,
-      Number(debt.total)
-    );
+  Math.min(
+    paid,
+    Number(debt.total)
+  );
 
-
-  /* cria lançamento automático */
 
   data.tx.push({
 
-    id:
-      Date.now()+1,
+    id:Date.now(),
 
     type:"expense",
 
     value:applied,
 
     desc:
-      "Pagamento - " +
-      debt.name,
+    "Pagamento - "+
+    debt.name,
 
     cat:"Dívidas",
 
-    date:todayISO(),
+    date:today(),
 
     debtId:debt.id
 
   });
 
 
-  /* reduz saldo da dívida */
-
   debt.total =
-    Math.max(
-      0,
-      Number(debt.total) -
-      applied
-    );
+  Math.max(
+    0,
+    Number(debt.total)-
+    applied
+  );
 
 
-  /* QUITOU */
+  if(debt.total<=0.005){
 
-  if(debt.total <= 0.005){
-
-    const debtName =
-      debt.name;
-
+    const name =
+    debt.name;
 
     data.debts =
-      data.debts.filter(
-        function(item){
-
-          return item.id !== id;
-
-        }
-      );
-
+    data.debts.filter(
+      function(d){
+        return d.id!==id;
+      }
+    );
 
     save();
 
-
     alert(
-      `${debtName} foi quitada! 🎉\n\n` +
-      `O pagamento de ${money(applied)} ` +
-      `também foi lançado automaticamente nas despesas.`
+      name+
+      " foi quitada! 🎉\n\n"+
+      "O pagamento também foi lançado como despesa."
     );
 
-
     return;
-
   }
 
-
-  /* SE FOR MENSAL, AVANÇA O VENCIMENTO */
 
   if(
     debt.monthly
@@ -1643,106 +1448,23 @@ function payDebt(id){
   ){
 
     debt.date =
-      nextMonthDate(
-        debt.date
-      );
+    nextMonthDate(
+      debt.date
+    );
 
-  }
+  }else{
 
-  else{
-
-    /*
-    cobrança única parcialmente paga:
-    mantém a dívida, mas remove
-    o vencimento atual para não
-    aparecer novamente automaticamente
-    */
-
-    debt.date = "";
+    debt.date="";
 
   }
 
 
   save();
 
-
   alert(
-
-    `Pagamento registrado! ✅\n\n` +
-
-    `Pago: ${money(applied)}\n` +
-
-    `Saldo restante: ${money(debt.total)}`
-
-  );
-
-}
-
-
-/* =========================
-DATAS MENSAIS
-========================= */
-
-function nextMonthDate(dateString){
-
-  const parts =
-    dateString.split("-");
-
-
-  if(parts.length !== 3){
-    return dateString;
-  }
-
-
-  const year =
-    Number(parts[0]);
-
-  const month =
-    Number(parts[1])-1;
-
-  const day =
-    Number(parts[2]);
-
-
-  let nextMonth =
-    month+1;
-
-  let nextYear =
-    year;
-
-
-  if(nextMonth > 11){
-
-    nextMonth = 0;
-    nextYear++;
-
-  }
-
-
-  const lastDay =
-    new Date(
-      nextYear,
-      nextMonth+1,
-      0
-    )
-    .getDate();
-
-
-  const safeDay =
-    Math.min(
-      day,
-      lastDay
-    );
-
-
-  return (
-    nextYear +
-    "-" +
-    String(nextMonth+1)
-      .padStart(2,"0") +
-    "-" +
-    String(safeDay)
-      .padStart(2,"0")
+    "Pagamento registrado! ✅\n\n"+
+    "Saldo restante: "+
+    money(debt.total)
   );
 
 }
@@ -1752,28 +1474,15 @@ function nextMonthDate(dateString){
 CARTÕES
 ========================= */
 
-function addCard(){
+$("btnSaveCard")
+.addEventListener(
+"click",
+function(){
 
   const name =
-    el("cname")
-    .value
-    .trim();
-
-  const limit =
-    Number(
-      el("climit").value
-    ) || 0;
-
-  const close =
-    Number(
-      el("cclose").value
-    ) || 0;
-
-  const due =
-    Number(
-      el("cdue").value
-    ) || 0;
-
+  $("cardName")
+  .value
+  .trim();
 
   if(!name){
 
@@ -1782,26 +1491,6 @@ function addCard(){
     );
 
     return;
-
-  }
-
-
-  if(
-    close < 0
-    ||
-    close > 31
-    ||
-    due < 0
-    ||
-    due > 31
-  ){
-
-    alert(
-      "Confira os dias de fechamento e vencimento."
-    );
-
-    return;
-
   }
 
 
@@ -1811,83 +1500,84 @@ function addCard(){
 
     name:name,
 
-    limit:limit,
+    limit:
+    Number(
+      $("cardLimit").value
+    ) || 0,
 
-    close:close,
+    close:
+    Number(
+      $("cardClose").value
+    ) || 0,
 
-    due:due
+    due:
+    Number(
+      $("cardDue").value
+    ) || 0
 
   });
 
 
-  el("cname").value = "";
-  el("climit").value = "";
-  el("cclose").value = "";
-  el("cdue").value = "";
+  $("cardName").value="";
+  $("cardLimit").value="";
+  $("cardClose").value="";
+  $("cardDue").value="";
 
-  el("cardForm").hidden = true;
+  $("cardForm").hidden=true;
+
+  save();
+
+});
+
+
+function deleteCard(id){
+
+  if(
+    !confirm(
+      "Excluir cartão e compras?"
+    )
+  ){
+    return;
+  }
+
+  data.cards =
+  data.cards.filter(
+    function(c){
+      return c.id!==id;
+    }
+  );
+
+  data.purchases =
+  data.purchases.filter(
+    function(p){
+      return p.cardId!==id;
+    }
+  );
 
   save();
 
 }
 
 
-el("saveCard")
-.addEventListener(
-  "click",
-  addCard
-);
+function cardTotal(id){
 
+  return data.purchases
 
-function deleteCard(id){
+  .filter(
+    function(p){
+      return p.cardId===id;
+    }
+  )
 
-  const card =
-    data.cards.find(
-      function(item){
+  .reduce(
+    function(sum,p){
 
-        return item.id === id;
+      return sum+
+      Number(p.value||0);
 
-      }
-    );
-
-
-  if(!card){
-    return;
-  }
-
-
-  const ok =
-    confirm(
-      `Excluir o cartão "${card.name}" e todas as compras dele?`
-    );
-
-
-  if(!ok){
-    return;
-  }
-
-
-  data.cards =
-    data.cards.filter(
-      function(item){
-
-        return item.id !== id;
-
-      }
-    );
-
-
-  data.purchases =
-    data.purchases.filter(
-      function(item){
-
-        return item.cardId !== id;
-
-      }
-    );
-
-
-  save();
+    },
+    0
+  );
 
 }
 
@@ -1895,25 +1585,23 @@ function deleteCard(id){
 function fillCardSelect(){
 
   const select =
-    el("pcard");
+  $("purchaseCard");
 
-
-  select.innerHTML = "";
-
+  select.innerHTML="";
 
   data.cards.forEach(
     function(card){
 
       const option =
-        document.createElement(
-          "option"
-        );
+      document.createElement(
+        "option"
+      );
 
-      option.value =
-        String(card.id);
+      option.value=
+      String(card.id);
 
-      option.textContent =
-        card.name;
+      option.textContent=
+      card.name;
 
       select.appendChild(
         option
@@ -1926,30 +1614,23 @@ function fillCardSelect(){
 
 
 /* =========================
-COMPRAS NO CARTÃO
+COMPRAS
 ========================= */
 
-function addPurchase(){
+$("btnSavePurchase")
+.addEventListener(
+"click",
+function(){
 
   const cardId =
-    Number(
-      el("pcard").value
-    );
-
-  const description =
-    el("pdesc")
-    .value
-    .trim() ||
-    "Compra";
+  Number(
+    $("purchaseCard").value
+  );
 
   const value =
-    Number(
-      el("pvalue").value
-    ) || 0;
-
-  const date =
-    el("pdate").value ||
-    todayISO();
+  Number(
+    $("purchaseValue").value
+  ) || 0;
 
 
   if(!cardId){
@@ -1959,18 +1640,15 @@ function addPurchase(){
     );
 
     return;
-
   }
 
-
-  if(value <= 0){
+  if(value<=0){
 
     alert(
-      "Informe o valor da compra."
+      "Informe o valor."
     );
 
     return;
-
   }
 
 
@@ -1980,54 +1658,48 @@ function addPurchase(){
 
     cardId:cardId,
 
-    desc:description,
+    desc:
+    $("purchaseDescription")
+    .value
+    .trim()
+    ||
+    "Compra",
 
     value:value,
 
-    date:date
+    date:
+    $("purchaseDate").value
+    ||
+    today()
 
   });
 
 
-  el("pdesc").value = "";
-  el("pvalue").value = "";
-  el("pdate").value =
-    todayISO();
+  $("purchaseDescription").value="";
+  $("purchaseValue").value="";
+  $("purchaseDate").value=today();
 
   save();
 
-}
-
-
-el("savePurchase")
-.addEventListener(
-  "click",
-  addPurchase
-);
+});
 
 
 function deletePurchase(id){
 
-  const ok =
-    confirm(
+  if(
+    !confirm(
       "Excluir esta compra?"
-    );
-
-
-  if(!ok){
+    )
+  ){
     return;
   }
 
-
   data.purchases =
-    data.purchases.filter(
-      function(item){
-
-        return item.id !== id;
-
-      }
-    );
-
+  data.purchases.filter(
+    function(p){
+      return p.id!==id;
+    }
+  );
 
   save();
 
@@ -2035,561 +1707,88 @@ function deletePurchase(id){
 
 
 /* =========================
-LANÇAMENTOS
+RECEITAS E DESPESAS
 ========================= */
 
-function addTransaction(){
+$("btnSaveTransaction")
+.addEventListener(
+"click",
+function(){
 
-  const typeSelect =
-    document.getElementById("ttype");
-
-  const selectedType =
-    typeSelect.options[typeSelect.selectedIndex].value;
+  const type =
+  $("transactionType").value;
 
   const value =
-    parseFloat(
-      document.getElementById("tvalue").value
-    ) || 0;
-
-  const description =
-    document.getElementById("tdesc").value.trim()
-    || "Lançamento";
-
-  const category =
-    document.getElementById("tcat").value;
-
-  const date =
-    document.getElementById("tdate").value
-    || todayISO();
+  Number(
+    $("transactionValue").value
+  ) || 0;
 
 
-  if(value <= 0){
+  if(value<=0){
 
-    alert("Informe um valor válido.");
+    alert(
+      "Informe um valor válido."
+    );
 
     return;
   }
-
-
-  const transaction = {
-
-    id: Date.now(),
-
-    type: selectedType === "income"
-      ? "income"
-      : "expense",
-
-    value: value,
-
-    desc: description,
-
-    cat: category,
-
-    date: date
-
-  };
-
-
-  data.tx.push(transaction);
-
-
-  document.getElementById("tvalue").value = "";
-
-  document.getElementById("tdesc").value = "";
-
-  document.getElementById("ttype").value = "expense";
-
-
-  save();
-
-
-  alert(
-    transaction.type === "income"
-      ? "Receita adicionada! ✅"
-      : "Despesa adicionada! ✅"
-  );
-
-}
 
 
   data.tx.push({
 
     id:Date.now(),
 
-    type:type,
+    type:
+    type==="income"
+    ? "income"
+    : "expense",
 
     value:value,
 
-    desc:description,
+    desc:
+    $("transactionDescription")
+    .value
+    .trim()
+    ||
+    "Lançamento",
 
-    cat:category,
+    cat:
+    $("transactionCategory").value,
 
-    date:date
+    date:
+    $("transactionDate").value
+    ||
+    today()
 
   });
 
 
-  el("tvalue").value = "";
-  el("tdesc").value = "";
+  $("transactionValue").value="";
+  $("transactionDescription").value="";
 
   save();
 
-}
-
-
-el("saveTransaction")
-.addEventListener(
-  "click",
-  addTransaction
-);
+});
 
 
 function deleteTransaction(id){
 
-  const ok =
-    confirm(
-      "Excluir este lançamento?"
-    );
-
-
-  if(!ok){
+  if(
+    !confirm(
+      "Excluir lançamento?"
+    )
+  ){
     return;
   }
-
 
   data.tx =
-    data.tx.filter(
-      function(item){
-
-        return item.id !== id;
-
-      }
-    );
-
+  data.tx.filter(
+    function(t){
+      return t.id!==id;
+    }
+  );
 
   save();
-
-}
-
-
-/* =========================
-CÁLCULO DAS FATURAS
-========================= */
-
-function cardTotal(cardId){
-
-  return data.purchases
-
-    .filter(
-      function(purchase){
-
-        return (
-          purchase.cardId ===
-          cardId
-        );
-
-      }
-    )
-
-    .reduce(
-      function(sum,purchase){
-
-        return (
-          sum +
-          Number(
-            purchase.value || 0
-          )
-        );
-
-      },
-      0
-    );
-
-}
-
-
-/* =========================
-PREVISÃO PRÓXIMO MÊS
-========================= */
-
-function renderNextMonth(
-  incomeThisMonth,
-  committedThisMonth
-){
-
-  const monthlyDebts =
-    data.debts
-
-      .filter(
-        function(debt){
-
-          return debt.monthly;
-
-        }
-      )
-
-      .reduce(
-        function(sum,debt){
-
-          const value =
-            Math.min(
-
-              Number(
-                debt.installment ||
-                debt.total ||
-                0
-              ),
-
-              Number(
-                debt.total || 0
-              )
-
-            );
-
-          return sum + value;
-
-        },
-        0
-      );
-
-
-  const cards =
-    data.cards.reduce(
-      function(sum,card){
-
-        return (
-          sum +
-          cardTotal(card.id)
-        );
-
-      },
-      0
-    );
-
-
-  const nextTotal =
-    monthlyDebts +
-    cards;
-
-
-  const thisMonth =
-    committedThisMonth +
-    cards;
-
-
-  el("nextMonthTotal")
-    .textContent =
-    money(nextTotal);
-
-
-  el("currentMonthCommit")
-    .textContent =
-    money(thisMonth);
-
-
-  el("nextMonthCommit")
-    .textContent =
-    money(nextTotal);
-
-
-  el("nextDebts")
-    .textContent =
-    money(monthlyDebts);
-
-
-  el("nextCards")
-    .textContent =
-    money(cards);
-
-
-  /* GRÁFICO */
-
-  if(nextTotal > 0){
-
-    const debtPercent =
-      (
-        monthlyDebts /
-        nextTotal
-      ) * 100;
-
-
-    el("debtPie")
-      .style
-      .background =
-
-      `conic-gradient(
-        var(--green) 0% ${debtPercent}%,
-        var(--orange) ${debtPercent}% 100%
-      )`;
-
-  }
-
-  else{
-
-    el("debtPie")
-      .style
-      .background =
-      "#214246";
-
-  }
-
-
-  /* MENSAGEM */
-
-  const message =
-    el("nextMonthMessage");
-
-
-  if(incomeThisMonth > 0){
-
-    const free =
-      incomeThisMonth -
-      nextTotal;
-
-
-    if(free >= 0){
-
-      message.innerHTML =
-
-        `Com base na sua renda deste mês, ` +
-
-        `depois desses compromissos sobrariam ` +
-
-        `<b style="color:#5df29a">` +
-
-        `${money(free)}` +
-
-        `</b>.`;
-
-    }
-
-    else{
-
-      message.innerHTML =
-
-        `⚠️ Seus compromissos previstos ` +
-
-        `ultrapassam a renda deste mês em ` +
-
-        `<b style="color:#ff6464">` +
-
-        `${money(Math.abs(free))}` +
-
-        `</b>.`;
-
-    }
-
-  }
-
-  else{
-
-    message.textContent =
-
-      "Cadastre suas receitas para comparar os compromissos do próximo mês com sua renda.";
-
-  }
-
-}
-
-
-/* =========================
-SIMULADOR
-========================= */
-
-function simulate(){
-
-  const extra =
-    Number(
-      el("extra").value
-    ) || 0;
-
-
-  if(data.debts.length === 0){
-
-    el("simResult")
-      .innerHTML =
-
-      "<p>Cadastre uma dívida primeiro.</p>";
-
-    return;
-
-  }
-
-
-  if(extra <= 0){
-
-    alert(
-      "Informe o valor extra que pretende pagar."
-    );
-
-    return;
-
-  }
-
-
-  const debts =
-    data.debts
-      .slice()
-      .sort(
-        function(a,b){
-
-          return (
-            Number(b.rate || 0) -
-            Number(a.rate || 0)
-          );
-
-        }
-      );
-
-
-  const debt =
-    debts[0];
-
-
-  const after =
-    Math.max(
-      0,
-      Number(debt.total) -
-      extra
-    );
-
-
-  el("simResult")
-    .innerHTML =
-
-    `<p>
-
-      Prioridade pelo maior juro:
-      <b>${escapeHTML(debt.name)}</b>
-
-      <br><br>
-
-      Saldo atual:
-      <b>${money(debt.total)}</b>
-
-      <br>
-
-      Juros:
-      <b>${Number(debt.rate || 0).toFixed(2)}% a.m.</b>
-
-      <br>
-
-      Depois do valor extra:
-      <b style="color:#5df29a">
-        ${money(after)}
-      </b>
-
-    </p>`;
-
-}
-
-
-el("simulateButton")
-.addEventListener(
-  "click",
-  simulate
-);
-
-
-/* =========================
-BACKUP
-========================= */
-
-function exportData(){
-
-  const content =
-    JSON.stringify(
-      data,
-      null,
-      2
-    );
-
-
-  const blob =
-    new Blob(
-      [content],
-      {
-        type:"application/json"
-      }
-    );
-
-
-  const url =
-    URL.createObjectURL(blob);
-
-
-  const link =
-    document.createElement("a");
-
-
-  link.href = url;
-
-  link.download =
-    "minha-saida-backup.json";
-
-
-  document.body.appendChild(
-    link
-  );
-
-
-  link.click();
-
-
-  link.remove();
-
-
-  setTimeout(
-    function(){
-
-      URL.revokeObjectURL(url);
-
-    },
-    1000
-  );
-
-}
-
-
-el("exportButton")
-.addEventListener(
-  "click",
-  exportData
-);
-
-
-/* =========================
-SEGURANÇA PARA TEXTO
-========================= */
-
-function escapeHTML(value){
-
-  return String(value)
-
-    .replace(
-      /&/g,
-      "&amp;"
-    )
-
-    .replace(
-      /</g,
-      "&lt;"
-    )
-
-    .replace(
-      />/g,
-      "&gt;"
-    )
-
-    .replace(
-      /"/g,
-      "&quot;"
-    )
-
-    .replace(
-      /'/g,
-      "&#039;"
-    );
 
 }
 
@@ -2601,179 +1800,130 @@ RENDER DÍVIDAS
 function renderDebts(){
 
   const total =
-    data.debts.reduce(
-      function(sum,debt){
+  data.debts.reduce(
+    function(sum,d){
+      return sum+
+      Number(d.total||0);
+    },
+    0
+  );
 
-        return (
-          sum +
-          Number(
-            debt.total || 0
-          )
-        );
+  $("debtTotal").textContent=
+  money(total);
 
-      },
-      0
-    );
-
-
-  el("debtTotal")
-    .textContent =
-    money(total);
-
-
-  el("debtCount")
-    .textContent =
-
-    `${data.debts.length} ` +
-
-    (
-      data.debts.length === 1
-      ? "dívida"
-      : "dívidas"
-    );
+  $("debtCount").textContent=
+  data.debts.length+
+  (
+    data.debts.length===1
+    ? " dívida"
+    : " dívidas"
+  );
 
 
   const list =
-    el("debtList");
+  $("debtList");
+
+  list.innerHTML="";
 
 
-  list.innerHTML = "";
+  if(data.debts.length===0){
 
-
-  if(data.debts.length === 0){
-
-    list.innerHTML =
-
-      `<div class="empty">
-        Nenhuma dívida cadastrada.
-      </div>`;
+    list.innerHTML=
+    '<div class="empty">Nenhuma dívida cadastrada.</div>';
 
     return;
-
   }
 
 
   data.debts.forEach(
-    function(debt){
+    function(d){
 
-      const row =
-        document.createElement(
-          "div"
-        );
+      const item =
+      document.createElement(
+        "div"
+      );
 
-
-      row.className =
-        "debt-row";
+      item.className="item";
 
 
       const top =
-        document.createElement(
-          "div"
-        );
+      document.createElement(
+        "div"
+      );
+
+      top.className="row";
 
 
-      top.className =
-        "row";
+      const title =
+      document.createElement(
+        "b"
+      );
+
+      title.textContent=d.name;
 
 
-      const name =
-        document.createElement(
-          "b"
-        );
+      const del =
+      document.createElement(
+        "button"
+      );
 
+      del.className="delete";
+      del.type="button";
+      del.textContent="×";
 
-      name.textContent =
-        debt.name;
-
-
-      const remove =
-        document.createElement(
-          "button"
-        );
-
-
-      remove.type =
-        "button";
-
-      remove.className =
-        "ghost";
-
-      remove.textContent =
-        "×";
-
-
-      remove.addEventListener(
+      del.addEventListener(
         "click",
         function(){
-
-          deleteDebt(
-            debt.id
-          );
-
+          deleteDebt(d.id);
         }
       );
 
 
-      top.appendChild(name);
-      top.appendChild(remove);
+      top.appendChild(title);
+      top.appendChild(del);
 
 
-      const value =
-        document.createElement(
-          "div"
-        );
+      const amount =
+      document.createElement(
+        "div"
+      );
+
+      amount.textContent=
+      money(d.total);
 
 
-      value.textContent =
-        money(debt.total);
+      const detail =
+      document.createElement(
+        "div"
+      );
 
+      detail.className=
+      "muted small";
 
-      const details =
-        document.createElement(
-          "div"
-        );
-
-
-      details.className =
-        "muted small";
-
-
-      let text =
-
-        `Parcela ${money(
-          debt.installment
-        )}` +
-
-        ` · ${Number(
-          debt.rate || 0
-        ).toFixed(2)}% a.m.`;
-
-
-      if(debt.date){
-
-        text +=
-          ` · ${formatDate(
-            debt.date
-          )}`;
-
-      }
-
-
-      text +=
-        debt.monthly
+      detail.textContent=
+      "Parcela "+
+      money(d.installment)+
+      " · "+
+      Number(d.rate||0)
+      .toFixed(2)+
+      "% a.m."+
+      (
+        d.date
+        ? " · "+dateBR(d.date)
+        : ""
+      )+
+      (
+        d.monthly
         ? " · 🔁 mensal"
-        : " · cobrança única";
+        : " · única"
+      );
 
 
-      details.textContent =
-        text;
+      item.appendChild(top);
+      item.appendChild(amount);
+      item.appendChild(detail);
 
-
-      row.appendChild(top);
-      row.appendChild(value);
-      row.appendChild(details);
-
-      list.appendChild(row);
+      list.appendChild(item);
 
     }
   );
@@ -2787,184 +1937,117 @@ RENDER CARTÕES
 
 function renderCards(){
 
-  el("cardCount")
-    .textContent =
-
-    `${data.cards.length} ` +
-
-    (
-      data.cards.length === 1
-      ? "cartão"
-      : "cartões"
-    );
+  $("cardCount").textContent=
+  data.cards.length+
+  (
+    data.cards.length===1
+    ? " cartão"
+    : " cartões"
+  );
 
 
   const list =
-    el("cardList");
+  $("cardList");
+
+  list.innerHTML="";
 
 
-  list.innerHTML = "";
+  if(data.cards.length===0){
 
-
-  if(data.cards.length === 0){
-
-    list.innerHTML =
-
-      `<div class="card empty">
-        Cadastre seu primeiro cartão.
-      </div>`;
+    list.innerHTML=
+    '<div class="card empty">Nenhum cartão cadastrado.</div>';
 
   }
 
-  else{
 
-    data.cards.forEach(
-      function(card){
+  data.cards.forEach(
+    function(card){
 
-        const total =
-          cardTotal(card.id);
-
-
-        const cardBox =
-          document.createElement(
-            "div"
-          );
+      const total =
+      cardTotal(card.id);
 
 
-        cardBox.className =
-          "card";
+      const box =
+      document.createElement(
+        "div"
+      );
+
+      box.className="card";
 
 
-        const top =
-          document.createElement(
-            "div"
-          );
+      const top =
+      document.createElement(
+        "div"
+      );
+
+      top.className="row";
 
 
-        top.className =
-          "row";
+      const title =
+      document.createElement(
+        "h2"
+      );
+
+      title.textContent=
+      card.name;
 
 
-        const titleBox =
-          document.createElement(
-            "div"
-          );
+      const del =
+      document.createElement(
+        "button"
+      );
+
+      del.type="button";
+      del.className="delete";
+      del.textContent="×";
+
+      del.addEventListener(
+        "click",
+        function(){
+          deleteCard(card.id);
+        }
+      );
 
 
-        titleBox.innerHTML =
-
-          `<span class="tag">
-            CARTÃO
-          </span>
-
-          <h2>
-            ${escapeHTML(card.name)}
-          </h2>`;
+      top.appendChild(title);
+      top.appendChild(del);
 
 
-        const remove =
-          document.createElement(
-            "button"
-          );
+      const content =
+      document.createElement(
+        "div"
+      );
+
+      content.innerHTML=
+      '<div class="muted">Total lançado</div>'+
+      '<div class="big">'+
+      money(total)+
+      '</div>'+
+      '<div class="muted small">'+
+      'Limite: '+
+      money(card.limit)+
+      ' · Disponível: '+
+      money(
+        Math.max(
+          0,
+          Number(card.limit||0)-
+          total
+        )
+      )+
+      '<br>Fecha dia '+
+      (card.close||"—")+
+      ' · Vence dia '+
+      (card.due||"—")+
+      '</div>';
 
 
-        remove.type =
-          "button";
+      box.appendChild(top);
+      box.appendChild(content);
 
-        remove.className =
-          "ghost";
+      list.appendChild(box);
 
-        remove.textContent =
-          "×";
-
-
-        remove.addEventListener(
-          "click",
-          function(){
-
-            deleteCard(
-              card.id
-            );
-
-          }
-        );
-
-
-        top.appendChild(
-          titleBox
-        );
-
-        top.appendChild(
-          remove
-        );
-
-
-        const info =
-          document.createElement(
-            "div"
-          );
-
-
-        info.innerHTML =
-
-          `<div class="muted">
-            Total lançado
-          </div>
-
-          <div class="big">
-            ${money(total)}
-          </div>
-
-          <div class="row small">
-
-            <span>
-              Limite
-              ${money(card.limit)}
-            </span>
-
-            <span>
-              Disponível
-              ${money(
-                Math.max(
-                  0,
-                  Number(card.limit || 0) -
-                  total
-                )
-              )}
-            </span>
-
-          </div>
-
-          <p class="muted small">
-
-            Fecha dia
-            ${card.close || "—"}
-
-            ·
-
-            Vence dia
-            ${card.due || "—"}
-
-          </p>`;
-
-
-        cardBox.appendChild(
-          top
-        );
-
-        cardBox.appendChild(
-          info
-        );
-
-
-        list.appendChild(
-          cardBox
-        );
-
-      }
-    );
-
-  }
+    }
+  );
 
 
   fillCardSelect();
@@ -2979,151 +2062,108 @@ RENDER COMPRAS
 function renderPurchases(){
 
   const list =
-    el("purchaseList");
+  $("purchaseList");
+
+  list.innerHTML="";
 
 
-  list.innerHTML = "";
+  if(data.purchases.length===0){
 
-
-  if(data.purchases.length === 0){
-
-    list.innerHTML =
-
-      `<div class="empty">
-        Nenhuma compra lançada.
-      </div>`;
+    list.innerHTML=
+    '<div class="empty">Nenhuma compra lançada.</div>';
 
     return;
-
   }
 
 
   data.purchases
-    .slice()
-    .reverse()
-    .forEach(
-      function(purchase){
+  .slice()
+  .reverse()
+  .forEach(
+    function(p){
 
-        const card =
-          data.cards.find(
-            function(item){
-
-              return (
-                item.id ===
-                purchase.cardId
-              );
-
-            }
-          );
+      const card =
+      data.cards.find(
+        function(c){
+          return c.id===p.cardId;
+        }
+      );
 
 
-        const row =
-          document.createElement(
-            "div"
-          );
+      const item =
+      document.createElement(
+        "div"
+      );
+
+      item.className=
+      "item row";
 
 
-        row.className =
-          "debt-row row";
+      const left =
+      document.createElement(
+        "div"
+      );
+
+      left.innerHTML=
+      "<b>"+
+      safeText(p.desc)+
+      "</b>"+
+      '<div class="muted small">'+
+      safeText(
+        card
+        ? card.name
+        : "Cartão"
+      )+
+      " · "+
+      dateBR(p.date)+
+      "</div>";
 
 
-        const left =
-          document.createElement(
-            "div"
-          );
+      const right =
+      document.createElement(
+        "div"
+      );
+
+      right.style.textAlign=
+      "right";
 
 
-        left.innerHTML =
+      const amount =
+      document.createElement(
+        "b"
+      );
 
-          `<b>
-            ${escapeHTML(
-              purchase.desc
-            )}
-          </b>
-
-          <div class="muted small">
-
-            ${escapeHTML(
-              card
-              ? card.name
-              : "Cartão"
-            )}
-
-            ·
-
-            ${formatDate(
-              purchase.date
-            )}
-
-          </div>`;
+      amount.textContent=
+      money(p.value);
 
 
-        const right =
-          document.createElement(
-            "div"
-          );
+      const del =
+      document.createElement(
+        "button"
+      );
+
+      del.type="button";
+      del.className="delete";
+      del.textContent="×";
+
+      del.addEventListener(
+        "click",
+        function(){
+          deletePurchase(p.id);
+        }
+      );
 
 
-        right.style.textAlign =
-          "right";
+      right.appendChild(amount);
+      right.appendChild(del);
 
+      item.appendChild(left);
+      item.appendChild(right);
 
-        const amount =
-          document.createElement(
-            "b"
-          );
+      list.appendChild(item);
 
-
-        amount.textContent =
-          money(
-            purchase.value
-          );
-
-
-        const remove =
-          document.createElement(
-            "button"
-          );
-
-
-        remove.type =
-          "button";
-
-        remove.className =
-          "ghost";
-
-        remove.textContent =
-          "×";
-
-
-        remove.addEventListener(
-          "click",
-          function(){
-
-            deletePurchase(
-              purchase.id
-            );
-
-          }
-        );
-
-
-        right.appendChild(
-          amount
-        );
-
-        right.appendChild(
-          remove
-        );
-
-
-        row.appendChild(left);
-        row.appendChild(right);
-
-        list.appendChild(row);
-
-      }
-    );
+    }
+  );
 
 }
 
@@ -3134,225 +2174,183 @@ RENDER LANÇAMENTOS
 
 function renderTransactions(){
 
-  const box =
-    el("txList");
+  const list =
+  $("transactionList");
+
+  list.innerHTML="";
 
 
-  box.innerHTML =
-    "<h2>Últimos lançamentos</h2>";
+  if(data.tx.length===0){
 
-
-  if(data.tx.length === 0){
-
-    box.innerHTML +=
-
-      `<div class="empty">
-        Nenhum lançamento.
-      </div>`;
+    list.innerHTML=
+    '<div class="empty">Nenhum lançamento.</div>';
 
     return;
-
   }
 
 
   data.tx
-    .slice()
-    .reverse()
-    .slice(0,20)
-    .forEach(
-      function(transaction){
+  .slice()
+  .reverse()
+  .slice(0,30)
+  .forEach(
+    function(t){
 
-        const row =
-          document.createElement(
-            "div"
-          );
-
-
-        row.className =
-          "debt-row row";
+      const isIncome =
+      String(t.type)
+      .trim()
+      .toLowerCase()
+      ===
+      "income";
 
 
-        const left =
-          document.createElement(
-            "div"
-          );
+      const item =
+      document.createElement(
+        "div"
+      );
+
+      item.className=
+      "item row";
 
 
-        const title =
-          document.createElement(
-            "b"
-          );
+      const left =
+      document.createElement(
+        "div"
+      );
 
 
-        title.textContent =
-          transaction.desc;
+      const title =
+      document.createElement(
+        "b"
+      );
+
+      title.textContent=
+      t.desc;
 
 
-        const details =
-          document.createElement(
-            "div"
-          );
+      const detail =
+      document.createElement(
+        "div"
+      );
+
+      detail.className=
+      "muted small";
+
+      detail.textContent=
+      (t.cat||"Outros")+
+      (
+        t.date
+        ? " · "+dateBR(t.date)
+        : ""
+      );
 
 
-        details.className =
-          "muted small";
+      left.appendChild(title);
+      left.appendChild(detail);
 
 
-        details.textContent =
+      const right =
+      document.createElement(
+        "div"
+      );
 
-          `${transaction.cat || "Outros"}` +
-
-          (
-            transaction.date
-            ? ` · ${formatDate(
-                transaction.date
-              )}`
-            : ""
-          );
+      right.style.textAlign=
+      "right";
 
 
-        left.appendChild(
-          title
-        );
+      const amount =
+      document.createElement(
+        "b"
+      );
 
-        left.appendChild(
-          details
-        );
+      amount.textContent=
+      (
+        isIncome
+        ? "+"
+        : "-"
+      )
+      +
+      money(t.value);
 
-
-        const right =
-          document.createElement(
-            "div"
-          );
-
-
-        right.style.textAlign =
-          "right";
-
-
-        const amount =
-          document.createElement(
-            "b"
-          );
+      amount.style.color=
+      isIncome
+      ? "#55ed96"
+      : "#ff6464";
 
 
-        const isIncome =
-  String(transaction.type)
-    .trim()
-    .toLowerCase() === "income";
+      const del =
+      document.createElement(
+        "button"
+      );
+
+      del.type="button";
+      del.className="delete";
+      del.textContent="×";
+
+      del.addEventListener(
+        "click",
+        function(){
+          deleteTransaction(t.id);
+        }
+      );
 
 
-amount.textContent =
-  (isIncome ? "+" : "-")
-  +
-  money(transaction.value);
+      right.appendChild(amount);
+      right.appendChild(del);
 
+      item.appendChild(left);
+      item.appendChild(right);
 
-amount.style.color =
-  isIncome
-  ? "#5df29a"
-  : "#ff6464";
+      list.appendChild(item);
 
-
-        const remove =
-          document.createElement(
-            "button"
-          );
-
-
-        remove.type =
-          "button";
-
-        remove.className =
-          "ghost";
-
-        remove.textContent =
-          "×";
-
-
-        remove.addEventListener(
-          "click",
-          function(){
-
-            deleteTransaction(
-              transaction.id
-            );
-
-          }
-        );
-
-
-        right.appendChild(
-          amount
-        );
-
-        right.appendChild(
-          remove
-        );
-
-
-        row.appendChild(left);
-        row.appendChild(right);
-
-        box.appendChild(row);
-
-      }
-    );
+    }
+  );
 
 }
 
 
 /* =========================
-RENDER AGENDA
+AGENDA
 ========================= */
 
 function renderCalendar(){
 
   const list =
-    el("calendarList");
+  $("calendarList");
 
+  list.innerHTML="";
 
-  list.innerHTML = "";
+  const events=[];
 
-
-  const events = [];
-
-
-  /* DÍVIDAS */
 
   data.debts.forEach(
-    function(debt){
+    function(d){
 
-      if(!debt.date){
+      if(!d.date){
         return;
       }
 
-
       events.push({
 
-        date:debt.date,
+        date:d.date,
 
-        label:debt.name,
+        name:d.name,
 
         value:
-          Math.min(
-            Number(
-              debt.installment ||
-              debt.total ||
-              0
-            ),
-            Number(
-              debt.total || 0
-            )
+        Math.min(
+          Number(
+            d.installment||
+            d.total||
+            0
           ),
+          Number(d.total||0)
+        ),
 
-        monthly:
-          debt.monthly,
+        monthly:d.monthly,
 
         type:"debt",
 
-        debtId:
-          debt.id
+        id:d.id
 
       });
 
@@ -3360,10 +2358,8 @@ function renderCalendar(){
   );
 
 
-  /* CARTÕES */
-
   const now =
-    new Date();
+  new Date();
 
 
   data.cards.forEach(
@@ -3373,52 +2369,46 @@ function renderCalendar(){
         return;
       }
 
+      const year=
+      now.getFullYear();
 
-      const year =
-        now.getFullYear();
+      const month=
+      now.getMonth();
 
-      const month =
-        now.getMonth();
+      const last=
+      new Date(
+        year,
+        month+1,
+        0
+      )
+      .getDate();
 
-      const lastDay =
-        new Date(
-          year,
-          month+1,
-          0
-        )
-        .getDate();
+      const day=
+      Math.min(
+        Number(card.due),
+        last
+      );
 
-
-      const safeDay =
-        Math.min(
-          Number(card.due),
-          lastDay
-        );
-
-
-      const date =
-
-        year +
-        "-" +
-        String(month+1)
-          .padStart(2,"0") +
-        "-" +
-        String(safeDay)
-          .padStart(2,"0");
+      const date=
+      year+
+      "-"+
+      String(month+1)
+      .padStart(2,"0")+
+      "-"+
+      String(day)
+      .padStart(2,"0");
 
 
       events.push({
 
         date:date,
 
-        label:
-          "Fatura " +
-          card.name,
+        name:
+        "Fatura "+
+        card.name,
 
         value:
-          cardTotal(
-            card.id
-          ),
+        cardTotal(card.id),
 
         monthly:true,
 
@@ -3432,165 +2422,119 @@ function renderCalendar(){
 
   events.sort(
     function(a,b){
-
-      return (
-        a.date
-        .localeCompare(
-          b.date
-        )
+      return a.date.localeCompare(
+        b.date
       );
-
     }
   );
 
 
-  if(events.length === 0){
+  if(events.length===0){
 
-    list.innerHTML =
-
-      `<div class="empty">
-        Nenhum vencimento cadastrado.
-      </div>`;
+    list.innerHTML=
+    '<div class="empty">Nenhum vencimento cadastrado.</div>';
 
     return;
-
   }
 
 
   events.forEach(
     function(event){
 
-      const row =
-        document.createElement(
-          "div"
-        );
+      const item =
+      document.createElement(
+        "div"
+      );
 
-
-      row.className =
-        "debt-row row";
+      item.className=
+      "item row";
 
 
       const left =
-        document.createElement(
-          "div"
-        );
-
+      document.createElement(
+        "div"
+      );
 
       const title =
-        document.createElement(
-          "b"
-        );
-
-
-      title.textContent =
-
-        `${formatDate(
-          event.date
-        )} · ${event.label}`;
-
-
-      const details =
-        document.createElement(
-          "div"
-        );
-
-
-      details.className =
-        "muted small";
-
-
-      details.textContent =
-
-        event.monthly
-        ? "🔁 recorrente mensal"
-        : "cobrança única";
-
-
-      left.appendChild(
-        title
+      document.createElement(
+        "b"
       );
 
-      left.appendChild(
-        details
+      title.textContent=
+      dateBR(event.date)+
+      " · "+
+      event.name;
+
+
+      const detail =
+      document.createElement(
+        "div"
       );
+
+      detail.className=
+      "muted small";
+
+      detail.textContent=
+      event.monthly
+      ? "🔁 recorrente mensal"
+      : "cobrança única";
+
+
+      left.appendChild(title);
+      left.appendChild(detail);
 
 
       const right =
-        document.createElement(
-          "div"
-        );
+      document.createElement(
+        "div"
+      );
 
-
-      right.style.textAlign =
-        "right";
+      right.style.textAlign=
+      "right";
 
 
       const amount =
-        document.createElement(
-          "div"
-        );
-
-
-      amount.className =
-        "red";
-
-
-      amount.textContent =
-        "-" +
-        money(
-          event.value
-        );
-
-
-      right.appendChild(
-        amount
+      document.createElement(
+        "div"
       );
 
+      amount.className="red";
 
-      if(
-        event.type ===
-        "debt"
-      ){
+      amount.textContent=
+      "-"+
+      money(event.value);
+
+
+      right.appendChild(amount);
+
+
+      if(event.type==="debt"){
 
         const pay =
-          document.createElement(
-            "button"
-          );
+        document.createElement(
+          "button"
+        );
 
-
-        pay.type =
-          "button";
-
-        pay.className =
-          "pay-button";
-
-        pay.textContent =
-          "✓ Pagar";
-
+        pay.type="button";
+        pay.className="pay";
+        pay.textContent="✓ Pagar";
 
         pay.addEventListener(
           "click",
           function(){
-
-            payDebt(
-              event.debtId
-            );
-
+            payDebt(event.id);
           }
         );
 
-
-        right.appendChild(
-          pay
-        );
+        right.appendChild(pay);
 
       }
 
 
-      row.appendChild(left);
-      row.appendChild(right);
+      item.appendChild(left);
+      item.appendChild(right);
 
-      list.appendChild(row);
+      list.appendChild(item);
 
     }
   );
@@ -3599,261 +2543,476 @@ function renderCalendar(){
 
 
 /* =========================
-RENDER PRINCIPAL
+PRÓXIMO MÊS
+========================= */
+
+function renderForecast(
+  income,
+  committed
+){
+
+  const monthlyDebts =
+  data.debts
+
+  .filter(
+    function(d){
+      return d.monthly;
+    }
+  )
+
+  .reduce(
+    function(sum,d){
+
+      return sum+
+      Math.min(
+        Number(
+          d.installment||
+          d.total||
+          0
+        ),
+        Number(d.total||0)
+      );
+
+    },
+    0
+  );
+
+
+  const cards =
+  data.cards.reduce(
+    function(sum,c){
+      return sum+
+      cardTotal(c.id);
+    },
+    0
+  );
+
+
+  const next =
+  monthlyDebts+
+  cards;
+
+
+  const current =
+  committed+
+  cards;
+
+
+  $("nextTotal").textContent=
+  money(next);
+
+  $("thisMonthCommit").textContent=
+  money(current);
+
+  $("nextMonthCommit").textContent=
+  money(next);
+
+  $("nextDebtValue").textContent=
+  money(monthlyDebts);
+
+  $("nextCardValue").textContent=
+  money(cards);
+
+
+  if(next>0){
+
+    const percent =
+    monthlyDebts/
+    next*
+    100;
+
+    $("pie").style.background=
+    "conic-gradient("+
+    "#55ed96 0% "+
+    percent+
+    "%,"+
+    "#ffb84d "+
+    percent+
+    "% 100%)";
+
+  }else{
+
+    $("pie").style.background=
+    "#214246";
+
+  }
+
+
+  if(income>0){
+
+    const free =
+    income-next;
+
+    if(free>=0){
+
+      $("nextMessage").innerHTML=
+      "Com base na sua renda deste mês, "+
+      "depois desses compromissos sobrariam "+
+      '<b style="color:#55ed96">'+
+      money(free)+
+      "</b>.";
+
+    }else{
+
+      $("nextMessage").innerHTML=
+      "⚠️ Os compromissos previstos ultrapassam "+
+      "sua renda em "+
+      '<b style="color:#ff6464">'+
+      money(
+        Math.abs(free)
+      )+
+      "</b>.";
+
+    }
+
+  }else{
+
+    $("nextMessage").textContent=
+    "Cadastre uma receita para comparar os compromissos com sua renda.";
+
+  }
+
+}
+
+
+/* =========================
+SIMULADOR
+========================= */
+
+$("btnSimulate")
+.addEventListener(
+"click",
+function(){
+
+  const extra =
+  Number(
+    $("simulationExtra").value
+  ) || 0;
+
+
+  if(data.debts.length===0){
+
+    $("simulationResult").innerHTML=
+    "<p>Cadastre uma dívida primeiro.</p>";
+
+    return;
+  }
+
+
+  if(extra<=0){
+
+    alert(
+      "Informe um valor extra."
+    );
+
+    return;
+  }
+
+
+  const debts =
+  data.debts
+  .slice()
+  .sort(
+    function(a,b){
+      return Number(b.rate||0)-
+      Number(a.rate||0);
+    }
+  );
+
+
+  const d =
+  debts[0];
+
+
+  $("simulationResult").innerHTML=
+  "<p>Prioridade: <b>"+
+  safeText(d.name)+
+  "</b><br>"+
+  "Saldo atual: "+
+  money(d.total)+
+  "<br>"+
+  "Após o pagamento extra: <b>"+
+  money(
+    Math.max(
+      0,
+      Number(d.total)-
+      extra
+    )
+  )+
+  "</b></p>";
+
+});
+
+
+/* =========================
+BACKUP
+========================= */
+
+$("btnBackup")
+.addEventListener(
+"click",
+function(){
+
+  const blob =
+  new Blob(
+    [
+      JSON.stringify(
+        data,
+        null,
+        2
+      )
+    ],
+    {
+      type:"application/json"
+    }
+  );
+
+
+  const url =
+  URL.createObjectURL(blob);
+
+  const a =
+  document.createElement(
+    "a"
+  );
+
+  a.href=url;
+
+  a.download=
+  "minha-saida-backup.json";
+
+  document.body.appendChild(a);
+
+  a.click();
+
+  a.remove();
+
+  setTimeout(
+    function(){
+      URL.revokeObjectURL(url);
+    },
+    1000
+  );
+
+});
+
+
+/* =========================
+RENDER GERAL
 ========================= */
 
 function render(){
 
   const now =
-    new Date();
+  new Date();
 
-  const currentMonth =
-    now.getMonth();
+  const month =
+  now.getMonth();
 
-  const currentYear =
-    now.getFullYear();
+  const year =
+  now.getFullYear();
 
-const transactionsThisMonth =
-  data.tx.filter(function(transaction){
 
-    if(!transaction.date){
-      return false;
+  const monthlyTransactions =
+  data.tx.filter(
+    function(t){
+
+      if(!t.date){
+        return false;
+      }
+
+      const p =
+      String(t.date)
+      .slice(0,10)
+      .split("-");
+
+      if(p.length!==3){
+        return false;
+      }
+
+      return (
+        Number(p[0])===year
+        &&
+        Number(p[1])-1===month
+      );
+
     }
+  );
 
-    const dateText =
-      String(transaction.date).slice(0,10);
-
-    const parts =
-      dateText.split("-");
-
-    if(parts.length < 3){
-      return false;
-    }
-
-    const year =
-      parseInt(parts[0],10);
-
-    const month =
-      parseInt(parts[1],10) - 1;
-
-    return (
-      year === currentYear &&
-      month === currentMonth
-    );
-
-  });
-  
-
-        
 
   const income =
-  transactionsThisMonth
-    .filter(function(transaction){
+  monthlyTransactions
+
+  .filter(
+    function(t){
 
       return (
-        String(transaction.type).toLowerCase() === "income"
+        String(t.type)
+        .trim()
+        .toLowerCase()
+        ===
+        "income"
       );
 
-    })
-    .reduce(function(sum,transaction){
+    }
+  )
+
+  .reduce(
+    function(sum,t){
+
+      return sum+
+      Number(t.value||0);
+
+    },
+    0
+  );
+
+
+  const expense =
+  monthlyTransactions
+
+  .filter(
+    function(t){
 
       return (
-        sum +
-        Number(transaction.value || 0)
+        String(t.type)
+        .trim()
+        .toLowerCase()
+        ===
+        "expense"
       );
 
-    },0);
+    }
+  )
 
+  .reduce(
+    function(sum,t){
 
-const expenses =
-  transactionsThisMonth
-    .filter(function(transaction){
+      return sum+
+      Number(t.value||0);
 
-      return (
-        String(transaction.type).toLowerCase() === "expense"
-      );
+    },
+    0
+  );
 
-    })
-    .reduce(function(sum,transaction){
-
-      return (
-        sum +
-        Number(transaction.value || 0)
-      );
-
-    },0);
 
   const totalDebt =
-    data.debts.reduce(
-      function(sum,debt){
+  data.debts.reduce(
+    function(sum,d){
 
-        return (
-          sum +
-          Number(
-            debt.total || 0
-          )
-        );
+      return sum+
+      Number(d.total||0);
 
-      },
-      0
-    );
+    },
+    0
+  );
 
 
   const committed =
-    data.debts.reduce(
-      function(sum,debt){
+  data.debts.reduce(
+    function(sum,d){
 
-        const value =
-          Math.min(
+      return sum+
+      Math.min(
+        Number(
+          d.installment||
+          d.total||
+          0
+        ),
+        Number(d.total||0)
+      );
 
-            Number(
-              debt.installment ||
-              debt.total ||
-              0
-            ),
-
-            Number(
-              debt.total || 0
-            )
-
-          );
-
-
-        return sum + value;
-
-      },
-      0
-    );
+    },
+    0
+  );
 
 
   const balance =
-    income -
-    expenses;
+  income-
+  expense;
 
 
   const real =
-    balance -
-    committed;
+  balance-
+  committed;
 
 
-  el("balance")
-    .textContent =
-    money(balance);
+  $("homeBalance").textContent=
+  money(balance);
+
+  $("homeIncome").textContent=
+  money(income);
+
+  $("homeExpense").textContent=
+  money(expense);
+
+  $("homeCommitted").textContent=
+  money(committed);
+
+  $("homeReal").textContent=
+  money(real);
 
 
-  el("committed")
-    .textContent =
-    money(committed);
+  if(totalDebt===0){
 
+    $("priority").textContent=
+    "Cadastre suas dívidas para começar seu plano.";
 
-  el("real")
-    .textContent =
-    money(real);
+  }else if(real<0){
 
+    $("priority").textContent=
+    "Seu fluxo está pressionado em "+
+    money(
+      Math.abs(real)
+    )+
+    ".";
 
-  el("income")
-    .textContent =
-    money(income);
+  }else{
 
-
-  el("expense")
-    .textContent =
-    money(expenses);
-
-
-  /* PRIORIDADE */
-
-  if(totalDebt <= 0){
-
-    el("priority")
-      .textContent =
-
-      "Cadastre suas dívidas para começar seu plano de saída.";
-
-  }
-
-  else if(real < 0){
-
-    el("priority")
-      .textContent =
-
-      `Seu fluxo está pressionado em ${money(
-        Math.abs(real)
-      )}. Evite assumir novos compromissos antes de equilibrar esse valor.`;
+    $("priority").textContent=
+    "Margem estimada após parcelas: "+
+    money(real)+
+    ".";
 
   }
 
-  else{
-
-    el("priority")
-      .textContent =
-
-      `Depois das parcelas cadastradas, sua margem estimada é de ${money(
-        real
-      )}.`;
-
-  }
-
-
-  /* PROGRESSO */
 
   const eliminated =
-    Math.max(
-      0,
-      Number(
-        data.initialDebt || 0
-      ) -
-      totalDebt
-    );
+  Math.max(
+    0,
+    Number(
+      data.initialDebt||0
+    )-
+    totalDebt
+  );
 
 
   const percent =
-
-    data.initialDebt > 0
-
-    ?
-
-    Math.min(
-      100,
-      (
-        eliminated /
-        data.initialDebt
-      ) * 100
-    )
-
-    :
-
-    0;
+  data.initialDebt>0
+  ?
+  Math.min(
+    100,
+    eliminated/
+    data.initialDebt*
+    100
+  )
+  :
+  0;
 
 
-  el("eliminated")
-    .textContent =
-    money(eliminated);
+  $("eliminated").textContent=
+  money(eliminated);
 
+  $("progressBar").style.width=
+  percent+"%";
 
-  el("progressBar")
-    .style
-    .width =
-    `${percent}%`;
-
-
-  if(data.initialDebt > 0){
-
-    el("progressText")
-      .textContent =
-
-      `${percent.toFixed(1)}% da dívida inicial eliminada.`;
-
-  }
-
-  else{
-
-    el("progressText")
-      .textContent =
-
-      "Comece cadastrando suas dívidas.";
-
-  }
+  $("progressText").textContent=
+  data.initialDebt>0
+  ?
+  percent.toFixed(1)+
+  "% da dívida inicial eliminada."
+  :
+  "Comece cadastrando suas dívidas.";
 
 
   renderDebts();
@@ -3866,7 +3025,7 @@ const expenses =
 
   renderCalendar();
 
-  renderNextMonth(
+  renderForecast(
     income,
     committed
   );
@@ -3875,23 +3034,17 @@ const expenses =
 
 
 /* =========================
-DATAS INICIAIS
-========================= */
-
-el("tdate").value =
-  todayISO();
-
-el("pdate").value =
-  todayISO();
-
-
-/* =========================
 INICIAR
 ========================= */
 
+$("transactionDate").value=
+today();
+
+$("purchaseDate").value=
+today();
+
 render();
 
-})();
 </script>
 
 </body>
