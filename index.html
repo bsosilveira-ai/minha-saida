@@ -451,10 +451,31 @@ nav{
   </div>
 
   <div class="card">
-    <h2>Backup</h2>
-    <p class="muted small">Seus dados ficam neste navegador. Faça backups regularmente.</p>
-    <button id="backup" class="secondary">Exportar meus dados</button>
+  <h2>Backup e restauração</h2>
+
+  <p class="muted small">
+    Exporte uma cópia dos seus dados ou restaure um backup anterior do FLUI.
+  </p>
+
+  <button id="backup" class="secondary">
+    ⬇️ Exportar meus dados
+  </button>
+
+  <button id="importBackup" class="secondary" style="margin-top:10px">
+    ⬆️ Importar backup
+  </button>
+
+  <input
+    id="backupFile"
+    type="file"
+    accept=".json,application/json"
+    style="display:none"
+  >
+
+  <div class="notice" style="margin-top:12px">
+    Antes de importar, o FLUI mostrará uma confirmação. A importação substituirá os dados atuais deste aparelho.
   </div>
+</div>
 </section>
 
 </main>
@@ -929,6 +950,68 @@ $("simulate").addEventListener("click",function(){
 $("backup").addEventListener("click",function(){
   var blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"}),url=URL.createObjectURL(blob),a=document.createElement("a");
   a.href=url;a.download="flui-backup.json";document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(url)},1000)
+});
+  $("importBackup").addEventListener("click",function(){
+  $("backupFile").value="";
+  $("backupFile").click();
+});
+
+$("backupFile").addEventListener("change",function(event){
+
+  var file=event.target.files[0];
+  if(!file)return;
+
+  var reader=new FileReader();
+
+  reader.onload=function(e){
+
+    try{
+
+      var imported=JSON.parse(e.target.result);
+
+      if(!imported || typeof imported!=="object" || Array.isArray(imported)){
+        alert("Este arquivo não parece ser um backup válido do FLUI.");
+        return;
+      }
+
+      var debts=Array.isArray(imported.debts)?imported.debts.length:0;
+      var cards=Array.isArray(imported.cards)?imported.cards.length:0;
+      var purchases=Array.isArray(imported.purchases)?imported.purchases.length:0;
+      var transactions=Array.isArray(imported.tx)?imported.tx.length:0;
+
+      var message=
+        "Backup encontrado!\n\n"+
+        "Dívidas: "+debts+"\n"+
+        "Cartões: "+cards+"\n"+
+        "Compras: "+purchases+"\n"+
+        "Lançamentos: "+transactions+"\n\n"+
+        "Ao continuar, os dados atuais deste aparelho serão substituídos pelos dados deste backup.\n\n"+
+        "Deseja importar?";
+
+      if(!confirm(message))return;
+
+      localStorage.setItem("minhaSaida",JSON.stringify(imported));
+
+      alert(
+        "Backup importado com sucesso! ✅\n\n"+
+        "O FLUI será atualizado agora."
+      );
+
+      location.reload();
+
+    }catch(error){
+
+      alert(
+        "Não consegui importar este arquivo.\n\n"+
+        "Verifique se você selecionou um backup .json criado pelo FLUI."
+      );
+
+    }
+
+  };
+
+  reader.readAsText(file);
+
 });
 
 function renderHome(){
