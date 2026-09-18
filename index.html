@@ -3616,62 +3616,41 @@ const transactionsThisMonth =
         
 
   const income =
-    transactionsThisMonth
+  transactionsThisMonth
+    .filter(function(transaction){
 
-      .filter(
-        function(transaction){
-
-          return (
-            transaction.type ===
-            "income"
-          );
-
-        }
-      )
-
-      .reduce(
-        function(sum,transaction){
-
-          return (
-            sum +
-            Number(
-              transaction.value || 0
-            )
-          );
-
-        },
-        0
+      return (
+        String(transaction.type).toLowerCase() === "income"
       );
 
+    })
+    .reduce(function(sum,transaction){
 
-  const expenses =
-    transactionsThisMonth
-
-      .filter(
-        function(transaction){
-
-          return (
-            transaction.type ===
-            "expense"
-          );
-
-        }
-      )
-
-      .reduce(
-        function(sum,transaction){
-
-          return (
-            sum +
-            Number(
-              transaction.value || 0
-            )
-          );
-
-        },
-        0
+      return (
+        sum +
+        Number(transaction.value || 0)
       );
 
+    },0);
+
+
+const expenses =
+  transactionsThisMonth
+    .filter(function(transaction){
+
+      return (
+        String(transaction.type).toLowerCase() === "expense"
+      );
+
+    })
+    .reduce(function(sum,transaction){
+
+      return (
+        sum +
+        Number(transaction.value || 0)
+      );
+
+    },0);
 
   const totalDebt =
     data.debts.reduce(
