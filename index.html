@@ -3582,42 +3582,38 @@ function render(){
   const currentYear =
     now.getFullYear();
 
+const transactionsThisMonth =
+  data.tx.filter(function(transaction){
 
-  const transactionsThisMonth =
-    data.tx.filter(
-      function(transaction){
+    if(!transaction.date){
+      return false;
+    }
 
-        if(!transaction.date){
-          return false;
-        }
+    const dateText =
+      String(transaction.date).slice(0,10);
 
+    const parts =
+      dateText.split("-");
 
-        const parts =
-          transaction.date
-          .split("-");
+    if(parts.length < 3){
+      return false;
+    }
 
+    const year =
+      parseInt(parts[0],10);
 
-        if(parts.length !== 3){
-          return false;
-        }
+    const month =
+      parseInt(parts[1],10) - 1;
 
-
-        const year =
-          Number(parts[0]);
-
-        const month =
-          Number(parts[1])-1;
-
-
-        return (
-          year === currentYear
-          &&
-          month === currentMonth
-        );
-
-      }
+    return (
+      year === currentYear &&
+      month === currentMonth
     );
 
+  });
+  
+
+        
 
   const income =
     transactionsThisMonth
