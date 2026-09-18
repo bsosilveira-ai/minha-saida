@@ -3,2751 +3,968 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#061b1e">
-<title>Minha Saída</title>
+<meta name="theme-color" content="#071311">
+<title>FLUI</title>
 
 <style>
 :root{
-  --bg:#061b1e;
-  --card:#0d2a2d;
-  --card2:#103236;
-  --green:#55ed96;
-  --greenDark:#159457;
-  --text:#f4fbf8;
-  --muted:#a9bfba;
-  --red:#ff6464;
-  --orange:#ffb84d;
-  --blue:#66b8ff;
-  --line:#214246;
+  --bg:#071311;
+  --panel:#0d1e1b;
+  --panel2:#122824;
+  --line:#1c3933;
+  --text:#f3faf7;
+  --muted:#8fa9a1;
+  --green:#5cf29b;
+  --green2:#25c878;
+  --red:#ff7070;
+  --orange:#ffb65b;
+  --white:#fff;
 }
-
 *{box-sizing:border-box}
-
-html,body{
-  margin:0;
-  background:var(--bg);
-  color:var(--text);
-  font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-}
-
+html,body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
 body{font-size:15px}
-
-.app{
-  max-width:520px;
-  margin:auto;
-  min-height:100vh;
-  padding:24px 16px 115px;
-}
-
-h1{
-  font-size:28px;
-  margin:8px 0 4px;
-}
-
-h2{
-  font-size:20px;
-  margin:8px 0 14px;
-}
-
-h3{
-  margin:4px 0 8px;
-  font-size:17px;
-}
-
-.card{
-  background:var(--card);
-  border:1px solid var(--line);
-  border-radius:18px;
-  padding:16px;
-  margin:12px 0;
-}
-
-.hero{
-  background:linear-gradient(135deg,#14945b,#087052);
-}
-
-.big{
-  font-size:34px;
-  font-weight:800;
-}
-
+button,input,select{font:inherit}
+button{cursor:pointer;-webkit-tap-highlight-color:transparent}
+.app{max-width:540px;margin:auto;padding:22px 16px 112px}
+.page{display:none}
+.page.active{display:block}
+.brand{font-size:26px;font-weight:900;letter-spacing:-1px;color:var(--green)}
+.brand span{color:var(--text)}
+.eyebrow{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:1px}
+h1{font-size:29px;line-height:1.05;margin:8px 0}
+h2{font-size:19px;margin:0 0 12px}
+h3{margin:0 0 5px}
 .muted{color:var(--muted)}
 .small{font-size:12px}
 .green{color:var(--green)}
 .red{color:var(--red)}
 .orange{color:var(--orange)}
-
-.grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
+.card{
+  background:var(--panel);border:1px solid var(--line);
+  border-radius:22px;padding:17px;margin:13px 0
 }
-
-.stat{
-  background:#fff;
-  color:#102325;
-  border-radius:14px;
-  padding:13px;
+.hero{
+  background:linear-gradient(145deg,#12382d,#0b251f);
+  border-color:#245b49;padding:20px
 }
-
-.stat b{
-  display:block;
-  font-size:20px;
-  margin-top:4px;
+.hero-label{color:#b6d1c8;font-size:13px}
+.hero-value{font-size:38px;font-weight:900;letter-spacing:-1.5px;margin:5px 0 17px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.mini{
+  background:rgba(255,255,255,.055);border-radius:14px;padding:11px;min-width:0
 }
-
-.row{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:10px;
+.mini span{display:block;color:var(--muted);font-size:11px}
+.mini b{display:block;margin-top:4px;font-size:15px;overflow-wrap:anywhere}
+.row{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.row-start{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+.primary,.secondary,.danger{
+  width:100%;border-radius:14px;padding:13px 14px;font-weight:800
 }
-
-.row-start{
-  display:flex;
-  justify-content:space-between;
-  align-items:flex-start;
-  gap:10px;
-}
-
-button{
-  font:inherit;
-  cursor:pointer;
-  touch-action:manipulation;
-  -webkit-tap-highlight-color:transparent;
-}
-
-.primary{
-  width:100%;
-  border:0;
-  border-radius:12px;
-  padding:13px 15px;
-  background:var(--green);
-  color:#082117;
-  font-weight:800;
-}
-
-.secondary{
-  width:100%;
-  border:1px solid var(--line);
-  border-radius:12px;
-  padding:12px;
-  background:#16383b;
-  color:var(--text);
-  font-weight:700;
-}
-
-.pay{
-  border:0;
-  border-radius:10px;
-  padding:9px 12px;
-  margin-top:7px;
-  background:var(--green);
-  color:#082117;
-  font-weight:800;
-}
-
-.delete{
-  border:0;
-  background:transparent;
-  color:#ff8585;
-  font-size:20px;
-  padding:8px;
-}
-
+.primary{border:0;background:var(--green);color:#062016}
+.secondary{border:1px solid var(--line);background:var(--panel2);color:var(--text)}
+.danger{border:1px solid #653737;background:#2b1717;color:#ff9292}
+.icon-btn{border:0;background:transparent;color:#ff8d8d;font-size:21px;padding:8px}
 input,select{
-  width:100%;
-  padding:13px;
-  border-radius:10px;
-  border:1px solid #b9c8c5;
-  margin:6px 0 12px;
-  background:#fff;
-  color:#102325;
-  font:inherit;
+  width:100%;border:1px solid #c8d4d0;border-radius:12px;
+  padding:13px;background:white;color:#12201d;margin:6px 0 12px;
+  font-size:16px
 }
-
-label.field{
-  display:block;
-  color:var(--muted);
-  font-size:12px;
-  margin-top:5px;
-}
-
-.item{
-  padding:12px 0;
-  border-bottom:1px solid var(--line);
-}
-
-.item:last-child{
-  border-bottom:0;
-}
-
-.empty{
-  text-align:center;
-  padding:20px;
-  color:var(--muted);
-}
-
+label{display:block;color:var(--muted);font-size:12px;margin-top:4px}
 .pill{
-  background:#16383b;
-  color:var(--green);
-  padding:5px 8px;
-  border-radius:999px;
-  font-size:11px;
+  display:inline-block;border-radius:999px;padding:5px 9px;
+  background:#16342d;color:var(--green);font-size:11px
 }
-
-.pill-paid{
-  background:rgba(85,237,150,.13);
-  color:var(--green);
-  padding:5px 8px;
-  border-radius:999px;
-  font-size:11px;
-  display:inline-block;
+.item{padding:13px 0;border-bottom:1px solid var(--line)}
+.item:last-child{border-bottom:0}
+.empty{text-align:center;color:var(--muted);padding:22px 8px}
+.amount{font-weight:850}
+.voice-card{
+  position:relative;overflow:hidden;
+  background:linear-gradient(145deg,#162d28,#10211e)
 }
-
-.pill-pending{
-  background:rgba(255,184,77,.12);
-  color:var(--orange);
-  padding:5px 8px;
-  border-radius:999px;
-  font-size:11px;
-  display:inline-block;
+.voice-card:before{
+  content:"";position:absolute;width:150px;height:150px;border-radius:50%;
+  background:rgba(92,242,155,.08);right:-65px;top:-70px
 }
-
-section{display:none}
-section.active{display:block}
-
-.pie-area{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:22px;
-  margin-top:20px;
+.voice-button{
+  width:74px;height:74px;border:0;border-radius:50%;
+  background:var(--green);color:#062016;font-size:31px;font-weight:800;
+  box-shadow:0 0 0 8px rgba(92,242,155,.08)
 }
-
-.pie{
-  width:150px;
-  height:150px;
-  border-radius:50%;
-  background:#214246;
-  position:relative;
-  flex-shrink:0;
+.voice-button.listening{animation:pulse 1.1s infinite}
+@keyframes pulse{
+  50%{box-shadow:0 0 0 18px rgba(92,242,155,.03)}
 }
-
-.pie:after{
-  content:"Próximo\A mês";
-  white-space:pre;
-  position:absolute;
-  width:82px;
-  height:82px;
-  top:34px;
-  left:34px;
-  border-radius:50%;
-  background:var(--card);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  color:var(--muted);
-  font-size:12px;
+.quick-input{margin-top:14px}
+.preview{
+  background:#102722;border:1px solid #275143;
+  border-radius:16px;padding:13px;margin-top:12px
 }
-
-.dot{
-  display:inline-block;
-  width:13px;
-  height:13px;
-  border-radius:50%;
-  margin-right:5px;
+.preview-title{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.8px}
+.progress{height:9px;background:#1d3732;border-radius:999px;overflow:hidden;margin-top:9px}
+.progress>div{height:100%;background:var(--green);width:0}
+.agenda-month{margin:20px 0 6px;color:var(--green);font-size:12px;text-transform:uppercase;letter-spacing:1px}
+.agenda{background:var(--panel2);border-radius:15px;padding:13px;margin:7px 0}
+.paid{opacity:.6}
+.pay{
+  border:0;background:var(--green);color:#062016;border-radius:10px;
+  padding:8px 11px;font-weight:800;margin-top:8px
 }
-
-.dot-green{background:var(--green)}
-.dot-orange{background:var(--orange)}
-
-.progress{
-  height:10px;
-  border-radius:10px;
-  background:#dce7e4;
-  overflow:hidden;
-  margin-top:12px;
+.report-bar{margin:13px 0}
+.bar-head{display:flex;justify-content:space-between;gap:10px;font-size:13px}
+.bar{height:8px;background:#1b3730;border-radius:999px;overflow:hidden;margin-top:6px}
+.bar div{height:100%;background:var(--green)}
+.report-result{font-size:31px;font-weight:900;margin-top:5px}
+.notice{
+  background:#152c27;border-radius:14px;padding:12px;
+  color:#b9ccc6;font-size:13px;margin-top:12px
 }
-
-.progress div{
-  height:100%;
-  width:0%;
-  background:var(--green);
-}
-
-.agenda-month{
-  color:var(--green);
-  font-size:14px;
-  text-transform:uppercase;
-  letter-spacing:.7px;
-  margin:20px 0 4px;
-}
-
-.agenda-card{
-  background:var(--card2);
-  border:1px solid var(--line);
-  border-radius:14px;
-  padding:13px;
-  margin:8px 0;
-}
-
-.paid{
-  opacity:.65;
-}
-
-.paid .agenda-title{
-  text-decoration:line-through;
-}
-
-.form-note{
-  background:#16383b;
-  border-radius:12px;
-  padding:12px;
-  color:var(--muted);
-  font-size:12px;
-  margin-bottom:12px;
-}
-
-.debt-summary{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:8px;
-  margin-top:10px;
-}
-
-.debt-summary div{
-  background:#102f32;
-  border-radius:10px;
-  padding:10px;
-}
-
-.debt-summary span{
-  display:block;
-  color:var(--muted);
-  font-size:11px;
-}
-
-.debt-summary b{
-  display:block;
-  margin-top:3px;
-}
-
 nav{
-  position:fixed;
-  z-index:9999;
-  bottom:0;
-  left:0;
-  right:0;
-  background:#092326;
-  border-top:1px solid var(--line);
-  padding:8px 5px calc(8px + env(safe-area-inset-bottom));
+  position:fixed;left:0;right:0;bottom:0;z-index:1000;
+  background:rgba(7,19,17,.96);border-top:1px solid var(--line);
+  padding:7px 5px calc(7px + env(safe-area-inset-bottom))
 }
-
-.nav{
-  max-width:520px;
-  margin:auto;
-  display:grid;
-  grid-template-columns:repeat(6,1fr);
-}
-
+.nav{max-width:540px;margin:auto;display:grid;grid-template-columns:repeat(6,1fr)}
 .nav button{
-  border:0;
-  background:transparent;
-  color:var(--muted);
-  font-size:10px;
-  padding:8px 1px;
-  min-height:48px;
+  min-height:52px;border:0;background:transparent;color:var(--muted);
+  font-size:10px;padding:5px 1px
 }
-
 .nav button.active{color:var(--green)}
-
+.nav .launch{font-size:10px}
+.nav .launch strong{
+  display:inline-flex;width:33px;height:33px;align-items:center;justify-content:center;
+  border-radius:50%;background:var(--green);color:#062016;font-size:17px;margin-bottom:1px
+}
+.modal{
+  position:fixed;z-index:2000;inset:0;background:rgba(0,0,0,.78);
+  display:flex;align-items:center;justify-content:center;padding:20px
+}
+.modal-box{
+  width:min(100%,440px);background:#0d1e1b;border:1px solid var(--line);
+  border-radius:26px;padding:22px
+}
+.welcome-logo{font-size:42px;font-weight:950;color:var(--green);letter-spacing:-2px}
 [hidden]{display:none!important}
-
 @media(max-width:390px){
-  .big{font-size:29px}
-  .pie{width:130px;height:130px}
-  .pie:after{
-    width:72px;
-    height:72px;
-    top:29px;
-    left:29px;
-  }
+  .hero-value{font-size:33px}
+  .grid3{grid-template-columns:1fr 1fr}
 }
 </style>
 </head>
 
 <body>
 
+<div id="welcome" class="modal" hidden>
+  <div class="modal-box">
+    <div class="welcome-logo">FLUI<span style="color:white">.</span></div>
+    <h1>Bem-vindo 👋</h1>
+    <p class="muted">Sua vida financeira, mais leve.</p>
+    <label>Como podemos te chamar?</label>
+    <input id="profileName" placeholder="Seu nome" autocomplete="name">
+    <button id="saveProfile" class="primary">Começar</button>
+  </div>
+</div>
+
 <main class="app">
 
-<!-- HOME -->
-<section id="page-home" class="active">
-
-<div class="muted">Minha Saída</div>
-<h1>Olá, Bruno! 👋</h1>
-<div class="muted">Disciplina hoje, liberdade amanhã.</div>
-
-<div class="card hero">
-  <div>Saldo em conta</div>
-  <div id="homeBalance" class="big">R$ 0,00</div>
-
+<section id="page-home" class="page active">
   <div class="row">
-    <div>
-      Comprometido
-      <br>
-      <b id="homeCommitted">R$ 0,00</b>
-    </div>
-
-    <div style="text-align:right">
-      Saldo real
-      <br>
-      <b id="homeReal">R$ 0,00</b>
-    </div>
-  </div>
-</div>
-
-<div class="grid">
-  <div class="stat">
-    Receitas do mês
-    <b id="homeIncome" class="green">R$ 0,00</b>
+    <div class="brand">FLUI<span>.</span></div>
+    <span class="pill">Minha vida financeira</span>
   </div>
 
-  <div class="stat">
-    Despesas do mês
-    <b id="homeExpense" class="red">R$ 0,00</b>
-  </div>
-</div>
+  <div style="margin-top:22px" class="eyebrow">Bom te ver</div>
+  <h1 id="helloName">Olá 👋</h1>
+  <div class="muted">Vamos ver como seu dinheiro está fluindo.</div>
 
-<div class="card">
-  <b>🎯 Sua prioridade agora</b>
-  <p id="priority" class="muted">
-    Cadastre seus dados para começar.
-  </p>
-</div>
+  <div class="card hero">
+    <div class="hero-label">Disponível agora</div>
+    <div id="availableNow" class="hero-value">R$ 0,00</div>
 
-<div class="card">
-  <h2>🔮 Próximo mês</h2>
-
-  <div class="muted">Total já comprometido</div>
-  <div id="nextTotal" class="big">R$ 0,00</div>
-
-  <div class="grid" style="margin-top:12px">
-    <div class="stat">
-      Este mês
-      <b id="thisMonthCommit">R$ 0,00</b>
-    </div>
-
-    <div class="stat">
-      Próximo mês
-      <b id="nextMonthCommit" class="red">R$ 0,00</b>
+    <div class="grid3">
+      <div class="mini"><span>Em conta</span><b id="accountBalance">R$ 0</b></div>
+      <div class="mini"><span>Comprometido</span><b id="committed">R$ 0</b></div>
+      <div class="mini"><span>Próx. 30 dias</span><b id="next30">R$ 0</b></div>
     </div>
   </div>
 
-  <div class="pie-area">
-    <div id="pie" class="pie"></div>
-
-    <div>
-      <div style="margin-bottom:12px">
-        <span class="dot dot-green"></span>
-        Dívidas
-        <br>
-        <b id="nextDebtValue">R$ 0,00</b>
+  <div class="card voice-card">
+    <div class="row-start">
+      <div style="min-width:0">
+        <div class="eyebrow">Lançamento rápido</div>
+        <h2 style="margin-top:5px">Fale com o FLUI</h2>
+        <div class="muted small">“Paguei 80 de gasolina”</div>
       </div>
+      <button id="homeMic" class="voice-button" type="button">🎙</button>
+    </div>
 
+    <input id="homeQuick" class="quick-input" placeholder="Ou digite: recebi 500 de um show">
+    <button id="homeInterpret" class="secondary">Interpretar lançamento</button>
+
+    <div id="homePreview" class="preview" hidden></div>
+  </div>
+
+  <div class="card">
+    <div class="row">
       <div>
-        <span class="dot dot-orange"></span>
-        Cartões
-        <br>
-        <b id="nextCardValue">R$ 0,00</b>
+        <div class="eyebrow">Seu mês</div>
+        <h2 id="homeMonthName" style="margin-top:4px">Este mês</h2>
       </div>
+      <button id="goReports" class="secondary" style="width:auto;padding:9px 11px">Ver relatório</button>
+    </div>
+
+    <div class="grid3">
+      <div class="mini"><span>Recebi</span><b id="monthIncome" class="green">R$ 0</b></div>
+      <div class="mini"><span>Gastei</span><b id="monthExpense" class="red">R$ 0</b></div>
+      <div class="mini"><span>Resultado</span><b id="monthResult">R$ 0</b></div>
+    </div>
+
+    <div id="homeInsight" class="notice">Faça seus primeiros lançamentos para o FLUI começar a analisar seu mês.</div>
+  </div>
+
+  <div class="card">
+    <div class="eyebrow">Próximo mês</div>
+    <div id="nextMonthTotal" style="font-size:29px;font-weight:900;margin:5px 0">R$ 0,00</div>
+    <div class="muted">já comprometidos</div>
+    <div class="grid2" style="margin-top:13px">
+      <div class="mini"><span>Dívidas</span><b id="nextDebt">R$ 0</b></div>
+      <div class="mini"><span>Cartões</span><b id="nextCards">R$ 0</b></div>
+    </div>
+  </div>
+</section>
+
+
+<section id="page-debts" class="page">
+  <div class="eyebrow">Organização</div>
+  <div class="row">
+    <h1>Dívidas</h1>
+    <span id="debtCount" class="pill">0 ativas</span>
+  </div>
+
+  <div class="card hero">
+    <div class="hero-label">Saldo devedor</div>
+    <div id="debtTotal" class="hero-value">R$ 0,00</div>
+    <div class="progress"><div id="debtProgress"></div></div>
+    <div id="debtProgressText" class="small" style="margin-top:7px">Comece cadastrando suas dívidas.</div>
+  </div>
+
+  <div id="debtList"></div>
+
+  <button id="openDebt" class="primary">+ Adicionar dívida</button>
+
+  <div id="debtForm" class="card" hidden>
+    <h2>Nova dívida</h2>
+
+    <label>Nome / credor</label>
+    <input id="debtName" placeholder="Nubank">
+
+    <label>Tipo</label>
+    <select id="debtType">
+      <option value="installment">Acordo parcelado</option>
+      <option value="single">Pagamento único</option>
+    </select>
+
+    <label>Valor original</label>
+    <input id="debtOriginal" type="number" step="0.01" inputmode="decimal">
+
+    <label>Valor negociado</label>
+    <input id="debtNegotiated" type="number" step="0.01" inputmode="decimal">
+
+    <div id="installmentFields">
+      <label>Entrada</label>
+      <input id="debtDown" type="number" step="0.01" inputmode="decimal">
+
+      <label>Data da entrada</label>
+      <input id="debtDownDate" type="date">
+
+      <label>Quantidade de parcelas</label>
+      <input id="debtInstallments" type="number" min="1" inputmode="numeric">
+
+      <label>Valor de cada parcela</label>
+      <input id="debtInstallmentValue" type="number" step="0.01" inputmode="decimal">
+
+      <label>Primeiro vencimento</label>
+      <input id="debtFirstDue" type="date">
+    </div>
+
+    <div id="singleFields" hidden>
+      <label>Vencimento</label>
+      <input id="debtSingleDue" type="date">
+    </div>
+
+    <label>Juros ao mês (%) — opcional</label>
+    <input id="debtRate" type="number" step="0.01" inputmode="decimal">
+
+    <button id="saveDebt" class="primary">Salvar dívida</button>
+  </div>
+</section>
+
+
+<section id="page-cards" class="page">
+  <div class="eyebrow">Controle</div>
+  <h1>Cartões</h1>
+
+  <div id="cardList"></div>
+
+  <button id="openCard" class="primary">+ Cadastrar cartão</button>
+
+  <div id="cardForm" class="card" hidden>
+    <h2>Novo cartão</h2>
+    <label>Nome</label><input id="cardName" placeholder="Nubank">
+    <label>Limite</label><input id="cardLimit" type="number" step="0.01">
+    <label>Dia de fechamento</label><input id="cardClose" type="number" min="1" max="31">
+    <label>Dia de vencimento</label><input id="cardDue" type="number" min="1" max="31">
+    <button id="saveCard" class="primary">Salvar cartão</button>
+  </div>
+
+  <button id="openPurchase" class="secondary" style="margin-top:10px">+ Lançar compra no cartão</button>
+
+  <div id="purchaseForm" class="card" hidden>
+    <h2>Nova compra</h2>
+    <label>Cartão</label><select id="purchaseCard"></select>
+    <label>Descrição</label><input id="purchaseDesc">
+    <label>Valor</label><input id="purchaseValue" type="number" step="0.01">
+    <label>Data</label><input id="purchaseDate" type="date">
+    <button id="savePurchase" class="primary">Adicionar</button>
+  </div>
+
+  <div class="card">
+    <h2>Compras lançadas</h2>
+    <div id="purchaseList"></div>
+  </div>
+</section>
+
+
+<section id="page-launch" class="page">
+  <div class="eyebrow">Em segundos</div>
+  <h1>Lançar</h1>
+
+  <div class="card voice-card">
+    <div style="text-align:center;padding:8px 0">
+      <button id="launchMic" class="voice-button" type="button">🎙</button>
+      <h2 style="margin-top:18px">O que aconteceu?</h2>
+      <div id="voiceStatus" class="muted small">Toque no microfone ou digite abaixo.</div>
+    </div>
+
+    <input id="quickText" placeholder="Ex.: paguei 120 de gasolina">
+    <button id="interpretQuick" class="primary">Entender</button>
+    <div id="quickPreview" class="preview" hidden></div>
+  </div>
+
+  <div class="card">
+    <h2>Lançamento manual</h2>
+
+    <label>Tipo</label>
+    <select id="txType">
+      <option value="expense">Despesa</option>
+      <option value="income">Receita</option>
+    </select>
+
+    <label>Valor</label><input id="txValue" type="number" step="0.01">
+    <label>Descrição</label><input id="txDesc">
+
+    <label>Categoria</label>
+    <select id="txCategory">
+      <option>Moradia</option>
+      <option>Alimentação</option>
+      <option>Combustível</option>
+      <option>Transporte</option>
+      <option>Farmácia/Saúde</option>
+      <option>Lazer</option>
+      <option>Dívidas</option>
+      <option>Cartões</option>
+      <option>Salário</option>
+      <option>Renda extra</option>
+      <option>Reserva</option>
+      <option>Outros</option>
+    </select>
+
+    <label>Data</label><input id="txDate" type="date">
+    <button id="saveTx" class="primary">Salvar lançamento</button>
+  </div>
+
+  <div class="card">
+    <h2>Últimos lançamentos</h2>
+    <div id="txList"></div>
+  </div>
+</section>
+
+
+<section id="page-reports" class="page">
+  <div class="eyebrow">Entenda seus hábitos</div>
+  <h1>Relatórios</h1>
+
+  <div class="card">
+    <label>Mês analisado</label>
+    <input id="reportMonth" type="month">
+
+    <div class="grid2">
+      <div class="mini"><span>Receitas</span><b id="reportIncome" class="green">R$ 0</b></div>
+      <div class="mini"><span>Despesas</span><b id="reportExpense" class="red">R$ 0</b></div>
+    </div>
+
+    <div style="margin-top:17px">
+      <div class="muted">Resultado</div>
+      <div id="reportResult" class="report-result">R$ 0,00</div>
     </div>
   </div>
 
-  <p id="nextMessage" class="muted"></p>
-</div>
+  <div class="card">
+    <h2>Para onde foi seu dinheiro</h2>
+    <div id="categoryReport"></div>
+  </div>
 
+  <div class="card">
+    <h2>Dívidas</h2>
+    <div class="grid2">
+      <div class="mini"><span>Pago no mês</span><b id="reportDebtPaid">R$ 0</b></div>
+      <div class="mini"><span>Pagamentos</span><b id="reportDebtPayments">0</b></div>
+    </div>
+  </div>
+
+  <div id="reportComparison" class="notice"></div>
 </section>
 
 
-<!-- DÍVIDAS -->
-<section id="page-debts">
-
-<div class="row">
-  <h1>Dívidas</h1>
-  <span id="debtCount" class="pill">0 dívidas</span>
-</div>
-
-<div class="card">
-  <div class="muted">Saldo devedor total</div>
-  <div id="debtTotal" class="big">R$ 0,00</div>
-  <div id="debtList"></div>
-</div>
-
-<button id="btnOpenDebt" class="primary">
-  + Adicionar dívida
-</button>
-
-<div id="debtForm" class="card" hidden>
-
-<h2>Nova dívida</h2>
-
-<label class="field">Nome / credor</label>
-<input id="debtName" placeholder="Ex.: Nubank">
-
-<label class="field">Tipo da dívida</label>
-<select id="debtType">
-  <option value="installment">Acordo / parcelamento</option>
-  <option value="single">Pagamento único</option>
-</select>
-
-<label class="field">Valor original da dívida</label>
-<input
-  id="debtOriginal"
-  type="number"
-  step="0.01"
-  inputmode="decimal"
-  placeholder="Ex.: 8000,00"
->
-
-<label class="field">Valor total negociado</label>
-<input
-  id="debtNegotiated"
-  type="number"
-  step="0.01"
-  inputmode="decimal"
-  placeholder="Ex.: 5000,00"
->
-
-<div id="installmentFields">
-
-<div class="form-note">
-  Se o acordo tiver entrada, informe abaixo. A entrada será colocada na Agenda separadamente das parcelas.
-</div>
-
-<label class="field">Valor da entrada</label>
-<input
-  id="debtDownPayment"
-  type="number"
-  step="0.01"
-  inputmode="decimal"
-  placeholder="Ex.: 500,00"
->
-
-<label class="field">Data da entrada</label>
-<input id="debtDownDate" type="date">
-
-<label class="field">Quantidade de parcelas</label>
-<input
-  id="debtInstallments"
-  type="number"
-  min="1"
-  step="1"
-  inputmode="numeric"
-  placeholder="Ex.: 10"
->
-
-<label class="field">Valor de cada parcela</label>
-<input
-  id="debtInstallmentValue"
-  type="number"
-  step="0.01"
-  inputmode="decimal"
-  placeholder="Ex.: 450,00"
->
-
-<label class="field">Primeiro vencimento das parcelas</label>
-<input id="debtFirstDue" type="date">
-
-</div>
-
-<div id="singleFields" hidden>
-
-<label class="field">Data do vencimento</label>
-<input id="debtSingleDue" type="date">
-
-</div>
-
-<label class="field">Juros ao mês (%) — opcional</label>
-<input
-  id="debtRate"
-  type="number"
-  step="0.01"
-  inputmode="decimal"
-  placeholder="Ex.: 1,99"
->
-
-<button id="btnSaveDebt" class="primary">
-  Salvar dívida
-</button>
-
-</div>
-
-</section>
-
-
-<!-- CARTÕES -->
-<section id="page-cards">
-
-<div class="row">
-  <h1>Cartões</h1>
-  <span id="cardCount" class="pill">0 cartões</span>
-</div>
-
-<div id="cardList"></div>
-
-<button id="btnOpenCard" class="primary">
-  + Cadastrar cartão
-</button>
-
-<div id="cardForm" class="card" hidden>
-
-<h2>Novo cartão</h2>
-
-<label class="field">Nome do cartão</label>
-<input id="cardName" placeholder="Ex.: Nubank">
-
-<label class="field">Limite</label>
-<input
-  id="cardLimit"
-  type="number"
-  step="0.01"
-  inputmode="decimal"
-  placeholder="Limite"
->
-
-<label class="field">Dia de fechamento</label>
-<input
-  id="cardClose"
-  type="number"
-  min="1"
-  max="31"
-  inputmode="numeric"
-  placeholder="Ex.: 3"
->
-
-<label class="field">Dia de vencimento</label>
-<input
-  id="cardDue"
-  type="number"
-  min="1"
-  max="31"
-  inputmode="numeric"
-  placeholder="Ex.: 10"
->
-
-<button id="btnSaveCard" class="primary">
-  Salvar cartão
-</button>
-
-</div>
-
-<button
-  id="btnOpenPurchase"
-  class="primary"
-  style="margin-top:10px"
->
-  + Lançar compra
-</button>
-
-<div id="purchaseForm" class="card" hidden>
-
-<h2>Nova compra</h2>
-
-<label class="field">Cartão</label>
-<select id="purchaseCard"></select>
-
-<label class="field">Descrição</label>
-<input id="purchaseDescription" placeholder="Ex.: Mercado">
-
-<label class="field">Valor</label>
-<input
-  id="purchaseValue"
-  type="number"
-  step="0.01"
-  inputmode="decimal"
-  placeholder="Valor"
->
-
-<label class="field">Data da compra</label>
-<input id="purchaseDate" type="date">
-
-<button id="btnSavePurchase" class="primary">
-  Adicionar à fatura
-</button>
-
-</div>
-
-<div class="card">
-  <h2>Compras</h2>
-  <div id="purchaseList"></div>
-</div>
-
-</section>
-
-
-<!-- LANÇAMENTOS -->
-<section id="page-transactions">
-
-<h1>Novo Lançamento</h1>
-
-<div class="card">
-
-<label class="field">Tipo</label>
-<select id="transactionType">
-  <option value="expense">Despesa</option>
-  <option value="income">Receita</option>
-</select>
-
-<label class="field">Valor</label>
-<input
-  id="transactionValue"
-  type="number"
-  step="0.01"
-  inputmode="decimal"
-  placeholder="Valor"
->
-
-<label class="field">Descrição</label>
-<input
-  id="transactionDescription"
-  placeholder="Descrição"
->
-
-<label class="field">Categoria</label>
-<select id="transactionCategory">
-  <option>Moradia</option>
-  <option>Alimentação</option>
-  <option>Transporte</option>
-  <option>Cartões</option>
-  <option>Dívidas</option>
-  <option>Lazer</option>
-  <option>Saúde</option>
-  <option>Salário</option>
-  <option>Reserva</option>
-  <option>Outros</option>
-</select>
-
-<label class="field">Data</label>
-<input id="transactionDate" type="date">
-
-<button id="btnSaveTransaction" class="primary">
-  Salvar lançamento
-</button>
-
-</div>
-
-<div class="card">
-  <h2>Últimos lançamentos</h2>
-  <div id="transactionList"></div>
-</div>
-
-</section>
-
-
-<!-- AGENDA -->
-<section id="page-calendar">
-
-<h1>Agenda Financeira</h1>
-
-<div class="card">
-  <p class="muted">
-    Entradas, parcelas e vencimentos das suas dívidas.
-  </p>
-
-  <div id="calendarList"></div>
-</div>
-
-</section>
-
-
-<!-- MAIS -->
-<section id="page-more">
-
-<h1>Minha Saída</h1>
-
-<div class="card hero">
-
-<div>Você já eliminou</div>
-<div id="eliminated" class="big">R$ 0,00</div>
-
-<div id="progressText">
-  Comece cadastrando suas dívidas.
-</div>
-
-<div class="progress">
-  <div id="progressBar"></div>
-</div>
-
-</div>
-
-<div class="card">
-
-<h2>Simulador</h2>
-
-<input
-  id="simulationExtra"
-  type="number"
-  step="0.01"
-  inputmode="decimal"
-  placeholder="Valor extra para pagar"
->
-
-<button id="btnSimulate" class="primary">
-  Simular
-</button>
-
-<div id="simulationResult"></div>
-
-</div>
-
-<div class="card">
-
-<h2>Backup</h2>
-
-<p class="muted small">
-  Seus dados ficam salvos neste navegador.
-</p>
-
-<button id="btnBackup" class="primary">
-  Exportar dados
-</button>
-
-</div>
-
+<section id="page-more" class="page">
+  <div class="brand">FLUI<span>.</span></div>
+  <h1>Mais</h1>
+
+  <div class="card">
+    <h2>Seu perfil</h2>
+    <label>Seu nome</label>
+    <input id="settingsName">
+    <button id="updateName" class="secondary">Alterar nome</button>
+  </div>
+
+  <div class="card">
+    <h2>Agenda financeira</h2>
+    <div id="calendarList"></div>
+  </div>
+
+  <div class="card">
+    <h2>Simulador de dívida</h2>
+    <input id="simulationExtra" type="number" step="0.01" placeholder="Valor extra para pagar">
+    <button id="simulate" class="secondary">Simular</button>
+    <div id="simulationResult"></div>
+  </div>
+
+  <div class="card">
+    <h2>Backup</h2>
+    <p class="muted small">Seus dados ficam neste navegador. Faça backups regularmente.</p>
+    <button id="backup" class="secondary">Exportar meus dados</button>
+  </div>
 </section>
 
 </main>
 
 
-<!-- MENU -->
 <nav>
 <div class="nav">
-
-<button class="navButton active" data-page="home">
-  ⌂<br>Início
-</button>
-
-<button class="navButton" data-page="debts">
-  ▤<br>Dívidas
-</button>
-
-<button class="navButton" data-page="cards">
-  ▣<br>Cartões
-</button>
-
-<button class="navButton" data-page="transactions">
-  ＋<br>Lançar
-</button>
-
-<button class="navButton" data-page="calendar">
-  ▦<br>Agenda
-</button>
-
-<button class="navButton" data-page="more">
-  ☰<br>Mais
-</button>
-
+  <button class="navBtn active" data-page="home">⌂<br>Início</button>
+  <button class="navBtn" data-page="debts">◈<br>Dívidas</button>
+  <button class="navBtn" data-page="cards">▣<br>Cartões</button>
+  <button class="navBtn launch" data-page="launch"><strong>＋</strong><br>Lançar</button>
+  <button class="navBtn" data-page="reports">◉<br>Relatórios</button>
+  <button class="navBtn" data-page="more">☰<br>Mais</button>
 </div>
 </nav>
 
 
 <script>
-"use strict";
+document.addEventListener("DOMContentLoaded",function(){
 
-/* ==================================================
-UTILIDADES
-================================================== */
-
-function $(id){
-  return document.getElementById(id);
+function $(id){return document.getElementById(id)}
+function num(v){var n=Number(v);return isFinite(n)?n:0}
+function pad(v){return String(v).length<2?"0"+v:String(v)}
+function money(v){return new Intl.NumberFormat("pt-BR",{style:"currency",currency:"BRL"}).format(num(v))}
+function today(){var d=new Date();return d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate())}
+function monthKey(d){return d.getFullYear()+"-"+pad(d.getMonth()+1)}
+function uid(){return Date.now()+Math.floor(Math.random()*1000000)}
+function parseDate(s){if(!s)return null;var p=String(s).slice(0,10).split("-");return p.length===3?new Date(+p[0],+p[1]-1,+p[2]):null}
+function dateBR(s){var p=String(s||"").slice(0,10).split("-");return p.length===3?p[2]+"/"+p[1]+"/"+p[0]:""}
+function iso(d){return d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate())}
+function addMonths(s,n){
+  var d=parseDate(s);if(!d)return s;
+  var day=d.getDate(),x=new Date(d.getFullYear(),d.getMonth()+n,1);
+  var last=new Date(x.getFullYear(),x.getMonth()+1,0).getDate();
+  x.setDate(Math.min(day,last));return iso(x)
+}
+function norm(s){
+  s=String(s||"").toLowerCase();
+  if(s.normalize)s=s.normalize("NFD").replace(/[\u0300-\u036f]/g,"");
+  return s
+}
+function escapeHtml(s){
+  return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;")
+  .replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#039;")
 }
 
-var BRL = new Intl.NumberFormat("pt-BR",{
-  style:"currency",
-  currency:"BRL"
-});
-
-function money(value){
-  return BRL.format(Number(value) || 0);
-}
-
-function today(){
-  var d = new Date();
-
-  return [
-    d.getFullYear(),
-    String(d.getMonth()+1).padStart(2,"0"),
-    String(d.getDate()).padStart(2,"0")
-  ].join("-");
-}
-
-function dateBR(value){
-  if(!value) return "";
-
-  var p = String(value).slice(0,10).split("-");
-
-  if(p.length !== 3) return String(value);
-
-  return p[2]+"/"+p[1]+"/"+p[0];
-}
-
-function parseDate(value){
-  if(!value) return null;
-
-  var p = String(value).slice(0,10).split("-");
-
-  if(p.length !== 3) return null;
-
-  return new Date(
-    Number(p[0]),
-    Number(p[1])-1,
-    Number(p[2])
-  );
-}
-
-function dateISO(d){
-  return [
-    d.getFullYear(),
-    String(d.getMonth()+1).padStart(2,"0"),
-    String(d.getDate()).padStart(2,"0")
-  ].join("-");
-}
-
-function addMonths(value,amount){
-  var d = parseDate(value);
-
-  if(!d) return value;
-
-  var originalDay = d.getDate();
-
-  var targetMonth = d.getMonth()+amount;
-  var targetYear = d.getFullYear();
-
-  var first = new Date(
-    targetYear,
-    targetMonth,
-    1
-  );
-
-  var lastDay = new Date(
-    first.getFullYear(),
-    first.getMonth()+1,
-    0
-  ).getDate();
-
-  first.setDate(
-    Math.min(originalDay,lastDay)
-  );
-
-  return dateISO(first);
-}
-
-function safeText(value){
-  return String(value == null ? "" : value)
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
-}
-
-function sameMonth(dateValue,year,month){
-  var d = parseDate(dateValue);
-
-  if(!d) return false;
-
-  return (
-    d.getFullYear() === year &&
-    d.getMonth() === month
-  );
-}
-
-function uid(){
-  return Date.now() +
-    Math.floor(Math.random()*1000000);
-}
-
-
-/* ==================================================
-DADOS
-================================================== */
-
-var data = {};
-
+var data={};
 try{
-  var saved = localStorage.getItem("minhaSaida");
+  var raw=localStorage.getItem("minhaSaida");
+  if(raw)data=JSON.parse(raw)
+}catch(e){data={}}
 
-  data = saved ? JSON.parse(saved) : {};
-}catch(e){
-  console.error(e);
-  data = {};
-}
+if(!data||typeof data!=="object"||Array.isArray(data))data={};
+if(!Array.isArray(data.debts))data.debts=[];
+if(!Array.isArray(data.cards))data.cards=[];
+if(!Array.isArray(data.purchases))data.purchases=[];
+if(!Array.isArray(data.tx))data.tx=[];
+if(typeof data.initialDebt!=="number")data.initialDebt=0;
+if(!data.profile||typeof data.profile!=="object")data.profile={name:""};
 
-if(!Array.isArray(data.debts)) data.debts=[];
-if(!Array.isArray(data.cards)) data.cards=[];
-if(!Array.isArray(data.purchases)) data.purchases=[];
-if(!Array.isArray(data.tx)) data.tx=[];
-
-if(typeof data.initialDebt !== "number"){
-  data.initialDebt=0;
-}
-
-
-/* ==================================================
-NORMALIZAR TRANSAÇÕES ANTIGAS
-================================================== */
-
-data.tx = data.tx.map(function(t){
-
-  var type = String(t.type || "")
-    .trim()
-    .toLowerCase();
-
-  if(
-    type==="receita" ||
-    type==="entrada"
-  ){
-    type="income";
+data.tx=data.tx.map(function(t){
+  var type=norm(t.type);
+  if(type==="receita"||type==="entrada")type="income";
+  if(type==="despesa"||type==="saida")type="expense";
+  if(type!=="income"&&type!=="expense")type="expense";
+  var value=num(t.value||t.amount||t.valor);
+  return{
+    id:t.id||uid(),type:type,value:value,
+    desc:t.desc||t.description||t.descricao||"Lançamento",
+    cat:t.cat||t.category||t.categoria||"Outros",
+    date:String(t.date||t.data||"").slice(0,10),
+    debtId:t.debtId||null,scheduleId:t.scheduleId||null
   }
-
-  if(
-    type==="despesa" ||
-    type==="saída" ||
-    type==="saida"
-  ){
-    type="expense";
-  }
-
-  if(type!=="income" && type!=="expense"){
-    type="expense";
-  }
-
-  return {
-    id:t.id || uid(),
-    type:type,
-    value:Number(t.value)||0,
-    desc:t.desc || "Lançamento",
-    cat:t.cat || "Outros",
-    date:String(t.date || "").slice(0,10),
-    debtId:t.debtId || null,
-    scheduleId:t.scheduleId || null
-  };
 });
 
-
-/* ==================================================
-NORMALIZAR DÍVIDAS ANTIGAS
-================================================== */
-
-data.debts = data.debts.map(function(d){
-
-  if(Array.isArray(d.schedule)){
-    return d;
+data.debts=data.debts.map(function(d){
+  if(Array.isArray(d.schedule))return d;
+  var total=num(d.total),inst=num(d.installment||total),schedule=[];
+  if(d.date&&total>0)schedule.push({
+    id:uid(),kind:d.monthly?"installment":"single",number:1,
+    date:String(d.date).slice(0,10),value:Math.min(inst,total),paid:false,paidDate:""
+  });
+  return{
+    id:d.id||uid(),name:d.name||"Dívida",type:d.monthly?"installment":"single",
+    original:num(d.original||total),negotiated:num(d.negotiated||total),
+    total:total,rate:num(d.rate),downPayment:0,installments:1,
+    installmentValue:inst,schedule:schedule
   }
-
-  var id = d.id || uid();
-
-  var total = Number(d.total || 0);
-
-  var installment =
-    Number(d.installment || total);
-
-  var schedule=[];
-
-  if(d.date && total>0){
-
-    schedule.push({
-      id:uid(),
-      kind:"installment",
-      number:1,
-      date:d.date,
-      value:Math.min(installment,total),
-      paid:false,
-      paidDate:null
-    });
-
-  }
-
-  return {
-    id:id,
-    name:d.name || "Dívida",
-    type:d.monthly ? "installment" : "single",
-    original:Number(d.original || total),
-    negotiated:Number(d.negotiated || total),
-    total:total,
-    rate:Number(d.rate || 0),
-    downPayment:0,
-    installments:d.monthly ? null : 1,
-    installmentValue:installment,
-    schedule:schedule
-  };
 });
-
 
 function save(){
-  localStorage.setItem(
-    "minhaSaida",
-    JSON.stringify(data)
-  );
-
-  render();
+  try{localStorage.setItem("minhaSaida",JSON.stringify(data))}
+  catch(e){alert("Não consegui salvar neste navegador.")}
+  render()
 }
 
+function showPage(name){
+  var pages=document.querySelectorAll(".page"),buttons=document.querySelectorAll(".navBtn"),i;
+  for(i=0;i<pages.length;i++)pages[i].classList.remove("active");
+  for(i=0;i<buttons.length;i++)buttons[i].classList.remove("active");
+  var p=$("page-"+name);if(p)p.classList.add("active");
+  for(i=0;i<buttons.length;i++)if(buttons[i].getAttribute("data-page")===name)buttons[i].classList.add("active");
+  window.scrollTo(0,0)
+}
 
-/* ==================================================
-MENU
-================================================== */
+var nav=document.querySelectorAll(".navBtn");
+for(var ni=0;ni<nav.length;ni++)nav[ni].addEventListener("click",function(){showPage(this.getAttribute("data-page"))});
+$("goReports").addEventListener("click",function(){showPage("reports")});
 
-document.querySelectorAll(".navButton")
-.forEach(function(button){
+function profile(){
+  var name=String(data.profile.name||"").trim();
+  $("helloName").textContent=name?"Olá, "+name+" 👋":"Olá 👋";
+  $("settingsName").value=name;
+  $("welcome").hidden=!!name
+}
+$("saveProfile").addEventListener("click",function(){
+  var name=$("profileName").value.trim();if(!name){alert("Digite seu nome.");return}
+  data.profile.name=name;save();$("welcome").hidden=true
+});
+$("updateName").addEventListener("click",function(){
+  var name=$("settingsName").value.trim();if(!name){alert("Digite seu nome.");return}
+  data.profile.name=name;save();alert("Nome atualizado.")
+});
 
-  button.addEventListener("click",function(){
-
-    var page = button.getAttribute("data-page");
-
-    document.querySelectorAll("main section")
-    .forEach(function(section){
-      section.classList.remove("active");
-    });
-
-    var target = $("page-"+page);
-
-    if(target){
-      target.classList.add("active");
-    }
-
-    document.querySelectorAll(".navButton")
-    .forEach(function(btn){
-      btn.classList.remove("active");
-    });
-
-    button.classList.add("active");
-
-    window.scrollTo(0,0);
+function events(){
+  var out=[];
+  data.debts.forEach(function(d){
+    (d.schedule||[]).forEach(function(s){
+      var label=s.kind==="down"?"Entrada":s.kind==="single"?"Pagamento único":"Parcela "+s.number+"/"+(d.installments||"?");
+      out.push({id:s.id,debtId:d.id,name:d.name,date:s.date,value:num(s.value),paid:!!s.paid,paidDate:s.paidDate||"",label:label})
+    })
   });
+  return out
+}
+function debtMonth(key){
+  return events().reduce(function(sum,e){return sum+(!e.paid&&String(e.date).slice(0,7)===key?e.value:0)},0)
+}
+function cardMonth(key){
+  var total=0;
+  data.purchases.forEach(function(p){
+    var c=data.cards.find(function(x){return x.id===p.cardId}),d=parseDate(p.date);
+    if(!c||!d)return;
+    var m=d.getMonth(),y=d.getFullYear();
+    if(c.close&&d.getDate()>num(c.close)){m++;if(m>11){m=0;y++}}
+    if(y+"-"+pad(m+1)===key)total+=num(p.value)
+  });
+  return total
+}
+function stats(key){
+  var r={income:0,expense:0,debtPaid:0,debtPayments:0,categories:{}};
+  data.tx.forEach(function(t){
+    if(String(t.date).slice(0,7)!==key)return;
+    if(t.type==="income")r.income+=num(t.value);
+    else{
+      r.expense+=num(t.value);
+      var c=t.cat||"Outros";r.categories[c]=(r.categories[c]||0)+num(t.value);
+      if(c==="Dívidas"||t.debtId){r.debtPaid+=num(t.value);r.debtPayments++}
+    }
+  });
+  r.result=r.income-r.expense;return r
+}
+function cardTotal(id){
+  return data.purchases.reduce(function(s,p){return s+(p.cardId===id?num(p.value):0)},0)
+}
 
-});
-
-
-/* ==================================================
-ABRIR FORMULÁRIOS
-================================================== */
-
-$("btnOpenDebt").addEventListener("click",function(){
-  $("debtForm").hidden = !$("debtForm").hidden;
-});
-
-$("btnOpenCard").addEventListener("click",function(){
-  $("cardForm").hidden = !$("cardForm").hidden;
-});
-
-$("btnOpenPurchase").addEventListener("click",function(){
-
-  if(data.cards.length===0){
-    alert("Cadastre um cartão primeiro.");
-    return;
-  }
-
-  fillCardSelect();
-  $("purchaseForm").hidden=false;
-  $("purchaseDate").value=today();
-});
-
-
-/* ==================================================
-TIPO DE DÍVIDA
-================================================== */
-
+$("openDebt").addEventListener("click",function(){$("debtForm").hidden=!$("debtForm").hidden});
 $("debtType").addEventListener("change",function(){
-
-  var installment =
-    $("debtType").value==="installment";
-
-  $("installmentFields").hidden=!installment;
-  $("singleFields").hidden=installment;
+  var x=this.value==="installment";$("installmentFields").hidden=!x;$("singleFields").hidden=x
 });
-
-
-/* ==================================================
-SALVAR DÍVIDA
-================================================== */
-
-$("btnSaveDebt").addEventListener("click",function(){
-
-  var name = $("debtName").value.trim();
-  var type = $("debtType").value;
-
-  var original =
-    Number($("debtOriginal").value)||0;
-
-  var negotiated =
-    Number($("debtNegotiated").value)||0;
-
-  var rate =
-    Number($("debtRate").value)||0;
-
-  if(!name){
-    alert("Informe o nome ou credor.");
-    return;
-  }
-
-  if(original<=0){
-    alert("Informe o valor original da dívida.");
-    return;
-  }
-
-  if(negotiated<=0){
-    negotiated=original;
-  }
-
-  var debtId=uid();
-  var schedule=[];
-  var remaining=negotiated;
-
-  var downPayment=0;
-  var installmentCount=1;
-  var installmentValue=negotiated;
-
-
+$("saveDebt").addEventListener("click",function(){
+  var name=$("debtName").value.trim(),type=$("debtType").value;
+  var original=num($("debtOriginal").value),neg=num($("debtNegotiated").value)||original;
+  if(!name||original<=0){alert("Informe o credor e o valor original.");return}
+  var schedule=[],down=0,count=1,inst=neg;
   if(type==="installment"){
-
-    downPayment =
-      Number($("debtDownPayment").value)||0;
-
-    var downDate =
-      $("debtDownDate").value;
-
-    installmentCount =
-      parseInt($("debtInstallments").value,10)||0;
-
-    installmentValue =
-      Number($("debtInstallmentValue").value)||0;
-
-    var firstDue =
-      $("debtFirstDue").value;
-
-
-    if(downPayment>0 && !downDate){
-      alert("Informe a data da entrada.");
-      return;
-    }
-
-    if(installmentCount<=0){
-      alert("Informe a quantidade de parcelas.");
-      return;
-    }
-
-    if(installmentValue<=0){
-      alert("Informe o valor de cada parcela.");
-      return;
-    }
-
-    if(!firstDue){
-      alert("Informe o primeiro vencimento.");
-      return;
-    }
-
-
-    if(downPayment>0){
-
-      schedule.push({
-        id:uid(),
-        kind:"down",
-        number:0,
-        date:downDate,
-        value:downPayment,
-        paid:false,
-        paidDate:null
-      });
-
-    }
-
-
-    for(var i=0;i<installmentCount;i++){
-
-      schedule.push({
-        id:uid(),
-        kind:"installment",
-        number:i+1,
-        date:addMonths(firstDue,i),
-        value:installmentValue,
-        paid:false,
-        paidDate:null
-      });
-
-    }
-
+    down=num($("debtDown").value);var downDate=$("debtDownDate").value;
+    count=parseInt($("debtInstallments").value,10)||0;inst=num($("debtInstallmentValue").value);
+    var first=$("debtFirstDue").value;
+    if(down>0&&!downDate){alert("Informe a data da entrada.");return}
+    if(count<1||inst<=0||!first){alert("Informe parcelas, valor e primeiro vencimento.");return}
+    if(down>0)schedule.push({id:uid(),kind:"down",number:0,date:downDate,value:down,paid:false,paidDate:""});
+    for(var i=0;i<count;i++)schedule.push({id:uid(),kind:"installment",number:i+1,date:addMonths(first,i),value:inst,paid:false,paidDate:""})
   }else{
-
-    var singleDue =
-      $("debtSingleDue").value;
-
-    if(!singleDue){
-      alert("Informe a data do vencimento.");
-      return;
-    }
-
-    schedule.push({
-      id:uid(),
-      kind:"single",
-      number:1,
-      date:singleDue,
-      value:negotiated,
-      paid:false,
-      paidDate:null
-    });
-
+    var due=$("debtSingleDue").value;if(!due){alert("Informe o vencimento.");return}
+    schedule.push({id:uid(),kind:"single",number:1,date:due,value:neg,paid:false,paidDate:""})
   }
-
-
-  var scheduledTotal =
-    schedule.reduce(function(sum,item){
-      return sum + Number(item.value||0);
-    },0);
-
-
-  /*
-  O saldo negociado será usado como saldo inicial.
-  Caso entrada + parcelas sejam diferentes do valor
-  informado, usamos o total efetivamente programado.
-  */
-
-  if(
-    type==="installment" &&
-    scheduledTotal>0 &&
-    Math.abs(scheduledTotal-negotiated)>0.01
-  ){
-    negotiated=scheduledTotal;
-  }
-
-
-  remaining=negotiated;
-
-
-  data.debts.push({
-    id:debtId,
-    name:name,
-    type:type,
-    original:original,
-    negotiated:negotiated,
-    total:remaining,
-    rate:rate,
-    downPayment:downPayment,
-    installments:installmentCount,
-    installmentValue:installmentValue,
-    schedule:schedule
-  });
-
-
-  data.initialDebt += negotiated;
-
-
-  clearDebtForm();
-
-  $("debtForm").hidden=true;
-
-  save();
-
+  var total=schedule.reduce(function(s,x){return s+num(x.value)},0);
+  data.debts.push({id:uid(),name:name,type:type,original:original,negotiated:total||neg,total:total||neg,
+    rate:num($("debtRate").value),downPayment:down,installments:count,installmentValue:inst,schedule:schedule});
+  data.initialDebt+=total||neg;
+  ["debtName","debtOriginal","debtNegotiated","debtDown","debtDownDate","debtInstallments","debtInstallmentValue","debtFirstDue","debtSingleDue","debtRate"]
+  .forEach(function(id){$(id).value=""});
+  $("debtForm").hidden=true;save()
 });
-
-
-function clearDebtForm(){
-
-  $("debtName").value="";
-  $("debtType").value="installment";
-  $("debtOriginal").value="";
-  $("debtNegotiated").value="";
-  $("debtDownPayment").value="";
-  $("debtDownDate").value="";
-  $("debtInstallments").value="";
-  $("debtInstallmentValue").value="";
-  $("debtFirstDue").value="";
-  $("debtSingleDue").value="";
-  $("debtRate").value="";
-
-  $("installmentFields").hidden=false;
-  $("singleFields").hidden=true;
-}
-
-
-/* ==================================================
-EXCLUIR DÍVIDA
-================================================== */
 
 function deleteDebt(id){
-
-  if(!confirm("Excluir esta dívida?")){
-    return;
-  }
-
-  data.debts =
-    data.debts.filter(function(d){
-      return d.id!==id;
-    });
-
-  save();
+  if(!confirm("Excluir esta dívida?"))return;
+  data.debts=data.debts.filter(function(d){return d.id!==id});save()
 }
-
-
-/* ==================================================
-PAGAR ITEM DA AGENDA
-================================================== */
-
 function paySchedule(debtId,scheduleId){
-
-  var debt =
-    data.debts.find(function(d){
-      return d.id===debtId;
-    });
-
-  if(!debt) return;
-
-  var item =
-    debt.schedule.find(function(s){
-      return s.id===scheduleId;
-    });
-
-  if(!item || item.paid) return;
-
-
-  var label="Pagamento";
-
-  if(item.kind==="down"){
-    label="Entrada";
-  }
-
-  if(item.kind==="installment"){
-    label="Parcela "+item.number+"/"+debt.installments;
-  }
-
-  if(item.kind==="single"){
-    label="Pagamento único";
-  }
-
-
-  if(
-    !confirm(
-      "Confirmar "+label+
-      " de "+money(item.value)+
-      " para "+debt.name+"?"
-    )
-  ){
-    return;
-  }
-
-
-  item.paid=true;
-  item.paidDate=today();
-
-
-  debt.total=Math.max(
-    0,
-    Number(debt.total||0)-
-    Number(item.value||0)
-  );
-
-
-  data.tx.push({
-    id:uid(),
-    type:"expense",
-    value:Number(item.value||0),
-    desc:label+" - "+debt.name,
-    cat:"Dívidas",
-    date:today(),
-    debtId:debt.id,
-    scheduleId:item.id
-  });
-
-
-  save();
-
-
-  if(debt.total<=0.01){
-    alert(
-      "Parabéns! 🎉\n\n"+
-      debt.name+
-      " foi quitada."
-    );
-  }else{
-    alert(
-      "Pagamento registrado! ✅\n\n"+
-      "Saldo restante: "+
-      money(debt.total)
-    );
-  }
-
+  var d=data.debts.find(function(x){return x.id===debtId});if(!d)return;
+  var s=(d.schedule||[]).find(function(x){return x.id===scheduleId});if(!s||s.paid)return;
+  if(!confirm("Registrar pagamento de "+money(s.value)+" para "+d.name+"?"))return;
+  s.paid=true;s.paidDate=today();d.total=Math.max(0,num(d.total)-num(s.value));
+  data.tx.push({id:uid(),type:"expense",value:num(s.value),desc:"Pagamento - "+d.name,cat:"Dívidas",date:today(),debtId:d.id,scheduleId:s.id});
+  save()
 }
 
-
-/* ==================================================
-CARTÕES
-================================================== */
-
-$("btnSaveCard").addEventListener("click",function(){
-
-  var name=$("cardName").value.trim();
-
-  if(!name){
-    alert("Informe o nome do cartão.");
-    return;
-  }
-
-  data.cards.push({
-    id:uid(),
-    name:name,
-    limit:Number($("cardLimit").value)||0,
-    close:Number($("cardClose").value)||0,
-    due:Number($("cardDue").value)||0
-  });
-
-  $("cardName").value="";
-  $("cardLimit").value="";
-  $("cardClose").value="";
-  $("cardDue").value="";
-
-  $("cardForm").hidden=true;
-
-  save();
+$("openCard").addEventListener("click",function(){$("cardForm").hidden=!$("cardForm").hidden});
+$("saveCard").addEventListener("click",function(){
+  var name=$("cardName").value.trim();if(!name){alert("Informe o nome.");return}
+  data.cards.push({id:uid(),name:name,limit:num($("cardLimit").value),close:num($("cardClose").value),due:num($("cardDue").value)});
+  ["cardName","cardLimit","cardClose","cardDue"].forEach(function(id){$(id).value=""});
+  $("cardForm").hidden=true;save()
 });
-
-
 function deleteCard(id){
-
-  if(!confirm("Excluir cartão e suas compras?")){
-    return;
-  }
-
-  data.cards=data.cards.filter(function(c){
-    return c.id!==id;
-  });
-
-  data.purchases=data.purchases.filter(function(p){
-    return p.cardId!==id;
-  });
-
-  save();
+  if(!confirm("Excluir cartão e compras?"))return;
+  data.cards=data.cards.filter(function(c){return c.id!==id});
+  data.purchases=data.purchases.filter(function(p){return p.cardId!==id});save()
 }
-
-
-function cardTotal(id){
-
-  return data.purchases
-  .filter(function(p){
-    return p.cardId===id;
-  })
-  .reduce(function(sum,p){
-    return sum+Number(p.value||0);
-  },0);
+function fillCards(){
+  $("purchaseCard").innerHTML="";
+  data.cards.forEach(function(c){var o=document.createElement("option");o.value=c.id;o.textContent=c.name;$("purchaseCard").appendChild(o)})
 }
-
-
-function fillCardSelect(){
-
-  var select=$("purchaseCard");
-
-  select.innerHTML="";
-
-  data.cards.forEach(function(card){
-
-    var option=document.createElement("option");
-
-    option.value=String(card.id);
-    option.textContent=card.name;
-
-    select.appendChild(option);
-  });
-}
-
-
-/* ==================================================
-COMPRAS NO CARTÃO
-================================================== */
-
-$("btnSavePurchase").addEventListener("click",function(){
-
-  var cardId=Number($("purchaseCard").value);
-
-  var value=
-    Number($("purchaseValue").value)||0;
-
-  if(!cardId){
-    alert("Escolha o cartão.");
-    return;
-  }
-
-  if(value<=0){
-    alert("Informe o valor da compra.");
-    return;
-  }
-
-  data.purchases.push({
-    id:uid(),
-    cardId:cardId,
-    desc:$("purchaseDescription").value.trim() || "Compra",
-    value:value,
-    date:$("purchaseDate").value || today()
-  });
-
-  $("purchaseDescription").value="";
-  $("purchaseValue").value="";
-  $("purchaseDate").value=today();
-
-  save();
+$("openPurchase").addEventListener("click",function(){
+  if(!data.cards.length){alert("Cadastre um cartão primeiro.");return}
+  fillCards();$("purchaseForm").hidden=false;$("purchaseDate").value=today()
 });
-
-
+$("savePurchase").addEventListener("click",function(){
+  var cardId=num($("purchaseCard").value),value=num($("purchaseValue").value);
+  if(!cardId||value<=0){alert("Informe cartão e valor.");return}
+  data.purchases.push({id:uid(),cardId:cardId,desc:$("purchaseDesc").value.trim()||"Compra",value:value,date:$("purchaseDate").value||today()});
+  $("purchaseDesc").value="";$("purchaseValue").value="";save()
+});
 function deletePurchase(id){
-
-  if(!confirm("Excluir esta compra?")){
-    return;
-  }
-
-  data.purchases=data.purchases.filter(function(p){
-    return p.id!==id;
-  });
-
-  save();
+  if(!confirm("Excluir compra?"))return;
+  data.purchases=data.purchases.filter(function(p){return p.id!==id});save()
 }
 
-
-/* ==================================================
-RECEITAS / DESPESAS
-================================================== */
-
-$("btnSaveTransaction").addEventListener("click",function(){
-
-  var type=$("transactionType").value;
-
-  var value=
-    Number($("transactionValue").value)||0;
-
-  if(value<=0){
-    alert("Informe um valor válido.");
-    return;
-  }
-
-  data.tx.push({
-    id:uid(),
-    type:type==="income" ? "income" : "expense",
-    value:value,
-    desc:$("transactionDescription").value.trim() || "Lançamento",
-    cat:$("transactionCategory").value,
-    date:$("transactionDate").value || today(),
-    debtId:null,
-    scheduleId:null
-  });
-
-  $("transactionValue").value="";
-  $("transactionDescription").value="";
-
-  save();
+$("saveTx").addEventListener("click",function(){
+  var value=num($("txValue").value);if(value<=0){alert("Informe o valor.");return}
+  data.tx.push({id:uid(),type:$("txType").value,value:value,desc:$("txDesc").value.trim()||"Lançamento",
+    cat:$("txCategory").value,date:$("txDate").value||today(),debtId:null,scheduleId:null});
+  $("txValue").value="";$("txDesc").value="";save()
 });
-
-
-function deleteTransaction(id){
-
-  var tx=data.tx.find(function(t){
-    return t.id===id;
-  });
-
-  if(!tx) return;
-
-
-  if(tx.scheduleId){
-
-    alert(
-      "Este lançamento foi criado pelo pagamento de uma dívida.\n\n"+
-      "Para manter a dívida e a agenda sincronizadas, ele não pode ser apagado por aqui."
-    );
-
-    return;
-  }
-
-
-  if(!confirm("Excluir lançamento?")){
-    return;
-  }
-
-  data.tx=data.tx.filter(function(t){
-    return t.id!==id;
-  });
-
-  save();
+function deleteTx(id){
+  var t=data.tx.find(function(x){return x.id===id});
+  if(t&&t.scheduleId){alert("Este lançamento está ligado a uma dívida.");return}
+  if(!confirm("Excluir lançamento?"))return;
+  data.tx=data.tx.filter(function(x){return x.id!==id});save()
 }
 
+function extractValue(text){
+  var m=String(text).match(/\d{1,3}(?:\.\d{3})*(?:,\d{1,2})?|\d+(?:[.,]\d{1,2})?/);
+  if(!m)return 0;var s=m[0];
+  if(s.indexOf(",")>=0)s=s.replace(/\./g,"").replace(",",".");
+  else if(/^\d{1,3}(\.\d{3})+$/.test(s))s=s.replace(/\./g,"");
+  return num(s)
+}
+function classify(text,type){
+  var t=norm(text),groups=[
+    ["Moradia",["aluguel","condominio","luz","energia","agua","internet"]],
+    ["Alimentação",["mercado","supermercado","comida","almoco","jantar","lanche","restaurante","ifood","padaria"]],
+    ["Combustível",["gasolina","etanol","combustivel","posto"]],
+    ["Transporte",["uber","taxi","onibus","pedagio","estacionamento"]],
+    ["Farmácia/Saúde",["farmacia","remedio","medico","consulta","dentista","exame"]],
+    ["Lazer",["cerveja","chopp","bar","festa","show","cinema","netflix","spotify"]],
+    ["Dívidas",["divida","parcela","acordo","emprestimo","financiamento"]],
+    ["Cartões",["fatura","cartao"]]
+  ];
+  if(type==="income"){
+    if(t.indexOf("salario")>=0)return"Salário";
+    if(t.indexOf("show")>=0||t.indexOf("bico")>=0||t.indexOf("freela")>=0||t.indexOf("vendi")>=0)return"Renda extra";
+    return"Renda extra"
+  }
+  for(var i=0;i<groups.length;i++)for(var j=0;j<groups[i][1].length;j++)if(t.indexOf(groups[i][1][j])>=0)return groups[i][0];
+  return"Outros"
+}
+function interpret(text){
+  var t=norm(text),incomeWords=["recebi","ganhei","vendi","entrou","caiu","depositaram"];
+  var type="expense";
+  for(var i=0;i<incomeWords.length;i++)if(t.indexOf(incomeWords[i])>=0){type="income";break}
+  var value=extractValue(text);if(value<=0)return null;
+  var cat=classify(text,type);
+  var desc=String(text).replace(/r?\$?\s*\d{1,3}(?:\.\d{3})*(?:,\d{1,2})?|r?\$?\s*\d+(?:[.,]\d{1,2})?/i,"")
+    .replace(/\b(reais|real)\b/gi,"").replace(/\s+/g," ").trim();
+  desc=desc.replace(/^(paguei|comprei|gastei|recebi|ganhei|vendi)\s*/i,"").trim();
+  if(!desc)desc=cat;
+  var debt=null,schedule=null;
+  if(type==="expense"){
+    for(var d=0;d<data.debts.length;d++)if(t.indexOf(norm(data.debts[d].name))>=0){debt=data.debts[d];break}
+    if(debt){
+      var pending=(debt.schedule||[]).filter(function(s){return !s.paid});
+      schedule=pending.find(function(s){return Math.abs(num(s.value)-value)<.02})||pending[0]||null;
+      cat="Dívidas"
+    }
+  }
+  return{type:type,value:value,cat:cat,desc:desc,date:today(),debt:debt,schedule:schedule}
+}
 
-/* ==================================================
-RENDER DÍVIDAS
-================================================== */
+var pendingQuick=null;
+function previewQuick(text,boxId){
+  var q=interpret(text),box=$(boxId);
+  if(!q){alert("Não consegui identificar o valor. Ex.: “paguei 80 de gasolina”.");return}
+  pendingQuick=q;
+  box.hidden=false;
+  box.innerHTML=
+    '<div class="preview-title">Entendi assim</div>'+
+    '<div class="row" style="margin-top:8px"><b style="color:'+(q.type==="income"?"#5cf29b":"#ff7070")+'">'+
+    (q.type==="income"?"Receita":"Despesa")+'</b><b>'+money(q.value)+'</b></div>'+
+    '<div class="muted small" style="margin-top:5px">'+escapeHtml(q.cat)+' · '+escapeHtml(q.desc)+'</div>'+
+    (q.debt&&q.schedule?'<div class="notice">Encontrei uma parcela de <b>'+escapeHtml(q.debt.name)+'</b>. Ao confirmar, ela será baixada na dívida.</div>':'')+
+    '<button class="primary confirmQuick" style="margin-top:12px">✓ Confirmar</button>'+
+    '<button class="secondary cancelQuick" style="margin-top:7px">Cancelar</button>';
+  box.querySelector(".confirmQuick").addEventListener("click",confirmQuick);
+  box.querySelector(".cancelQuick").addEventListener("click",function(){pendingQuick=null;box.hidden=true})
+}
+function confirmQuick(){
+  var q=pendingQuick;if(!q)return;
+  if(q.debt&&q.schedule){
+    q.schedule.paid=true;q.schedule.paidDate=today();
+    q.debt.total=Math.max(0,num(q.debt.total)-num(q.schedule.value));
+    data.tx.push({id:uid(),type:"expense",value:num(q.schedule.value),desc:"Pagamento - "+q.debt.name,cat:"Dívidas",
+      date:today(),debtId:q.debt.id,scheduleId:q.schedule.id})
+  }else{
+    data.tx.push({id:uid(),type:q.type,value:q.value,desc:q.desc,cat:q.cat,date:q.date,debtId:null,scheduleId:null})
+  }
+  pendingQuick=null;$("quickText").value="";$("homeQuick").value="";$("quickPreview").hidden=true;$("homePreview").hidden=true;
+  save()
+}
+$("interpretQuick").addEventListener("click",function(){previewQuick($("quickText").value,"quickPreview")});
+$("homeInterpret").addEventListener("click",function(){previewQuick($("homeQuick").value,"homePreview")});
+
+function setupVoice(buttonId,inputId,statusId){
+  var SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+  var btn=$(buttonId);
+  if(!SR){
+    btn.addEventListener("click",function(){
+      alert("O reconhecimento de voz não está disponível neste navegador. Digite a frase no campo logo abaixo.")
+    });
+    return
+  }
+  var rec=new SR();rec.lang="pt-BR";rec.interimResults=false;rec.maxAlternatives=1;
+  btn.addEventListener("click",function(){
+    try{rec.start();btn.classList.add("listening");if(statusId)$(statusId).textContent="Ouvindo... fale agora."}catch(e){}
+  });
+  rec.onresult=function(e){
+    var text=e.results[0][0].transcript;$(inputId).value=text;
+    btn.classList.remove("listening");if(statusId)$(statusId).textContent='Ouvi: “'+text+'”';
+    previewQuick(text,inputId==="homeQuick"?"homePreview":"quickPreview")
+  };
+  rec.onerror=function(){btn.classList.remove("listening");if(statusId)$(statusId).textContent="Não consegui ouvir. Tente novamente ou digite."};
+  rec.onend=function(){btn.classList.remove("listening")}
+}
+setupVoice("homeMic","homeQuick",null);
+setupVoice("launchMic","quickText","voiceStatus");
 
 function renderDebts(){
-
-  var total=data.debts.reduce(function(sum,d){
-    return sum+Number(d.total||0);
-  },0);
-
-  $("debtTotal").textContent=money(total);
-
-  $("debtCount").textContent=
-    data.debts.length+
-    (data.debts.length===1 ? " dívida" : " dívidas");
-
-  var list=$("debtList");
-
-  list.innerHTML="";
-
-
-  if(data.debts.length===0){
-
-    list.innerHTML=
-      '<div class="empty">Nenhuma dívida cadastrada.</div>';
-
-    return;
-  }
-
-
+  var total=data.debts.reduce(function(s,d){return s+num(d.total)},0);
+  var active=data.debts.filter(function(d){return num(d.total)>.01}).length;
+  $("debtTotal").textContent=money(total);$("debtCount").textContent=active+" ativas";
+  var eliminated=Math.max(0,num(data.initialDebt)-total);
+  var pct=data.initialDebt>0?Math.min(100,eliminated/data.initialDebt*100):0;
+  $("debtProgress").style.width=pct+"%";
+  $("debtProgressText").textContent=data.initialDebt>0?pct.toFixed(1)+"% do total cadastrado já eliminado.":"Comece cadastrando suas dívidas.";
+  var box=$("debtList");box.innerHTML="";
+  if(!data.debts.length){box.innerHTML='<div class="card empty">Nenhuma dívida cadastrada.</div>';return}
   data.debts.forEach(function(d){
-
-    var item=document.createElement("div");
-    item.className="item";
-
-    var top=document.createElement("div");
-    top.className="row-start";
-
-    var left=document.createElement("div");
-
-    var title=document.createElement("h3");
-    title.textContent=d.name;
-
-    var type=document.createElement("div");
-    type.className="muted small";
-
-    type.textContent=
-      d.type==="installment"
-      ? "Acordo / parcelamento"
-      : "Pagamento único";
-
-    left.appendChild(title);
-    left.appendChild(type);
-
-
-    var del=document.createElement("button");
-    del.className="delete";
-    del.type="button";
-    del.textContent="×";
-
-    del.addEventListener("click",function(){
-      deleteDebt(d.id);
-    });
-
-
-    top.appendChild(left);
-    top.appendChild(del);
-
-    item.appendChild(top);
-
-
-    var amount=document.createElement("div");
-    amount.className="big";
-    amount.style.fontSize="25px";
-    amount.textContent=money(d.total);
-
-    item.appendChild(amount);
-
-
-    var label=document.createElement("div");
-    label.className="muted small";
-    label.textContent="Saldo restante";
-
-    item.appendChild(label);
-
-
-    var summary=document.createElement("div");
-    summary.className="debt-summary";
-
-    summary.innerHTML=
-      "<div><span>Original</span><b>"+
-      money(d.original)+
-      "</b></div>"+
-      "<div><span>Negociado</span><b>"+
-      money(d.negotiated)+
-      "</b></div>";
-
-    if(d.type==="installment"){
-
-      summary.innerHTML+=
-        "<div><span>Entrada</span><b>"+
-        money(d.downPayment)+
-        "</b></div>"+
-        "<div><span>Parcelas</span><b>"+
-        (d.installments || "—")+
-        " × "+
-        money(d.installmentValue)+
-        "</b></div>";
-    }
-
-    item.appendChild(summary);
-
-
-    var paidCount=0;
-    var totalCount=0;
-
-    if(Array.isArray(d.schedule)){
-
-      d.schedule.forEach(function(s){
-
-        if(s.kind!=="down"){
-          totalCount++;
-          if(s.paid) paidCount++;
-        }
-
-      });
-    }
-
-
-    if(totalCount>0){
-
-      var progress=document.createElement("div");
-      progress.className="muted small";
-      progress.style.marginTop="10px";
-
-      progress.textContent=
-        paidCount+
-        " de "+
-        totalCount+
-        " parcelas/pagamentos quitados";
-
-      item.appendChild(progress);
-    }
-
-
-    list.appendChild(item);
-  });
-
+    var paid=(d.schedule||[]).filter(function(s){return s.paid}).length,totalItems=(d.schedule||[]).length;
+    var next=(d.schedule||[]).filter(function(s){return !s.paid}).sort(function(a,b){return String(a.date).localeCompare(String(b.date))})[0];
+    var el=document.createElement("div");el.className="card";
+    el.innerHTML='<div class="row-start"><div><h3>'+escapeHtml(d.name)+'</h3><div class="muted small">'+
+      (num(d.total)<=.01?"Quitada ✓":d.type==="installment"?"Acordo em andamento":"Pagamento único")+
+      '</div></div><button class="icon-btn">×</button></div>'+
+      '<div style="font-size:26px;font-weight:900;margin-top:11px">'+money(d.total)+'</div>'+
+      '<div class="muted small">restantes</div>'+
+      '<div class="progress"><div style="width:'+(totalItems?paid/totalItems*100:0)+'%"></div></div>'+
+      '<div class="small muted" style="margin-top:7px">'+paid+' de '+totalItems+' pagamentos concluídos</div>'+
+      (next?'<div class="notice">Próximo: <b>'+money(next.value)+'</b> · '+dateBR(next.date)+'</div>':'');
+    el.querySelector(".icon-btn").addEventListener("click",function(){deleteDebt(d.id)});
+    box.appendChild(el)
+  })
 }
-
-
-/* ==================================================
-RENDER CARTÕES
-================================================== */
 
 function renderCards(){
-
-  $("cardCount").textContent=
-    data.cards.length+
-    (data.cards.length===1 ? " cartão" : " cartões");
-
-  var list=$("cardList");
-  list.innerHTML="";
-
-  if(data.cards.length===0){
-
-    list.innerHTML=
-      '<div class="card empty">Nenhum cartão cadastrado.</div>';
-  }
-
-
-  data.cards.forEach(function(card){
-
-    var total=cardTotal(card.id);
-
-    var box=document.createElement("div");
-    box.className="card";
-
-    var top=document.createElement("div");
-    top.className="row";
-
-    var title=document.createElement("h2");
-    title.textContent=card.name;
-
-    var del=document.createElement("button");
-    del.className="delete";
-    del.type="button";
-    del.textContent="×";
-
-    del.addEventListener("click",function(){
-      deleteCard(card.id);
-    });
-
-    top.appendChild(title);
-    top.appendChild(del);
-
-    box.appendChild(top);
-
-
-    var totalLabel=document.createElement("div");
-    totalLabel.className="muted";
-    totalLabel.textContent="Total lançado";
-
-    box.appendChild(totalLabel);
-
-
-    var amount=document.createElement("div");
-    amount.className="big";
-    amount.textContent=money(total);
-
-    box.appendChild(amount);
-
-
-    var detail=document.createElement("div");
-    detail.className="muted small";
-
-    detail.innerHTML=
-      "Limite: "+money(card.limit)+
-      " · Disponível: "+
-      money(
-        Math.max(
-          0,
-          Number(card.limit||0)-total
-        )
-      )+
-      "<br>Fecha dia "+
-      (card.close||"—")+
-      " · Vence dia "+
-      (card.due||"—");
-
-    box.appendChild(detail);
-
-    list.appendChild(box);
+  var box=$("cardList");box.innerHTML="";
+  if(!data.cards.length)box.innerHTML='<div class="card empty">Nenhum cartão cadastrado.</div>';
+  data.cards.forEach(function(c){
+    var total=cardTotal(c.id),el=document.createElement("div");el.className="card";
+    el.innerHTML='<div class="row-start"><div><h3>'+escapeHtml(c.name)+'</h3><div class="muted small">Fecha dia '+(c.close||"—")+' · vence dia '+(c.due||"—")+
+      '</div></div><button class="icon-btn">×</button></div>'+
+      '<div style="font-size:26px;font-weight:900;margin-top:11px">'+money(total)+'</div><div class="muted small">compras lançadas</div>'+
+      '<div class="grid2" style="margin-top:11px"><div class="mini"><span>Limite</span><b>'+money(c.limit)+'</b></div>'+
+      '<div class="mini"><span>Disponível</span><b>'+money(Math.max(0,num(c.limit)-total))+'</b></div></div>';
+    el.querySelector(".icon-btn").addEventListener("click",function(){deleteCard(c.id)});box.appendChild(el)
   });
-
-  fillCardSelect();
+  fillCards()
 }
-
-
-/* ==================================================
-RENDER COMPRAS
-================================================== */
 
 function renderPurchases(){
-
-  var list=$("purchaseList");
-  list.innerHTML="";
-
-  if(data.purchases.length===0){
-
-    list.innerHTML=
-      '<div class="empty">Nenhuma compra lançada.</div>';
-
-    return;
-  }
-
-
-  data.purchases
-  .slice()
-  .reverse()
-  .forEach(function(p){
-
-    var card=data.cards.find(function(c){
-      return c.id===p.cardId;
-    });
-
-    var item=document.createElement("div");
-    item.className="item row";
-
-    var left=document.createElement("div");
-
-    var title=document.createElement("b");
-    title.textContent=p.desc;
-
-    var detail=document.createElement("div");
-    detail.className="muted small";
-    detail.textContent=
-      (card ? card.name : "Cartão")+
-      " · "+
-      dateBR(p.date);
-
-    left.appendChild(title);
-    left.appendChild(detail);
-
-
-    var right=document.createElement("div");
-    right.style.textAlign="right";
-
-    var amount=document.createElement("b");
-    amount.textContent=money(p.value);
-
-    var del=document.createElement("button");
-    del.className="delete";
-    del.type="button";
-    del.textContent="×";
-
-    del.addEventListener("click",function(){
-      deletePurchase(p.id);
-    });
-
-    right.appendChild(amount);
-    right.appendChild(del);
-
-    item.appendChild(left);
-    item.appendChild(right);
-
-    list.appendChild(item);
-  });
-
-}
-
-
-/* ==================================================
-RENDER TRANSAÇÕES
-================================================== */
-
-function renderTransactions(){
-
-  var list=$("transactionList");
-  list.innerHTML="";
-
-  if(data.tx.length===0){
-
-    list.innerHTML=
-      '<div class="empty">Nenhum lançamento.</div>';
-
-    return;
-  }
-
-
-  data.tx
-  .slice()
-  .sort(function(a,b){
-    return String(b.date).localeCompare(String(a.date));
+  var box=$("purchaseList");box.innerHTML="";
+  if(!data.purchases.length){box.innerHTML='<div class="empty">Nenhuma compra.</div>';return}
+  data.purchases.slice().reverse().forEach(function(p){
+    var c=data.cards.find(function(x){return x.id===p.cardId}),el=document.createElement("div");el.className="item row";
+    el.innerHTML='<div><b>'+escapeHtml(p.desc)+'</b><div class="muted small">'+escapeHtml(c?c.name:"Cartão")+' · '+dateBR(p.date)+'</div></div>'+
+      '<div style="text-align:right"><b>'+money(p.value)+'</b><br><button class="icon-btn">×</button></div>';
+    el.querySelector(".icon-btn").addEventListener("click",function(){deletePurchase(p.id)});box.appendChild(el)
   })
-  .slice(0,50)
-  .forEach(function(t){
-
-    var isIncome=
-      String(t.type).toLowerCase()==="income";
-
-    var item=document.createElement("div");
-    item.className="item row";
-
-    var left=document.createElement("div");
-
-    var title=document.createElement("b");
-    title.textContent=t.desc;
-
-    var detail=document.createElement("div");
-    detail.className="muted small";
-
-    detail.textContent=
-      (t.cat||"Outros")+
-      (t.date ? " · "+dateBR(t.date) : "");
-
-    left.appendChild(title);
-    left.appendChild(detail);
-
-
-    var right=document.createElement("div");
-    right.style.textAlign="right";
-
-    var amount=document.createElement("b");
-
-    amount.textContent=
-      (isIncome ? "+" : "-")+
-      money(t.value);
-
-    amount.style.color=
-      isIncome
-      ? "#55ed96"
-      : "#ff6464";
-
-    var del=document.createElement("button");
-    del.className="delete";
-    del.type="button";
-    del.textContent="×";
-
-    del.addEventListener("click",function(){
-      deleteTransaction(t.id);
-    });
-
-    right.appendChild(amount);
-    right.appendChild(del);
-
-    item.appendChild(left);
-    item.appendChild(right);
-
-    list.appendChild(item);
-  });
-
 }
 
-
-/* ==================================================
-EVENTOS DAS DÍVIDAS
-================================================== */
-
-function debtEvents(){
-
-  var events=[];
-
-  data.debts.forEach(function(debt){
-
-    if(!Array.isArray(debt.schedule)){
-      return;
-    }
-
-    debt.schedule.forEach(function(s){
-
-      var label="Pagamento";
-
-      if(s.kind==="down"){
-        label="Entrada";
-      }
-
-      if(s.kind==="installment"){
-        label=
-          "Parcela "+
-          s.number+
-          "/"+
-          (debt.installments || "?");
-      }
-
-      if(s.kind==="single"){
-        label="Pagamento único";
-      }
-
-      events.push({
-        id:s.id,
-        debtId:debt.id,
-        date:s.date,
-        value:Number(s.value||0),
-        paid:!!s.paid,
-        paidDate:s.paidDate,
-        name:debt.name,
-        label:label
-      });
-
-    });
-
-  });
-
-  return events;
+function renderTx(){
+  var box=$("txList");box.innerHTML="";
+  if(!data.tx.length){box.innerHTML='<div class="empty">Nenhum lançamento.</div>';return}
+  data.tx.slice().sort(function(a,b){return String(b.date).localeCompare(String(a.date))}).slice(0,30).forEach(function(t){
+    var el=document.createElement("div");el.className="item row";
+    el.innerHTML='<div><b>'+escapeHtml(t.desc)+'</b><div class="muted small">'+escapeHtml(t.cat)+' · '+dateBR(t.date)+'</div></div>'+
+      '<div style="text-align:right"><b style="color:'+(t.type==="income"?"#5cf29b":"#ff7070")+'">'+(t.type==="income"?"+":"-")+money(t.value)+'</b>'+
+      '<br><button class="icon-btn">×</button></div>';
+    el.querySelector(".icon-btn").addEventListener("click",function(){deleteTx(t.id)});box.appendChild(el)
+  })
 }
-
-
-/* ==================================================
-AGENDA
-================================================== */
 
 function renderCalendar(){
-
-  var list=$("calendarList");
-  list.innerHTML="";
-
-  var events=debtEvents();
-
-  events.sort(function(a,b){
-    return String(a.date).localeCompare(String(b.date));
-  });
-
-
-  if(events.length===0){
-
-    list.innerHTML=
-      '<div class="empty">Nenhum vencimento cadastrado.</div>';
-
-    return;
-  }
-
-
-  var lastMonth="";
-
-
-  events.forEach(function(event){
-
-    var d=parseDate(event.date);
-
-    if(!d) return;
-
-    var monthLabel=
-      d.toLocaleDateString(
-        "pt-BR",
-        {
-          month:"long",
-          year:"numeric"
-        }
-      );
-
-    if(monthLabel!==lastMonth){
-
-      var monthTitle=document.createElement("div");
-      monthTitle.className="agenda-month";
-      monthTitle.textContent=monthLabel;
-
-      list.appendChild(monthTitle);
-
-      lastMonth=monthLabel;
-    }
-
-
-    var box=document.createElement("div");
-    box.className=
-      "agenda-card"+
-      (event.paid ? " paid" : "");
-
-
-    var top=document.createElement("div");
-    top.className="row-start";
-
-
-    var left=document.createElement("div");
-
-    var title=document.createElement("b");
-    title.className="agenda-title";
-
-    title.textContent=
-      dateBR(event.date)+
-      " · "+
-      event.name;
-
-    var detail=document.createElement("div");
-    detail.className="muted small";
-    detail.style.marginTop="4px";
-    detail.textContent=event.label;
-
-    left.appendChild(title);
-    left.appendChild(detail);
-
-
-    var amount=document.createElement("b");
-
-    amount.textContent=
-      money(event.value);
-
-    amount.style.color=
-      event.paid
-      ? "#55ed96"
-      : "#ff6464";
-
-
-    top.appendChild(left);
-    top.appendChild(amount);
-
-    box.appendChild(top);
-
-
-    var bottom=document.createElement("div");
-    bottom.style.marginTop="8px";
-
-
-    if(event.paid){
-
-      var paid=document.createElement("span");
-      paid.className="pill-paid";
-
-      paid.textContent=
-        "✓ Pago"+
-        (
-          event.paidDate
-          ? " em "+dateBR(event.paidDate)
-          : ""
-        );
-
-      bottom.appendChild(paid);
-
-    }else{
-
-      var pending=document.createElement("span");
-      pending.className="pill-pending";
-      pending.textContent="Pendente";
-
-      bottom.appendChild(pending);
-
-
-      var pay=document.createElement("button");
-      pay.type="button";
-      pay.className="pay";
-      pay.style.display="block";
-      pay.textContent="✓ Pagar";
-
-      pay.addEventListener("click",function(){
-        paySchedule(
-          event.debtId,
-          event.id
-        );
-      });
-
-      bottom.appendChild(pay);
-    }
-
-    box.appendChild(bottom);
-
-    list.appendChild(box);
-  });
-
-}
-
-
-/* ==================================================
-COMPROMISSOS POR MÊS
-================================================== */
-
-function debtCommitmentForMonth(year,month){
-
-  return debtEvents()
-  .filter(function(e){
-
-    return (
-      !e.paid &&
-      sameMonth(e.date,year,month)
-    );
-
+  var box=$("calendarList");box.innerHTML="",ev=events().sort(function(a,b){return String(a.date).localeCompare(String(b.date))}),last="";
+  if(!ev.length){box.innerHTML='<div class="empty">Nenhum vencimento.</div>';return}
+  ev.forEach(function(e){
+    var d=parseDate(e.date);if(!d)return;
+    var label=d.toLocaleDateString("pt-BR",{month:"long",year:"numeric"});
+    if(label!==last){var h=document.createElement("div");h.className="agenda-month";h.textContent=label;box.appendChild(h);last=label}
+    var el=document.createElement("div");el.className="agenda"+(e.paid?" paid":"");
+    el.innerHTML='<div class="row-start"><div><b>'+escapeHtml(e.name)+'</b><div class="muted small">'+escapeHtml(e.label)+' · '+dateBR(e.date)+'</div></div>'+
+      '<b style="color:'+(e.paid?"#5cf29b":"#ff7070")+'">'+money(e.value)+'</b></div>'+
+      (e.paid?'<div class="small green" style="margin-top:8px">✓ Pago '+(e.paidDate?"em "+dateBR(e.paidDate):"")+'</div>':'<button class="pay">✓ Pagar</button>');
+    var btn=el.querySelector(".pay");if(btn)btn.addEventListener("click",function(){paySchedule(e.debtId,e.id)});box.appendChild(el)
   })
-  .reduce(function(sum,e){
-    return sum+Number(e.value||0);
+}
+
+function renderReports(){
+  var key=$("reportMonth").value||monthKey(new Date()),r=stats(key);
+  $("reportIncome").textContent=money(r.income);$("reportExpense").textContent=money(r.expense);
+  $("reportResult").textContent=money(r.result);$("reportResult").style.color=r.result>=0?"#5cf29b":"#ff7070";
+  $("reportDebtPaid").textContent=money(r.debtPaid);$("reportDebtPayments").textContent=r.debtPayments;
+  var cats=Object.keys(r.categories).map(function(k){return{name:k,value:r.categories[k]}}).sort(function(a,b){return b.value-a.value});
+  var box=$("categoryReport");box.innerHTML="";
+  if(!cats.length)box.innerHTML='<div class="empty">Nenhuma despesa neste mês.</div>';
+  else{
+    var max=cats[0].value;
+    cats.forEach(function(c){
+      var el=document.createElement("div");el.className="report-bar";
+      el.innerHTML='<div class="bar-head"><span>'+escapeHtml(c.name)+'</span><b>'+money(c.value)+'</b></div>'+
+        '<div class="bar"><div style="width:'+(c.value/max*100)+'%"></div></div>';
+      box.appendChild(el)
+    })
+  }
+  var p=key.split("-"),prev=new Date(+p[0],+p[1]-2,1),old=stats(monthKey(prev)),diff=r.expense-old.expense;
+  $("reportComparison").innerHTML=old.income===0&&old.expense===0?
+    "Ainda não há dados suficientes do mês anterior para comparar.":
+    diff>0?"Você gastou <b>"+money(diff)+" a mais</b> que no mês anterior.":
+    diff<0?"Você gastou <b>"+money(Math.abs(diff))+" a menos</b> que no mês anterior.":
+    "Suas despesas ficaram no mesmo nível do mês anterior."
+}
+
+$("reportMonth").addEventListener("change",renderReports);
+
+$("simulate").addEventListener("click",function(){
+  var extra=num($("simulationExtra").value),active=data.debts.filter(function(d){return num(d.total)>0});
+  if(extra<=0||!active.length){$("simulationResult").innerHTML='<div class="notice">Informe um valor e tenha pelo menos uma dívida ativa.</div>';return}
+  active.sort(function(a,b){return num(b.rate)-num(a.rate)});var d=active[0];
+  $("simulationResult").innerHTML='<div class="notice">Aplicando em <b>'+escapeHtml(d.name)+'</b>: '+money(d.total)+' → <b>'+money(Math.max(0,num(d.total)-extra))+'</b>.</div>'
+});
+
+$("backup").addEventListener("click",function(){
+  var blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"}),url=URL.createObjectURL(blob),a=document.createElement("a");
+  a.href=url;a.download="flui-backup.json";document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(url)},1000)
+});
+
+function renderHome(){
+  var now=new Date(),key=monthKey(now),r=stats(key),next=new Date(now.getFullYear(),now.getMonth()+1,1),nextKey=monthKey(next);
+  var debtNow=debtMonth(key),cardsNow=cardMonth(key),commit=debtNow+cardsNow;
+  var balance=r.income-r.expense,available=balance-commit;
+  $("accountBalance").textContent=money(balance);$("committed").textContent=money(commit);$("availableNow").textContent=money(available);
+  var thirty=events().reduce(function(s,e){
+    if(e.paid)return s;var d=parseDate(e.date);if(!d)return s;
+    var diff=(d-new Date(now.getFullYear(),now.getMonth(),now.getDate()))/86400000;
+    return s+(diff>=0&&diff<=30?e.value:0)
   },0);
+  $("next30").textContent=money(thirty);
+  $("monthIncome").textContent=money(r.income);$("monthExpense").textContent=money(r.expense);$("monthResult").textContent=money(r.result);
+  $("monthResult").style.color=r.result>=0?"#5cf29b":"#ff7070";
+  $("homeMonthName").textContent=now.toLocaleDateString("pt-BR",{month:"long",year:"numeric"});
+  var nd=debtMonth(nextKey),nc=cardMonth(nextKey);
+  $("nextDebt").textContent=money(nd);$("nextCards").textContent=money(nc);$("nextMonthTotal").textContent=money(nd+nc);
+  var prev=new Date(now.getFullYear(),now.getMonth()-1,1),old=stats(monthKey(prev)),diff=r.expense-old.expense;
+  if(!r.income&&!r.expense)$("homeInsight").textContent="Faça seus primeiros lançamentos para o FLUI começar a analisar seu mês.";
+  else if(old.income===0&&old.expense===0)$("homeInsight").textContent="Continue lançando seus gastos. No próximo mês o FLUI já poderá comparar sua evolução.";
+  else if(diff<0)$("homeInsight").innerHTML="Você gastou <b>"+money(Math.abs(diff))+" a menos</b> que no mês passado.";
+  else if(diff>0)$("homeInsight").innerHTML="Suas despesas estão <b>"+money(diff)+" acima</b> do mês passado.";
+  else $("homeInsight").textContent="Suas despesas estão no mesmo nível do mês passado."
 }
-
-
-/* ==================================================
-CARTÕES POR MÊS
-================================================== */
-
-function cardCommitmentForMonth(year,month){
-
-  var total=0;
-
-  data.cards.forEach(function(card){
-
-    data.purchases.forEach(function(p){
-
-      if(p.cardId!==card.id){
-        return;
-      }
-
-      var purchaseDate=parseDate(p.date);
-
-      if(!purchaseDate){
-        return;
-      }
-
-      /*
-      Regra simples:
-      compra feita depois do fechamento
-      vai para a fatura seguinte.
-      */
-
-      var invoiceMonth=
-        purchaseDate.getMonth();
-
-      var invoiceYear=
-        purchaseDate.getFullYear();
-
-      if(
-        card.close &&
-        purchaseDate.getDate() >
-        Number(card.close)
-      ){
-
-        invoiceMonth++;
-
-        if(invoiceMonth>11){
-          invoiceMonth=0;
-          invoiceYear++;
-        }
-      }
-
-      if(
-        invoiceYear===year &&
-        invoiceMonth===month
-      ){
-        total+=Number(p.value||0);
-      }
-
-    });
-
-  });
-
-  return total;
-}
-
-
-/* ==================================================
-HOME / PREVISÃO
-================================================== */
-
-function renderForecast(income){
-
-  var now=new Date();
-
-  var currentYear=now.getFullYear();
-  var currentMonth=now.getMonth();
-
-  var nextDate=
-    new Date(
-      currentYear,
-      currentMonth+1,
-      1
-    );
-
-  var nextYear=
-    nextDate.getFullYear();
-
-  var nextMonth=
-    nextDate.getMonth();
-
-
-  var currentDebt=
-    debtCommitmentForMonth(
-      currentYear,
-      currentMonth
-    );
-
-  var currentCards=
-    cardCommitmentForMonth(
-      currentYear,
-      currentMonth
-    );
-
-  var nextDebt=
-    debtCommitmentForMonth(
-      nextYear,
-      nextMonth
-    );
-
-  var nextCards=
-    cardCommitmentForMonth(
-      nextYear,
-      nextMonth
-    );
-
-
-  var currentTotal=
-    currentDebt+currentCards;
-
-  var nextTotal=
-    nextDebt+nextCards;
-
-
-  $("thisMonthCommit").textContent=
-    money(currentTotal);
-
-  $("nextMonthCommit").textContent=
-    money(nextTotal);
-
-  $("nextTotal").textContent=
-    money(nextTotal);
-
-  $("nextDebtValue").textContent=
-    money(nextDebt);
-
-  $("nextCardValue").textContent=
-    money(nextCards);
-
-
-  if(nextTotal>0){
-
-    var debtPercent=
-      (nextDebt/nextTotal)*100;
-
-    $("pie").style.background=
-      "conic-gradient("+
-      "#55ed96 0% "+
-      debtPercent+
-      "%,"+
-      "#ffb84d "+
-      debtPercent+
-      "% 100%)";
-
-  }else{
-
-    $("pie").style.background="#214246";
-  }
-
-
-  if(income>0){
-
-    var remaining=
-      income-nextTotal;
-
-    if(remaining>=0){
-
-      $("nextMessage").innerHTML=
-        "Mantendo uma renda de "+
-        "<b>"+money(income)+"</b>, "+
-        "depois dos compromissos já previstos para o próximo mês sobrariam aproximadamente "+
-        '<b style="color:#55ed96">'+
-        money(remaining)+
-        "</b>.";
-
-    }else{
-
-      $("nextMessage").innerHTML=
-        "⚠️ Os compromissos já previstos para o próximo mês ultrapassam sua renda atual em "+
-        '<b style="color:#ff6464">'+
-        money(Math.abs(remaining))+
-        "</b>.";
-    }
-
-  }else{
-
-    $("nextMessage").textContent=
-      "Cadastre suas receitas para comparar a previsão do próximo mês com sua renda.";
-  }
-
-}
-
-
-/* ==================================================
-SIMULADOR
-================================================== */
-
-$("btnSimulate").addEventListener("click",function(){
-
-  var extra=
-    Number($("simulationExtra").value)||0;
-
-  var activeDebts=
-    data.debts.filter(function(d){
-      return Number(d.total||0)>0;
-    });
-
-  if(activeDebts.length===0){
-
-    $("simulationResult").innerHTML=
-      "<p>Você não possui dívida ativa cadastrada.</p>";
-
-    return;
-  }
-
-  if(extra<=0){
-    alert("Informe um valor extra.");
-    return;
-  }
-
-
-  var debts=activeDebts.slice()
-  .sort(function(a,b){
-    return Number(b.rate||0)-Number(a.rate||0);
-  });
-
-  var d=debts[0];
-
-  $("simulationResult").innerHTML=
-    "<p>Aplicando esse valor primeiro em <b>"+
-    safeText(d.name)+
-    "</b>:<br><br>"+
-    "Saldo atual: "+
-    money(d.total)+
-    "<br>"+
-    "Pagamento extra: "+
-    money(extra)+
-    "<br>"+
-    "Saldo estimado depois: <b>"+
-    money(
-      Math.max(
-        0,
-        Number(d.total)-extra
-      )
-    )+
-    "</b></p>";
-});
-
-
-/* ==================================================
-BACKUP
-================================================== */
-
-$("btnBackup").addEventListener("click",function(){
-
-  var blob=new Blob(
-    [JSON.stringify(data,null,2)],
-    {type:"application/json"}
-  );
-
-  var url=URL.createObjectURL(blob);
-
-  var a=document.createElement("a");
-
-  a.href=url;
-  a.download="minha-saida-backup.json";
-
-  document.body.appendChild(a);
-  a.click();
-  a.remove();
-
-  setTimeout(function(){
-    URL.revokeObjectURL(url);
-  },1000);
-});
-
-
-/* ==================================================
-RENDER GERAL
-================================================== */
 
 function render(){
-
-  var now=new Date();
-
-  var currentYear=now.getFullYear();
-  var currentMonth=now.getMonth();
-
-
-  var monthlyTransactions=
-    data.tx.filter(function(t){
-
-      return sameMonth(
-        t.date,
-        currentYear,
-        currentMonth
-      );
-
-    });
-
-
-  var income=
-    monthlyTransactions
-    .filter(function(t){
-      return String(t.type).toLowerCase()==="income";
-    })
-    .reduce(function(sum,t){
-      return sum+Number(t.value||0);
-    },0);
-
-
-  var expense=
-    monthlyTransactions
-    .filter(function(t){
-      return String(t.type).toLowerCase()==="expense";
-    })
-    .reduce(function(sum,t){
-      return sum+Number(t.value||0);
-    },0);
-
-
-  var totalDebt=
-    data.debts.reduce(function(sum,d){
-      return sum+Number(d.total||0);
-    },0);
-
-
-  var debtCommitted=
-    debtCommitmentForMonth(
-      currentYear,
-      currentMonth
-    );
-
-
-  var cardCommitted=
-    cardCommitmentForMonth(
-      currentYear,
-      currentMonth
-    );
-
-
-  var committed=
-    debtCommitted+
-    cardCommitted;
-
-
-  /*
-  Saldo em conta:
-  receitas efetivamente lançadas
-  menos despesas efetivamente pagas.
-  */
-
-  var balance=
-    income-expense;
-
-
-  /*
-  Saldo real:
-  saldo atual menos compromissos
-  ainda pendentes neste mês.
-  */
-
-  var real=
-    balance-committed;
-
-
-  $("homeBalance").textContent=
-    money(balance);
-
-  $("homeIncome").textContent=
-    money(income);
-
-  $("homeExpense").textContent=
-    money(expense);
-
-  $("homeCommitted").textContent=
-    money(committed);
-
-  $("homeReal").textContent=
-    money(real);
-
-
-  if(totalDebt<=0){
-
-    $("priority").textContent=
-      "Você não possui saldo devedor ativo cadastrado.";
-
-  }else if(real<0){
-
-    $("priority").textContent=
-      "Depois dos compromissos ainda pendentes deste mês, faltariam "+
-      money(Math.abs(real))+
-      ".";
-
-  }else{
-
-    $("priority").textContent=
-      "Depois dos compromissos pendentes deste mês, sua margem estimada é "+
-      money(real)+
-      ".";
-  }
-
-
-  var eliminated=
-    Math.max(
-      0,
-      Number(data.initialDebt||0)-
-      totalDebt
-    );
-
-
-  var percent=
-    data.initialDebt>0
-    ? Math.min(
-        100,
-        (eliminated/data.initialDebt)*100
-      )
-    : 0;
-
-
-  $("eliminated").textContent=
-    money(eliminated);
-
-  $("progressBar").style.width=
-    percent+"%";
-
-  $("progressText").textContent=
-    data.initialDebt>0
-    ? percent.toFixed(1)+
-      "% da dívida cadastrada já foi eliminada."
-    : "Comece cadastrando suas dívidas.";
-
-
-  renderDebts();
-  renderCards();
-  renderPurchases();
-  renderTransactions();
-  renderCalendar();
-  renderForecast(income);
+  profile();renderHome();renderDebts();renderCards();renderPurchases();renderTx();renderCalendar();renderReports()
 }
 
-
-/* ==================================================
-INICIAR
-================================================== */
-
-$("transactionDate").value=today();
+$("txDate").value=today();
 $("purchaseDate").value=today();
-
+$("reportMonth").value=monthKey(new Date());
 render();
 
+});
 </script>
-
 </body>
 </html>
