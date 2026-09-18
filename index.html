@@ -195,6 +195,106 @@ Despesas do mês
 
 </div>
 
+<!-- PREVISÃO DO PRÓXIMO MÊS -->
+
+<div class="card">
+
+<h2>🔮 Próximo mês</h2>
+
+<div class="muted">
+Total já comprometido
+</div>
+
+<div id="nextMonthTotal" class="big">
+R$ 0,00
+</div>
+
+<div class="grid" style="margin-top:12px">
+
+<div class="stat">
+Este mês
+<b id="currentMonthCommit">
+R$ 0,00
+</b>
+</div>
+
+<div class="stat">
+Próximo mês
+<b id="nextMonthCommit" class="red">
+R$ 0,00
+</b>
+</div>
+
+</div>
+
+<div style="
+display:flex;
+align-items:center;
+justify-content:center;
+gap:22px;
+margin-top:20px;
+">
+
+<div id="debtPie" style="
+width:150px;
+height:150px;
+border-radius:50%;
+background:#214246;
+position:relative;
+flex-shrink:0;
+">
+
+<div style="
+position:absolute;
+width:82px;
+height:82px;
+background:#0d2a2d;
+border-radius:50%;
+top:34px;
+left:34px;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+font-size:11px;
+color:#a9bfba;
+">
+Próximo<br>mês
+</div>
+
+</div>
+
+<div>
+
+<div style="margin-bottom:9px">
+<span style="color:#5df29a">●</span>
+Dívidas
+<br>
+<b id="nextDebts">
+R$ 0,00
+</b>
+</div>
+
+<div>
+<span style="color:#ffb84d">●</span>
+Cartões
+<br>
+<b id="nextCards">
+R$ 0,00
+</b>
+</div>
+
+</div>
+
+</div>
+
+<div id="nextMonthMessage"
+class="muted"
+style="margin-top:18px">
+</div>
+
+</div>
+
 </section>
 
 
@@ -988,6 +1088,148 @@ a.click();
 
 }
 
+/* PREVISÃO DO PRÓXIMO MÊS */
+
+function calculateNextMonth(){
+
+let monthlyDebts =
+data.debts
+.filter(d=>d.monthly)
+.reduce(
+(total,d)=>
+total + Math.min(
+d.installment || d.total,
+d.total
+),
+0
+);
+
+
+let cardsTotal =
+data.cards.reduce(
+(total,card)=>{
+
+let invoice =
+data.purchases
+.filter(
+p=>p.cardId===card.id
+)
+.reduce(
+(sum,p)=>sum+p.value,
+0
+);
+
+return total + invoice;
+
+},
+0
+);
+
+
+let total =
+monthlyDebts +
+cardsTotal;
+
+
+let current =
+data.debts.reduce(
+(total,d)=>
+total + Math.min(
+d.installment || d.total,
+d.total
+),
+0
+)
++
+cardsTotal;
+
+
+nextMonthTotal.textContent =
+BRL.format(total);
+
+currentMonthCommit.textContent =
+BRL.format(current);
+
+nextMonthCommit.textContent =
+BRL.format(total);
+
+nextDebts.textContent =
+BRL.format(monthlyDebts);
+
+nextCards.textContent =
+BRL.format(cardsTotal);
+
+
+/* GRÁFICO */
+
+if(total > 0){
+
+let debtPercent =
+(monthlyDebts / total) * 100;
+
+debtPie.style.background =
+`conic-gradient(
+#5df29a 0% ${debtPercent}%,
+#ffb84d ${debtPercent}% 100%
+)`;
+
+}else{
+
+debtPie.style.background =
+'#214246';
+
+}
+
+
+/* COMPARAÇÃO COM RENDA */
+
+let monthlyIncome =
+data.tx
+.filter(
+t=>t.type === 'income'
+)
+.reduce(
+(total,t)=>total+t.value,
+0
+);
+
+
+if(monthlyIncome > 0){
+
+let available =
+monthlyIncome - total;
+
+if(available >= 0){
+
+nextMonthMessage.innerHTML =
+
+`Com base na renda cadastrada,
+depois desses compromissos você teria
+<b style="color:#5df29a">
+${BRL.format(available)}
+</b>
+disponível.`;
+
+}else{
+
+nextMonthMessage.innerHTML =
+
+`⚠️ Os compromissos cadastrados ultrapassam
+sua renda em
+<b style="color:#ff6464">
+${BRL.format(Math.abs(available))}
+</b>.`;
+
+}
+
+}else{
+
+nextMonthMessage.textContent =
+'Cadastre suas receitas para comparar os compromissos do próximo mês com sua renda.';
+
+}
+
+}
 
 /* ATUALIZA TELA */
 
@@ -1689,8 +1931,11 @@ Nenhum vencimento cadastrado.
 
 </div>`;
 
-
 fillCards();
+
+calculateNextMonth();
+
+}
 
 }
 
