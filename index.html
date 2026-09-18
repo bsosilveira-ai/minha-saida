@@ -2040,37 +2040,76 @@ LANÇAMENTOS
 
 function addTransaction(){
 
-  const type =
-    el("ttype").value;
+  const typeSelect =
+    document.getElementById("ttype");
+
+  const selectedType =
+    typeSelect.options[typeSelect.selectedIndex].value;
 
   const value =
-    Number(
-      el("tvalue").value
+    parseFloat(
+      document.getElementById("tvalue").value
     ) || 0;
 
   const description =
-    el("tdesc")
-    .value
-    .trim() ||
-    "Lançamento";
+    document.getElementById("tdesc").value.trim()
+    || "Lançamento";
 
   const category =
-    el("tcat").value;
+    document.getElementById("tcat").value;
 
   const date =
-    el("tdate").value ||
-    todayISO();
+    document.getElementById("tdate").value
+    || todayISO();
 
 
   if(value <= 0){
 
-    alert(
-      "Informe um valor válido."
-    );
+    alert("Informe um valor válido.");
 
     return;
-
   }
+
+
+  const transaction = {
+
+    id: Date.now(),
+
+    type: selectedType === "income"
+      ? "income"
+      : "expense",
+
+    value: value,
+
+    desc: description,
+
+    cat: category,
+
+    date: date
+
+  };
+
+
+  data.tx.push(transaction);
+
+
+  document.getElementById("tvalue").value = "";
+
+  document.getElementById("tdesc").value = "";
+
+  document.getElementById("ttype").value = "expense";
+
+
+  save();
+
+
+  alert(
+    transaction.type === "income"
+      ? "Receita adicionada! ✅"
+      : "Despesa adicionada! ✅"
+  );
+
+}
 
 
   data.tx.push({
@@ -3197,30 +3236,22 @@ function renderTransactions(){
           );
 
 
-        amount.textContent =
-
-          (
-            transaction.type ===
-            "income"
-            ? "+"
-            : "-"
-          )
-
-          +
-
-          money(
-            transaction.value
-          );
+        const isIncome =
+  String(transaction.type)
+    .trim()
+    .toLowerCase() === "income";
 
 
-        amount.style.color =
+amount.textContent =
+  (isIncome ? "+" : "-")
+  +
+  money(transaction.value);
 
-          transaction.type ===
-          "income"
 
-          ? "#5df29a"
-
-          : "#ff6464";
+amount.style.color =
+  isIncome
+  ? "#5df29a"
+  : "#ff6464";
 
 
         const remove =
